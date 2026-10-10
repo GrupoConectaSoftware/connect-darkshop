@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Lilita One", "Archivo Black", Impact, sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --color-dark-950: #080808;
+  --color-dark-900: #121212;
+  --color-dark-850: #1a1a1a;
+  --color-dark-800: #262626;
+  --color-dark-700: #333333;
+  --color-dark-600: #4a4a4a;
+  --color-dark-500: #737373;
+  --color-dark-400: #969696;
+  --color-dark-300: #b8b8b8;
+  --color-dark-200: #d9d9d9;
+  --color-dark-100: #ececec;
+  --color-dark-50: #f5f5f3;
+  --color-dark-white: #ffffff;
+  --color-dark-burgundy: #491c25;
+  --color-dark-burgundy-light: #612832;
+  --color-dark-burgundy-deep: #301218;
+  --color-dark-red: #d9272e;
+  --color-dark-red-light: #ed3038;
+  --color-dark-red-deep: #ad1e24;
+  --color-dark-cream: #ede6d6;
+  --color-newsletter: #050505;
+  --color-footer: #000000;
+}
+
+@layer base {
+  :root {
+    --dark-bg: var(--color-dark-950);
+    --dark-surface: var(--color-dark-900);
+    --dark-surface-raised: var(--color-dark-850);
+    --dark-line: var(--color-dark-700);
+    --dark-text: var(--color-dark-50);
+    --dark-muted: var(--color-dark-400);
+  }
+}
+
+@keyframes ux-reveal-rise {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ux-reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ux-reveal-typewriter {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+@keyframes ux-underline-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.ux-reveal {
+  opacity: 0;
+  transition-delay: var(--ux-reveal-delay, 0ms);
+}
+
+.ux-reveal--rise { transform: translate3d(0, 18px, 0); }
+
+.ux-reveal.is-visible {
+  animation: ux-reveal-rise 700ms cubic-bezier(.2,.75,.25,1) both;
+  animation-delay: var(--ux-reveal-delay, 0ms);
+}
+
+.ux-reveal--fade.is-visible {
+  animation-name: ux-reveal-fade;
+  animation-duration: 650ms;
+}
+
+.ux-reveal--typewriter.is-visible {
+  animation-name: ux-reveal-typewriter;
+  animation-duration: 900ms;
+  animation-timing-function: steps(24, end);
+}
+
+.cta-outline-button {
+  position: relative;
+  isolation: isolate;
+  text-decoration: none;
+}
+
+.cta-outline-button::after {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--color-dark-950);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 450ms cubic-bezier(.2,.75,.25,1);
+}
+
+.cta-outline-button:hover::after,
+.cta-outline-button:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ux-reveal,
+  .ux-reveal.is-visible {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+
+  .cta-outline-button::after { transition: none; }
+}
+
+/* Darkshop UI mapped to the official palette. */
+body { background: var(--dark-bg); color: var(--dark-text); }
+.site-nav { background: var(--color-dark-950); border-color: var(--dark-line); }
+.brand, .hero h1, .section h2, .cta-section h2 { color: var(--color-dark-50); }
+.hero > p, .community-copy > p:not(.eyebrow), .set-text { color: var(--color-dark-300); }
+.eyebrow, .brand span, .nav-button, .hero h1 em, .section h2 em, .text-link, .circle-word { color: var(--color-dark-red); }
+.nav-button { border-color: var(--color-dark-red); }
+.primary-button { background: var(--color-dark-red); color: var(--color-dark-white); }
+.hero-art { border-color: var(--color-dark-600); }
+.model-shape, .community-quote em { color: var(--color-dark-burgundy-light); }
+.section { border-color: var(--dark-line); }
+.product-card { color: var(--color-dark-50); }
+.card-orange { background: var(--color-dark-burgundy-light); }
+.card-lime { background: var(--color-dark-700); }
+.card-purple { background: var(--color-dark-burgundy); }
+.community { background: var(--color-dark-900); }
+.categories { background: var(--color-dark-burgundy-deep); color: var(--color-dark-50); }
+.categories .eyebrow, .categories h2 em { color: var(--color-dark-red-light); }
+.category-row, .category-row span { border-color: var(--color-dark-600); }
+.advantage-strip { background: var(--color-dark-red-deep); color: var(--color-dark-50); }
+.advantage-strip div { border-color: var(--color-dark-red); }
+.set-section { background: linear-gradient(110deg, var(--color-dark-950) 45%, var(--color-dark-850) 45%); }
+.cta-section { background: var(--color-dark-burgundy); color: var(--color-dark-50); }
+.cta-section .eyebrow { color: var(--color-dark-red-light); }
+.cta-section h2 em { color: var(--color-dark-red); }
