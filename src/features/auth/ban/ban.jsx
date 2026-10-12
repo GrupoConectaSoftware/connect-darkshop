@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import banImage from '../../../assets/Sections/auth/ban/ban.webp'
+import banImage from '../../../assets/Sections/auth/ban/banSection.webp'
 import BanComponents from './components/banComponents'
 
 export default function Ban() {
