@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import buyerImage from '../../../../assets/Sections/auth/selectAccount/Options/OptionsSesionUno.webp'
 import sellerImage from '../../../../assets/Sections/auth/selectAccount/Options/OptionsSesionDos.webp'
-import SessionButton from '../../../../components/ui/SessionButton'
+import ImageZoom from '../../../../components/ux/ImageZoom'
+import SessionButton from '../../../../components/ui/buttons/SessionButton'
 
 const options = [
   {
@@ -29,7 +30,9 @@ function OptionCard({ option, isSelected, onSelect }) {
       aria-pressed={isSelected}
       className={`group relative flex aspect-video w-full min-w-0 cursor-pointer flex-col justify-end overflow-hidden border bg-dark-950 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dark-white/60 sm:aspect-4/5 ${isSelected ? 'border-dark-white opacity-100' : 'border-dark-700/40 opacity-40 hover:opacity-70'}`}
     >
-      <img src={option.image} alt="" className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+      <ImageZoom className="absolute inset-0">
+        <img src={option.image} alt="" className="size-full object-cover grayscale transition-[filter] duration-700 ease-out group-hover:grayscale-0" />
+      </ImageZoom>
       <span aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-black/95 via-black/35 to-transparent" />
       <span className="relative z-10 min-w-0 p-3 sm:p-4">
         <span className="mb-1.5 block font-body text-[9px] font-bold uppercase tracking-[0.2em] text-dark-300 sm:text-[10px]">{option.eyebrow}</span>

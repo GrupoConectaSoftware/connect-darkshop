@@ -1,11 +1,14 @@
 import accountImage from '../../../assets/Sections/auth/selectAccount/Section/AccountSesion.webp'
+import ImageZoom from '../../../components/ux/ImageZoom'
 import FormSelect from './components/formSelect'
 
 export default function SelectAccount() {
   return (
     <main className="grid h-screen h-dvh w-full grid-cols-1 overflow-hidden bg-dark-950 text-dark-white lg:grid-cols-2">
       <section aria-label="DARKSHOP, una tienda hecha para encontrar tu estilo" className="relative hidden min-h-0 overflow-hidden bg-dark-900 lg:block">
-        <img src={accountImage} alt="Interior oscuro de DARKSHOP con prendas de la colección" className="absolute inset-0 size-full object-cover" />
+        <ImageZoom className="absolute inset-0">
+          <img src={accountImage} alt="Interior oscuro de DARKSHOP con prendas de la colección" className="size-full object-cover" />
+        </ImageZoom>
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-black/10" />
         <div className="absolute inset-x-0 bottom-0 p-8 drop-shadow-lg xl:p-12 2xl:p-16">
           <p className="mb-4 font-body text-xs font-medium tracking-[0.12em] text-white/65">DARKSHOP · TU PRÓXIMO CAPÍTULO</p>

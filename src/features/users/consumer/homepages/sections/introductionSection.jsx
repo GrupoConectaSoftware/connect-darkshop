@@ -1,4 +1,4 @@
-import CarouselHero from '../../../../../ux/CarouselHero'
+import CarouselHero from '../../../../../components/ux/CarouselHero'
 import desktopOne from '../../../../../assets/Sections/homespages/introduction/escritorio/imagesIntroductionUno.webp'
 import desktopTwo from '../../../../../assets/Sections/homespages/introduction/escritorio/imagesIntroductionDos.webp'
 import desktopThree from '../../../../../assets/Sections/homespages/introduction/escritorio/imagesIntroductionTres.webp'

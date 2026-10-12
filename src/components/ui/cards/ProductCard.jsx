@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Eye, Gift, Heart, Share2, ShoppingCart } from 'lucide-react'
 import ProductBadge from '../badges/ProductBadge'
 import ColorDot from '../buttons/ColorDot'
@@ -21,11 +22,18 @@ const money = new Intl.NumberFormat('es-CO', {
 })
 
 export default function ProductCard({ product, isOutlet = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
+  const navigate = useNavigate()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
   const [viewMode, setViewMode] = useState('garment')
   const isGift = product.badge?.variant === 'obsequio'
   const isDiscount = product.badge?.variant === 'descuento'
+  const productSlug = product.slug || `${product.name}-${product.id}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+
+  const handleAction = (label) => (event) => {
+    event.stopPropagation()
+    if (label === 'Vista rápida') navigate(`/preview/${productSlug}`)
+  }
 
   return (
     <article
@@ -48,7 +56,7 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
           className={`absolute inset-0 block h-full w-full max-w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] ${viewMode === 'model' ? 'saturate-100' : 'saturate-[.85]'}`}
         />
         <div className="absolute right-3 top-3 z-10 flex translate-x-2 flex-col gap-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} />)}
+          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} onClick={handleAction(action.label)} />)}
         </div>
         <div className="absolute bottom-3 left-3 z-10">
           <GarmentSwitch value={viewMode} onChange={setViewMode} />

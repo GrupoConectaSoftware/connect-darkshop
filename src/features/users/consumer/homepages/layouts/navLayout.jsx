@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, User } from 'lucide-react'
 import logoDarkShop from '../../../../../assets/Logometria/LogoOficial.webp'
 import HeartIcon from '../../../../../commons/ui/icons/commerce/HeartIcon'
@@ -10,8 +11,8 @@ import PhoneIcon from '../../../../../commons/ui/icons/contact/PhoneIcon'
 import InstagramIcon from '../../../../../commons/ui/icons/social/InstagramIcon'
 import FacebookIcon from '../../../../../commons/ui/icons/social/FacebookIcon'
 import TiktokIcon from '../../../../../commons/ui/icons/social/TiktokIcon'
-import UserButton from '../../../../../components/ui/UserButton'
-import SearchBar from '../../../../../components/ui/SearchBar'
+import UserButton from '../../../../../components/ui/buttons/UserButton'
+import SearchBar from '../../../../../components/ui/inputs/SearchBar'
 import useHideOnScroll from '../../../../../hooks/useHideOnScroll'
 import TextPromotionComponent from '../components/TextPromotionComponent'
 import AyudaComponent from '../components/AyudaComponent'
@@ -20,7 +21,6 @@ import PqrComponent from '../../../../../commons/components/PqrComponent'
 const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Outlet', href: '#coleccion' },
-  { label: 'Nosotros', href: '#nosotros' },
   { label: 'Comunidad', href: '#comunidad' },
   { label: 'Categorías', href: '#categorias' },
   { label: 'Conjuntos', href: '#conjuntos' },
@@ -64,7 +64,7 @@ function DesktopNavLinks() {
         <a
           key={link.label}
           href={link.href}
-          className={`shrink-0 py-2 text-sm font-medium tracking-wide text-dark-600 transition-colors hover:text-dark-950 ${link.label === 'Outlet' ? 'mr-3' : ''}`}
+          className={`shrink-0 py-5 text-sm font-medium tracking-wide text-dark-600 transition-colors hover:text-dark-950 ${link.label === 'Outlet' ? 'mr-3' : ''}`}
         >
           {/* El span relative envuelve SOLO la palabra: el contador se ancla a ella */}
           <span className="relative inline-block">
@@ -119,7 +119,7 @@ export default function NavLayout() {
             <div className="flex shrink-0 flex-row items-center gap-4 text-sm text-dark-200">
               <SocialLinks />
               <span className="h-3 w-px bg-dark-700" />
-              <a href="#trabaja" className="transition-colors hover:text-dark-white">Trabaja con nosotros</a>
+              <Link to="/register" className="transition-colors hover:text-dark-white">Trabaja con nosotros</Link>
               <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="cursor-pointer transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
               <span className="relative ml-2"><AyudaComponent /></span>
             </div>
@@ -141,7 +141,7 @@ export default function NavLayout() {
         {/* Barra blanca principal */}
         <div className="hidden bg-dark-white lg:block">
           <div className={`${DESKTOP_CONTAINER} h-24`}>
-            <div className="grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 xl:grid-cols-[auto_minmax(0,1fr)_18rem_auto] xl:gap-5 2xl:grid-cols-[auto_minmax(0,1fr)_20rem_auto] 2xl:gap-7">
+            <div className="grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 xl:grid-cols-[auto_minmax(0,1fr)_20rem_auto] xl:gap-5 2xl:grid-cols-[auto_minmax(0,1fr)_22rem_auto] 2xl:gap-7">
               <div className="flex shrink-0 flex-row items-center">
                 <a href="#inicio" className="shrink-0" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></a>
                 {/* En lg (1024-1279px) se oculta para que los links no se aprieten; desde xl se ve igual en todos los tamaños */}
@@ -195,7 +195,7 @@ export default function NavLayout() {
         </div>
 
         <div className="relative mx-6 mt-2 shrink-0 bg-dark-50 px-4 py-3">
-          <a href="#login" onClick={closeMenu} className="inline-flex w-full items-center gap-3 text-sm text-dark-700 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red"><span className="grid size-9 place-items-center rounded-full bg-dark-950 text-dark-white"><User size={16} /></span><span><span className="block text-[10px] uppercase tracking-wide text-dark-500">Únete a la comunidad</span><span className="font-semibold text-dark-950">Iniciar sesión</span></span><ArrowUpRight size={16} className="ml-auto text-dark-400" /></a>
+          <Link to="/login" onClick={closeMenu} className="inline-flex w-full items-center gap-3 text-sm text-dark-700 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red"><span className="grid size-9 place-items-center rounded-full bg-dark-950 text-dark-white"><User size={16} /></span><span><span className="block text-[10px] uppercase tracking-wide text-dark-500">Únete a la comunidad</span><span className="font-semibold text-dark-950">Iniciar sesión</span></span><ArrowUpRight size={16} className="ml-auto text-dark-400" /></Link>
         </div>
 
         <nav className="relative flex-1 overflow-y-auto px-6 py-8" data-scroll-ignore aria-label="Navegación principal">

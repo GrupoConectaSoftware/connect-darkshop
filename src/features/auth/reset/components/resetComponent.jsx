@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import PasswordValidation from '../../../../components/ui/PasswordValidation'
+import PasswordValidation from '../../../../components/ui/forms/PasswordValidation'
 
 const validatePassword = (value) => {
   if (!value) return 'Ingresa una contraseña.'

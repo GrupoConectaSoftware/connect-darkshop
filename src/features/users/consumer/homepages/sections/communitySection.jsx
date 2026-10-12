@@ -1,12 +1,12 @@
 import { Lock, Package, Settings, Truck } from 'lucide-react'
 import BenefitCard from '../../../../../components/ui/cards/BenefitCard'
-import ImageZoom from '../../../../../ux/ImageZoom'
-import Reveal from '../../../../../ux/Reveal'
+import ImageZoom from '../../../../../components/ux/ImageZoom'
+import Reveal from '../../../../../components/ux/Reveal'
 import communityImage from '../../../../../assets/Sections/homespages/community/imagesCommunity.webp'
 
 const NAV_ITEMS = [
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Los productos', href: '#productos' },
+  { label: 'Sobre', href: '#nosotros' },
+  { label: 'Los productos', href: '#coleccion' },
   { label: 'Comunidad', href: '#comunidad' },
 ]
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import InstagramIcon from '../../../../../commons/ui/icons/social/InstagramIcon'
 import TiktokIcon from '../../../../../commons/ui/icons/social/TiktokIcon'
 
@@ -15,20 +16,20 @@ const FOOTER_GROUPS = [
   {
     title: 'Compañía',
     links: [
-      ['Manifiesto', '#manifiesto'],
+      ['Manifiesto', '#nosotros'],
       ['Comunidad', '#comunidad'],
-      ['LookBook', '#lookbook'],
-      ['Tiendas físicas', '#tiendas'],
-      ['Carrera', '#carrera'],
+      ['LookBook', '#conjuntos'],
+      ['Tiendas físicas', 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20tiendas%20f%C3%ADsicas'],
+      ['Carrera', '/register'],
     ],
   },
   {
     title: 'Legalidad',
     links: [
-      ['Términos y condiciones', '#terminos'],
-      ['Políticas de privacidad', '#privacidad'],
-      ['Devoluciones', '#devoluciones'],
-      ['Tallas', '#tallas'],
+      ['Términos y condiciones', 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20t%C3%A9rminos%20y%20condiciones'],
+      ['Políticas de privacidad', 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20privacidad'],
+      ['Devoluciones', '#comunidad'],
+      ['Tallas', '#coleccion'],
       ['Contacto', '#contacto'],
     ],
   },
@@ -52,11 +53,13 @@ function SocialLink({ href, label, children }) {
 }
 
 function FooterLink({ label, href }) {
+  const className = 'group relative inline-flex w-fit max-w-full items-center text-sm font-light leading-relaxed text-neutral-400 transition duration-300 hover:translate-x-1 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transform-none motion-reduce:transition-none sm:text-base lg:text-lg'
+  const content = <><span>{label}</span><span aria-hidden="true" className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-dark-red transition-transform duration-300 group-hover:scale-x-100 motion-reduce:transition-none" /></>
+
   return (
-    <a href={href} className="group relative inline-flex w-fit max-w-full items-center text-sm font-light leading-relaxed text-neutral-400 transition duration-300 hover:translate-x-1 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transform-none motion-reduce:transition-none sm:text-base lg:text-lg">
-      <span>{label}</span>
-      <span aria-hidden="true" className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-dark-red transition-transform duration-300 group-hover:scale-x-100 motion-reduce:transition-none" />
-    </a>
+    href.startsWith('/')
+      ? <Link to={href} className={className}>{content}</Link>
+      : <a href={href} className={className}>{content}</a>
   )
 }
 

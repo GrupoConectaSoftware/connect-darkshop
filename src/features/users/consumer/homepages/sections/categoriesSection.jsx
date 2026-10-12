@@ -1,5 +1,5 @@
 import CategoryCard from '../../../../../components/ui/cards/CategoryCard'
-import Reveal from '../../../../../ux/Reveal'
+import Reveal from '../../../../../components/ux/Reveal'
 import jacketsImage from '../../../../../assets/Sections/homespages/categories/categorieChaqueta.webp'
 import shoesImage from '../../../../../assets/Sections/homespages/categories/categorieZapatos.webp'
 import accessoriesImage from '../../../../../assets/Sections/homespages/categories/categorieAccesorios.webp'
@@ -7,8 +7,8 @@ import pantsImage from '../../../../../assets/Sections/homespages/categories/cat
 import teesImage from '../../../../../assets/Sections/homespages/categories/categorieCamisetas.webp'
 
 const NAV_ITEMS = [
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Los productos', href: '#productos' },
+  { label: 'Sobre', href: '#nosotros' },
+  { label: 'Los productos', href: '#coleccion' },
   { label: 'Comunidad', href: '#comunidad' },
 ]
 

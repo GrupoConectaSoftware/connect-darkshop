@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import deniedImage from '../../../assets/Sections/auth/denied/deniedSection.webp'
+import ImageZoom from '../../../components/ux/ImageZoom'
 import VerifyComponents from './components/verifyComponents'
 
 export default function Denied() {
@@ -8,7 +9,7 @@ export default function Denied() {
   return (
     <main className="grid min-h-screen w-full bg-white text-neutral-950 lg:min-h-dvh lg:grid-cols-2">
       <aside className="relative hidden min-h-dvh overflow-hidden bg-neutral-950 lg:block" aria-label="Editorial DARKSHOP">
-        <img src={deniedImage} alt="" className="absolute inset-0 size-full object-cover" />
+        <ImageZoom className="absolute inset-0"><img src={deniedImage} alt="" className="size-full object-cover" /></ImageZoom>
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/10" />
         <div className="absolute inset-x-0 bottom-0 z-10 p-8 drop-shadow-lg xl:p-12 2xl:p-16">
           <p className="mb-3 font-body text-xs font-medium tracking-[0.12em] text-white/65">DARKSHOP · SEGURIDAD</p>

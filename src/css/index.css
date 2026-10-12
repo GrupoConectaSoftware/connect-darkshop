@@ -1,4 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lilita+One&family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Lilita One", "Archivo Black", Impact, sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --color-dark-950: #080808;
+  --color-dark-900: #121212;
+  --color-dark-850: #1a1a1a;
+  --color-dark-800: #262626;
+  --color-dark-700: #333333;
+  --color-dark-600: #4a4a4a;
+  --color-dark-500: #737373;
+  --color-dark-400: #969696;
+  --color-dark-300: #b8b8b8;
+  --color-dark-200: #d9d9d9;
+  --color-dark-100: #ececec;
+  --color-dark-50: #f5f5f3;
+  --color-dark-white: #ffffff;
+  --color-dark-burgundy: #491c25;
+  --color-dark-burgundy-light: #612832;
+  --color-dark-burgundy-deep: #301218;
+  --color-dark-red: #d9272e;
+  --color-dark-red-light: #ed3038;
+  --color-dark-red-deep: #ad1e24;
+  --color-dark-cream: #ede6d6;
+  --color-newsletter: #050505;
+  --color-footer: #000000;
+}
+
 :root {
   font-family: "Space Grotesk", sans-serif;
   color: #f5f3ee;
@@ -14,8 +43,8 @@ html {
 }
 body {
   margin: 0;
-  background: #111;
-  color: #f5f3ee;
+  background: var(--dark-bg, #111);
+  color: var(--dark-text, #f5f3ee);
 }
 .site-nav {
   height: 82px;

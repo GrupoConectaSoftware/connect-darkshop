@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import GoogleButton from '../../../../components/ui/GoogleButton'
-import SessionButton from '../../../../components/ui/SessionButton'
+import GoogleButton from '../../../../components/ui/buttons/GoogleButton'
+import SessionButton from '../../../../components/ui/buttons/SessionButton'
 
 const validateEmail = (value) => {
   if (!value.trim()) return 'Ingresa tu email.'

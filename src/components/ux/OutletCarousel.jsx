@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import CarouselControlButton from '../components/ui/buttons/CarouselControlButton'
-import ProductCard from '../components/ui/cards/ProductCard'
+import CarouselControlButton from '../ui/buttons/CarouselControlButton'
+import ProductCard from '../ui/cards/ProductCard'
 import InfiniteMarquee from './InfiniteMarquee'
 
 export default function OutletCarousel({ products }) {
