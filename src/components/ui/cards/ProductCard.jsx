@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Eye, Gift, Heart, Share2, ShoppingCart } from 'lucide-react'
 import ProductBadge from '../badges/ProductBadge'
@@ -7,6 +7,7 @@ import GarmentSwitch from '../buttons/GarmentSwitch'
 import IconActionButton from '../buttons/IconActionButton'
 import SizeButton from '../buttons/SizeButton'
 import StoreCardButton from '../buttons/StoreCardButton'
+import { FAVORITES_UPDATED_EVENT, isFavorite as isProductFavorite, toggleFavorite } from '../../../commons/storage/favoritesStorage'
 
 const ACTIONS = [
   { icon: Eye, label: 'Vista rápida' },
@@ -26,13 +27,23 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
   const [viewMode, setViewMode] = useState('garment')
+  const [favorite, setFavorite] = useState(() => isProductFavorite(product))
   const isGift = product.badge?.variant === 'obsequio'
   const isDiscount = product.badge?.variant === 'descuento'
   const productSlug = product.slug || `${product.name}-${product.id}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
+  useEffect(() => {
+    const syncFavorite = () => setFavorite(isProductFavorite(product))
+
+    syncFavorite()
+    window.addEventListener(FAVORITES_UPDATED_EVENT, syncFavorite)
+    return () => window.removeEventListener(FAVORITES_UPDATED_EVENT, syncFavorite)
+  }, [product])
+
   const handleAction = (label) => (event) => {
     event.stopPropagation()
     if (label === 'Vista rápida') navigate(`/preview/${productSlug}`)
+    if (label === 'Agregar a favoritos') setFavorite(toggleFavorite(product).isFavorite)
   }
 
   return (
@@ -56,7 +67,7 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
           className={`absolute inset-0 block h-full w-full max-w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] ${viewMode === 'model' ? 'saturate-100' : 'saturate-[.85]'}`}
         />
         <div className="absolute right-3 top-3 z-10 flex translate-x-2 flex-col gap-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} onClick={handleAction(action.label)} />)}
+          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action.label)} className={action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} />)}
         </div>
         <div className="absolute bottom-3 left-3 z-10">
           <GarmentSwitch value={viewMode} onChange={setViewMode} />

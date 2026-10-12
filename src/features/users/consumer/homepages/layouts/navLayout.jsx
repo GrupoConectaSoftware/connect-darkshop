@@ -17,6 +17,7 @@ import useHideOnScroll from '../../../../../hooks/useHideOnScroll'
 import TextPromotionComponent from '../components/TextPromotionComponent'
 import AyudaComponent from '../components/AyudaComponent'
 import PqrComponent from '../../../../../commons/components/PqrComponent'
+import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../../commons/storage/favoritesStorage'
 
 const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
@@ -80,6 +81,7 @@ function DesktopNavLinks() {
 export default function NavLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isPqrOpen, setIsPqrOpen] = useState(false)
+  const [favoriteCount, setFavoriteCount] = useState(() => getFavorites().length)
   const isHidden = useHideOnScroll(0.2)
   const closePqr = useCallback(() => setIsPqrOpen(false), [])
 
@@ -88,6 +90,13 @@ export default function NavLayout() {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    const syncFavoriteCount = () => setFavoriteCount(getFavorites().length)
+
+    window.addEventListener(FAVORITES_UPDATED_EVENT, syncFavoriteCount)
+    return () => window.removeEventListener(FAVORITES_UPDATED_EVENT, syncFavoriteCount)
+  }, [])
 
   // Cierra el menú con Escape o si la pantalla pasa a desktop (lg = 1024px)
   useEffect(() => {
@@ -159,7 +168,7 @@ export default function NavLayout() {
 
               <div className="flex shrink-0 flex-row items-center justify-end gap-3">
                 <div className="flex flex-row items-center gap-1">
-                  <button aria-label="Favoritos" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><HeartIcon size={17} /><Counter>2</Counter></button>
+                  <Link to="/favorites" aria-label="Favoritos" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><HeartIcon size={17} />{favoriteCount > 0 && <Counter>{favoriteCount}</Counter>}</Link>
                   <button aria-label="Carrito" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><ShoppingBagIcon size={17} /><Counter>1</Counter></button>
                 </div>
                 <UserButton />
@@ -173,7 +182,7 @@ export default function NavLayout() {
           <div className="mx-auto flex h-14 max-w-[1600px] flex-row items-center justify-between px-4">
             <a href="#inicio" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></a>
             <div className="flex flex-row items-center gap-1">
-              <button aria-label="Favoritos" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><HeartIcon size={19} /><Counter mobile>2</Counter></button>
+              <Link to="/favorites" aria-label="Favoritos" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><HeartIcon size={19} />{favoriteCount > 0 && <Counter mobile>{favoriteCount}</Counter>}</Link>
               <button aria-label="Carrito" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><ShoppingBagIcon size={19} /><Counter mobile>1</Counter></button>
               <button aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)} className="grid h-9 w-9 cursor-pointer place-items-center text-dark-950 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red">
                 {isMobileMenuOpen ? <CloseIcon size={20} /> : <MenuIcon size={20} />}

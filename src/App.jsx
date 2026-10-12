@@ -12,6 +12,7 @@ import Recovery from './features/auth/recovery/recovery'
 import Sent from './features/auth/send/send'
 import Expired from './features/auth/expired/expired'
 import Preview from './features/users/consumer/preview/preview'
+import Favorite from './features/users/consumer/favorites/favorite'
 import './css/index.css'
 import './css/App.css'
 
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/sent" element={<Sent />} />
         <Route path="/expired" element={<Expired />} />
         <Route path="/preview/:slug" element={<Preview />} />
+        <Route path="/favorites" element={<Favorite />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
