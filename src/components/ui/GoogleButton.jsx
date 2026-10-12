@@ -4,7 +4,7 @@ export default function GoogleButton({ children, onClick, loading = false, disab
       type="button"
       onClick={onClick}
       disabled={disabled || loading}
-      className={`inline-flex min-h-12 min-w-0 items-center justify-center gap-3 border border-dark-700 bg-transparent px-5 py-3 font-body text-xs font-medium uppercase tracking-wide text-dark-white transition-colors duration-200 hover:border-dark-400 hover:bg-white/[0.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark-white/70 disabled:cursor-not-allowed disabled:opacity-50 ${fullWidth ? 'w-full' : ''}`}
+      className={`inline-flex min-h-12 min-w-0 cursor-pointer items-center justify-center gap-3 border border-dark-700 bg-transparent px-5 py-3 font-body text-xs font-medium uppercase tracking-wide text-dark-white transition-colors duration-200 hover:border-dark-400 hover:bg-white/[0.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark-white/70 disabled:cursor-not-allowed disabled:opacity-50 ${fullWidth ? 'w-full' : ''}`}
     >
       {loading ? (
         <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-white border-r-transparent" />

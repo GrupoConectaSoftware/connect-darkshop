@@ -91,7 +91,7 @@ export default function PqrComponent({ isOpen, onClose }) {
               <h2 id="pqr-title" className="mt-4 font-display text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">¿Cómo podemos ayudarte?</h2>
               <p className="mt-4 max-w-2xl text-sm font-light leading-relaxed text-neutral-400 sm:text-base">Encuentra información sobre prendas, pedidos y servicios de DARKSHOP.</p>
             </div>
-            <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Cerrar preguntas frecuentes" className="grid size-10 shrink-0 place-items-center text-neutral-400 transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Cerrar preguntas frecuentes" className="grid size-10 shrink-0 cursor-pointer place-items-center text-neutral-400 transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
               <X size={21} strokeWidth={1.4} />
             </button>
           </div>
@@ -108,7 +108,7 @@ export default function PqrComponent({ isOpen, onClose }) {
             return (
               <article key={question} className={`border-b border-white/10 transition-colors duration-300 last:border-b-0 ${expanded ? 'bg-white/[0.035]' : ''}`}>
                 <h3>
-                  <button type="button" aria-expanded={expanded} aria-controls={answerId} onClick={() => setActiveQuestion(expanded ? null : index)} className="group flex w-full items-center gap-4 px-1 py-4 text-left sm:gap-5 sm:px-3 sm:py-5">
+                  <button type="button" aria-expanded={expanded} aria-controls={answerId} onClick={() => setActiveQuestion(expanded ? null : index)} className="group flex w-full cursor-pointer items-center gap-4 px-1 py-4 text-left sm:gap-5 sm:px-3 sm:py-5">
                     <span className={`w-7 shrink-0 font-body text-[10px] tracking-widest transition-colors ${expanded ? 'text-dark-red' : 'text-neutral-500'}`}>0{index + 1}</span>
                     <span className={`flex-1 text-sm font-medium leading-snug transition-colors sm:text-base ${expanded ? 'text-dark-white' : 'text-neutral-200 group-hover:text-dark-white'}`}>{question}</span>
                     <span className={`grid size-7 shrink-0 place-items-center border transition-colors ${expanded ? 'border-dark-red text-dark-red' : 'border-white/10 text-neutral-500 group-hover:border-white/40 group-hover:text-dark-white'}`}>

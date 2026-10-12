@@ -40,18 +40,18 @@ export default function RegisterForm() {
     if (Object.values(nextErrors).every((error) => !error)) navigate('/select-account')
   }
 
-  const inputClass = (hasError) => `h-10 w-full border bg-dark-white px-4 font-body text-sm text-dark-950 outline-none transition-colors duration-200 placeholder:text-dark-400 focus:ring-2 focus:ring-dark-red/20 sm:h-11 ${hasError ? 'border-red-500' : 'border-dark-200 focus:border-dark-red'}`
+  const inputClass = (hasError) => `h-9 w-full border bg-dark-white px-4 font-body text-sm text-dark-950 outline-none transition-colors duration-200 placeholder:text-dark-400 focus:ring-2 focus:ring-dark-red/20 sm:h-10 ${hasError ? 'border-red-500' : 'border-dark-200 focus:border-dark-red'}`
 
   return (
     <div className="w-full min-w-0 gap-5">
       <GoogleButton fullWidth onClick={() => setNotice('El registro con Google estará disponible próximamente.')}>Continuar con Google</GoogleButton>
-      <div className="my-3 flex items-center gap-4 sm:my-4" aria-hidden="true">
+      <div className="my-2 flex items-center gap-4 sm:my-3" aria-hidden="true">
         <span className="h-px flex-1 bg-dark-700" />
         <span className="font-body text-[10px] font-medium uppercase text-dark-300">o continuar con email</span>
         <span className="h-px flex-1 bg-dark-700" />
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 sm:gap-5">
+      <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-2.5 sm:gap-3">
         <div>
           <label htmlFor="register-name" className="mb-1 block font-body text-xs font-semibold uppercase tracking-wide text-dark-white">Ingresa tu nombre <span className="text-dark-400">*</span></label>
           <input id="register-name" name="name" type="text" autoComplete="name" value={name} onChange={(event) => { setName(event.target.value); setNotice('') }} onBlur={() => setErrors((current) => ({ ...current, name: name.trim() ? '' : 'Ingresa tu nombre.' }))} aria-invalid={Boolean(errors.name)} aria-describedby="register-name-error" placeholder="Tu nombre completo" className={inputClass(errors.name)} />
@@ -64,9 +64,9 @@ export default function RegisterForm() {
         </div>
         <div>
           <label htmlFor="register-password" className="mb-1 block font-body text-xs font-semibold uppercase tracking-wide text-dark-white">Ingresa tu contraseña <span className="text-dark-400">*</span></label>
-          <div className={`flex h-10 items-center border bg-dark-white transition-colors duration-200 focus-within:ring-2 focus-within:ring-dark-red/20 sm:h-11 ${errors.password ? 'border-red-500' : 'border-dark-200 focus-within:border-dark-red'}`}>
+          <div className={`flex h-9 items-center border bg-dark-white transition-colors duration-200 focus-within:ring-2 focus-within:ring-dark-red/20 sm:h-10 ${errors.password ? 'border-red-500' : 'border-dark-200 focus-within:border-dark-red'}`}>
             <input id="register-password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="new-password" value={password} onChange={(event) => { setPassword(event.target.value); setNotice('') }} onBlur={() => setErrors((current) => ({ ...current, password: validatePassword(password) }))} aria-invalid={Boolean(errors.password)} aria-describedby="register-password-error password-requirements" placeholder="Crea una contraseña segura" className="h-full min-w-0 flex-1 bg-transparent px-4 font-body text-sm text-dark-950 outline-none placeholder:text-dark-400" />
-            <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} className="grid size-10 shrink-0 place-items-center text-dark-500 transition-colors hover:text-dark-950 focus-visible:outline focus-visible:outline-dark-red">{showPassword ? <EyeOff size={18} strokeWidth={1.6} /> : <Eye size={18} strokeWidth={1.6} />}</button>
+            <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} className="grid size-10 shrink-0 cursor-pointer place-items-center text-dark-500 transition-colors hover:text-dark-950 focus-visible:outline focus-visible:outline-dark-red">{showPassword ? <EyeOff size={18} strokeWidth={1.6} /> : <Eye size={18} strokeWidth={1.6} />}</button>
           </div>
           <div id="password-requirements"><PasswordValidation password={password} error={errors.password} /></div>
         </div>
@@ -80,7 +80,7 @@ export default function RegisterForm() {
         <SessionButton type="submit" fullWidth>Registrar cuenta</SessionButton>
         {notice && <p role="status" aria-live="polite" className="pt-0.5 font-body text-xs text-dark-300">{notice}</p>}
       </form>
-      <p className="mt-5 text-center font-body text-xs font-light text-dark-400 sm:text-sm">¿Ya tienes cuenta? <Link to="/login" className="font-medium text-dark-white transition-colors hover:text-dark-red">Iniciar sesión</Link></p>
+      <p className="mt-6 text-center font-body text-xs font-light text-dark-400 sm:text-sm">¿Ya tienes cuenta? <Link to="/login" className="font-medium text-dark-white transition-colors hover:text-dark-red">Iniciar sesión</Link></p>
     </div>
   )
 }

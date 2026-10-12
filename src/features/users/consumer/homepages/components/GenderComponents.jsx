@@ -71,7 +71,7 @@ export default function GenderComponents() {
                 ref={index === 0 ? firstOptionRef : undefined}
                 type="button"
                 onClick={() => navigate(`/${option.slug}`)}
-                className="group relative flex min-h-[17rem] overflow-hidden bg-black p-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-dark-cream sm:min-h-[22rem] sm:p-7 lg:min-h-[23rem] lg:p-8 xl:min-h-[26rem] xl:p-10"
+                className="group relative flex min-h-[17rem] cursor-pointer overflow-hidden bg-black p-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-dark-cream sm:min-h-[22rem] sm:p-7 lg:min-h-[23rem] lg:p-8 xl:min-h-[26rem] xl:p-10"
               >
                 <img src={option.image} alt="" className="absolute inset-0 h-full w-full object-cover object-[center_25%] grayscale transition duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0 motion-reduce:transition-none" />
                 <span aria-hidden="true" className="absolute inset-0 bg-black/45 transition-colors duration-500 group-hover:bg-black/15 motion-reduce:transition-none" />
