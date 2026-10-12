@@ -19,7 +19,7 @@ function MarqueeRow({ brands, selectedBrand, onBrandSelect, reverse = false }) {
                 aria-label={`Filtrar productos de ${brand}`}
                 aria-pressed={selectedBrand === brand}
                 tabIndex={group === 0 ? 0 : -1}
-                className={selectedBrand === brand ? 'is-selected' : ''}
+                className={`cursor-pointer ${selectedBrand === brand ? 'is-selected' : ''}`}
                 onClick={() => onBrandSelect(selectedBrand === brand ? '' : brand)}
               >
                 {brand}

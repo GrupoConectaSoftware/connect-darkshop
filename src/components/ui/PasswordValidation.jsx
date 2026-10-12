@@ -88,7 +88,7 @@ export default function PasswordValidation({ password = '', error = '' }) {
           ))}
           <button
             type="button"
-            className={`ml-1 flex size-5 shrink-0 items-center justify-center transition-colors duration-200 ${helpIconColor} focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-dark-white`}
+          className={`ml-1 flex size-5 shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${helpIconColor} focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-dark-white`}
             aria-label="Ver requisitos de contraseña"
             aria-expanded={isOpen}
             aria-controls="password-rules-popover"
@@ -142,7 +142,7 @@ export default function PasswordValidation({ password = '', error = '' }) {
               aria-label="Cerrar requisitos"
               onClick={() => setIsOpen(false)}
               tabIndex={isOpen ? 0 : -1}
-              className="absolute right-3 top-3 flex size-7 items-center justify-center text-dark-400 transition-colors duration-200 hover:text-dark-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-dark-white"
+              className="absolute right-3 top-3 flex size-7 cursor-pointer items-center justify-center text-dark-400 transition-colors duration-200 hover:text-dark-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-dark-white"
             >
               <X aria-hidden="true" className="size-4" />
             </button>

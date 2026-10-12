@@ -120,7 +120,7 @@ export default function NavLayout() {
               <SocialLinks />
               <span className="h-3 w-px bg-dark-700" />
               <a href="#trabaja" className="transition-colors hover:text-dark-white">Trabaja con nosotros</a>
-              <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
+              <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="cursor-pointer transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
               <span className="relative ml-2"><AyudaComponent /></span>
             </div>
           </div>
@@ -159,8 +159,8 @@ export default function NavLayout() {
 
               <div className="flex shrink-0 flex-row items-center justify-end gap-3">
                 <div className="flex flex-row items-center gap-1">
-                  <button aria-label="Favoritos" className="relative grid size-10 place-items-center text-dark-700 transition-colors hover:text-dark-red"><HeartIcon size={17} /><Counter>2</Counter></button>
-                  <button aria-label="Carrito" className="relative grid size-10 place-items-center text-dark-700 transition-colors hover:text-dark-red"><ShoppingBagIcon size={17} /><Counter>1</Counter></button>
+                  <button aria-label="Favoritos" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><HeartIcon size={17} /><Counter>2</Counter></button>
+                  <button aria-label="Carrito" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><ShoppingBagIcon size={17} /><Counter>1</Counter></button>
                 </div>
                 <UserButton />
               </div>
@@ -173,9 +173,9 @@ export default function NavLayout() {
           <div className="mx-auto flex h-14 max-w-[1600px] flex-row items-center justify-between px-4">
             <a href="#inicio" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></a>
             <div className="flex flex-row items-center gap-1">
-              <button aria-label="Favoritos" className="relative grid h-9 w-9 place-items-center text-dark-800"><HeartIcon size={19} /><Counter mobile>2</Counter></button>
-              <button aria-label="Carrito" className="relative grid h-9 w-9 place-items-center text-dark-800"><ShoppingBagIcon size={19} /><Counter mobile>1</Counter></button>
-              <button aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)} className="grid h-9 w-9 place-items-center text-dark-950 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red">
+              <button aria-label="Favoritos" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><HeartIcon size={19} /><Counter mobile>2</Counter></button>
+              <button aria-label="Carrito" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><ShoppingBagIcon size={19} /><Counter mobile>1</Counter></button>
+              <button aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)} className="grid h-9 w-9 cursor-pointer place-items-center text-dark-950 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red">
                 {isMobileMenuOpen ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
               </button>
             </div>
@@ -191,7 +191,7 @@ export default function NavLayout() {
         {/* Header del drawer */}
         <div className="relative flex shrink-0 flex-row items-center justify-between px-6 pb-4 pt-6">
           <img src={logoDarkShop} alt="Darkshop" className="h-7 w-auto object-contain" />
-          <button onClick={closeMenu} aria-label="Cerrar menú" className="grid h-9 w-9 place-items-center text-dark-950 transition-colors hover:rotate-90 hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red motion-reduce:transform-none"><CloseIcon size={22} /></button>
+          <button onClick={closeMenu} aria-label="Cerrar menú" className="grid h-9 w-9 cursor-pointer place-items-center text-dark-950 transition-colors hover:rotate-90 hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red motion-reduce:transform-none"><CloseIcon size={22} /></button>
         </div>
 
         <div className="relative mx-6 mt-2 shrink-0 bg-dark-50 px-4 py-3">

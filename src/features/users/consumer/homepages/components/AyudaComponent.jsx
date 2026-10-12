@@ -14,7 +14,7 @@ export default function AyudaComponent() {
         type="button"
         aria-haspopup="true"
         aria-expanded="false"
-        className="flex flex-row items-center gap-1.5 text-sm font-medium text-dark-200 transition-colors hover:text-dark-white"
+        className="flex cursor-pointer flex-row items-center gap-1.5 text-sm font-medium text-dark-200 transition-colors hover:text-dark-white"
       >
         <span>Ayuda</span>
         <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" aria-hidden="true" />

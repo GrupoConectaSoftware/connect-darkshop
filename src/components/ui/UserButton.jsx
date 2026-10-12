@@ -9,7 +9,7 @@ export default function UserButton({
     <button
       type="button"
       onClick={onClick}
-      className="flex h-11 items-center gap-3 border-l border-dark-200 px-4 py-2 text-left transition-opacity hover:opacity-80"
+      className="flex h-11 cursor-pointer items-center gap-3 border-l border-dark-200 px-4 py-2 text-left transition-opacity hover:opacity-80"
     >
       <span className="grid size-9 shrink-0 place-items-center rounded-full border border-dark-700 bg-dark-900 text-dark-white">
         <User width="100%" height="100%" className="p-2" aria-hidden="true" />
