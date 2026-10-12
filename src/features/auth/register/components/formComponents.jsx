@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import GoogleButton from '../../../../components/ui/GoogleButton'
 import PasswordValidation from '../../../../components/ui/PasswordValidation'
 import SessionButton from '../../../../components/ui/SessionButton'
@@ -18,6 +18,7 @@ const validatePassword = (value) => {
 }
 
 export default function RegisterForm() {
+  const navigate = useNavigate()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -36,7 +37,7 @@ export default function RegisterForm() {
     }
     setErrors(nextErrors)
     setNotice('')
-    if (Object.values(nextErrors).every((error) => !error)) setNotice('El registro estará disponible próximamente.')
+    if (Object.values(nextErrors).every((error) => !error)) navigate('/select-account')
   }
 
   const inputClass = (hasError) => `h-10 w-full border bg-dark-white px-4 font-body text-sm text-dark-950 outline-none transition-colors duration-200 placeholder:text-dark-400 focus:ring-2 focus:ring-dark-red/20 sm:h-11 ${hasError ? 'border-red-500' : 'border-dark-200 focus:border-dark-red'}`

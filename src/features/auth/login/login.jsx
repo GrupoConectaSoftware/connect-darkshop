@@ -1,4 +1,3 @@
-import logoDarkShop from '../../../assets/Logometria/LogoOficial.webp'
 import loginVideo from '../../../movies/login/vidLogin.mp4'
 import LoginForm from './components/formComponent'
 
