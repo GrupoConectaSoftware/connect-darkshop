@@ -7,6 +7,8 @@ import { RolePlaceholder } from './features/auth/account/components/formSelect'
 import Denied from './features/auth/denied/denied'
 import Reset from './features/auth/reset/reset'
 import Ban from './features/auth/ban/ban'
+import Verify from './features/auth/identity/identify'
+import Recovery from './features/auth/recovery/recovery'
 import './css/index.css'
 import './css/App.css'
 
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="/denied" element={<Denied />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/ban" element={<Ban />} />
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/recovery" element={<Recovery />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
