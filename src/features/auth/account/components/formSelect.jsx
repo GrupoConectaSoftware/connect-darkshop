@@ -27,10 +27,10 @@ function OptionCard({ option, isSelected, onSelect }) {
       type="button"
       onClick={onSelect}
       aria-pressed={isSelected}
-      className={`group relative flex aspect-[16/9] w-full min-w-0 cursor-pointer flex-col justify-end overflow-hidden border bg-dark-950 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dark-white/60 sm:aspect-[4/5] ${isSelected ? 'border-dark-white opacity-100' : 'border-dark-700/40 opacity-40 hover:opacity-70'}`}
+      className={`group relative flex aspect-video w-full min-w-0 cursor-pointer flex-col justify-end overflow-hidden border bg-dark-950 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dark-white/60 sm:aspect-4/5 ${isSelected ? 'border-dark-white opacity-100' : 'border-dark-700/40 opacity-40 hover:opacity-70'}`}
     >
       <img src={option.image} alt="" className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-      <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent" />
+      <span aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-black/95 via-black/35 to-transparent" />
       <span className="relative z-10 min-w-0 p-3 sm:p-4">
         <span className="mb-1.5 block font-body text-[9px] font-bold uppercase tracking-[0.2em] text-dark-300 sm:text-[10px]">{option.eyebrow}</span>
         <span className="block font-display text-sm uppercase leading-tight tracking-[-0.02em] text-dark-white sm:text-base">{option.title}</span>

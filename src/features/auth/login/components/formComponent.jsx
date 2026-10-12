@@ -59,7 +59,7 @@ export default function LoginForm() {
         </div>
         <div className="flex min-h-6 min-w-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 pb-1 font-body text-[10px] sm:text-xs">
           <label htmlFor="remember-login" className="inline-flex shrink-0 cursor-pointer items-center gap-2 text-dark-300"><input id="remember-login" type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="size-4 accent-dark-red" />Recuérdame</label>
-          <a href="#recuperar-contrasena" className="ml-auto max-w-[65%] wrap-break-word text-right text-dark-300 underline decoration-dark-500 underline-offset-4 transition-colors hover:text-dark-white">¿Olvidaste tu contraseña?</a>
+          <Link to="/recovery" className="ml-auto max-w-[65%] wrap-break-word text-right text-dark-300 underline decoration-dark-500 underline-offset-4 transition-colors hover:text-dark-white">¿Olvidaste tu contraseña?</Link>
         </div>
         <SessionButton type="submit" fullWidth>Iniciar sesión</SessionButton>
         <p role="status" aria-live="polite" className="min-h-5 pt-1 font-body text-xs text-dark-300">{notice}</p>
