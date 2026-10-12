@@ -1,5 +1,5 @@
 import AdvantageCard from '../../../../../components/ui/cards/AdvantageCard'
-import Reveal from '../../../../../ux/Reveal'
+import Reveal from '../../../../../components/ux/Reveal'
 
 const ADVANTAGES = [
   {

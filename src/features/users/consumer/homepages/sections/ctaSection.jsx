@@ -1,5 +1,6 @@
 import invitationImage from '../../../../../assets/Sections/homespages/invitation/ImagesInvitation.webp'
-import Reveal from '../../../../../ux/Reveal'
+import './ctaSection.css'
+import Reveal from '../../../../../components/ux/Reveal'
 
 export default function CtaSection() {
   return (
@@ -22,3 +23,4 @@ export default function CtaSection() {
     </section>
   )
 }
+import './ctaSection.css'

@@ -1,6 +1,6 @@
 import setsImage from '../../../../../assets/Sections/homespages/sets/ImagesSets.webp'
-import ImageZoom from '../../../../../ux/ImageZoom'
-import Reveal from '../../../../../ux/Reveal'
+import ImageZoom from '../../../../../components/ux/ImageZoom'
+import Reveal from '../../../../../components/ux/Reveal'
 
 const OUTLET_BRANDS = ['DARK', 'AMERICAN EAGLE', 'MONCLER FRIEND', 'DYNAMO BRAND']
 

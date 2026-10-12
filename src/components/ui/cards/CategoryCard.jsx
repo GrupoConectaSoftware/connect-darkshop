@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import ImageZoom from '../../../ux/ImageZoom'
+import ImageZoom from '../../ux/ImageZoom'
 
 export default function CategoryCard({ category }) {
   const { name, itemsCount, description, image } = category
