@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import banImage from '../../../assets/Sections/auth/ban/ban.webp'
+import banImage from '../../../assets/Sections/auth/ban/banSection.webp'
 import IdentityComponents from './components/identityComponents'
 
 export default function Verify() {

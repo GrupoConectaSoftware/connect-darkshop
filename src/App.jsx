@@ -9,7 +9,7 @@ import Reset from './features/auth/reset/reset'
 import Ban from './features/auth/ban/ban'
 import Verify from './features/auth/identity/identify'
 import Recovery from './features/auth/recovery/recovery'
-import Sent from './features/auth/code/code'
+import Sent from './features/auth/send/send'
 import './css/index.css'
 import './css/App.css'
 
