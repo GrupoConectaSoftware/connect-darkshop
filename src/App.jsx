@@ -9,6 +9,7 @@ import Reset from './features/auth/reset/reset'
 import Ban from './features/auth/ban/ban'
 import Verify from './features/auth/identity/identify'
 import Recovery from './features/auth/recovery/recovery'
+import Sent from './features/auth/code/code'
 import './css/index.css'
 import './css/App.css'
 
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/ban" element={<Ban />} />
         <Route path="/verify" element={<Verify />} />
         <Route path="/recovery" element={<Recovery />} />
+        <Route path="/sent" element={<Sent />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
