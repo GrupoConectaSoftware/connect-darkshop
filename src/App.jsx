@@ -5,6 +5,7 @@ import Register from './features/auth/register/register'
 import SelectAccount from './features/auth/account/selectAccount'
 import { RolePlaceholder } from './features/auth/account/components/formSelect'
 import Denied from './features/auth/denied/denied'
+import Reset from './features/auth/reset/reset'
 import './css/index.css'
 import './css/App.css'
 
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/select-account" element={<SelectAccount />} />
         <Route path="/denied" element={<Denied />} />
+        <Route path="/reset" element={<Reset />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
