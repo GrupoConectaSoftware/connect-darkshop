@@ -18,6 +18,7 @@ import TextPromotionComponent from '../components/TextPromotionComponent'
 import AyudaComponent from '../components/AyudaComponent'
 import PqrComponent from '../../../../../commons/components/PqrComponent'
 import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../../commons/storage/favoritesStorage'
+import { CART_UPDATED_EVENT, getCart } from '../../../../../commons/storage/cartStorage'
 
 const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
@@ -33,6 +34,7 @@ const DESKTOP_CONTAINER = 'mx-auto w-full max-w-[1600px] px-8'
 // Posiciones del contador
 const POS_ICON = 'right-0 top-0'                                    // favoritos / carrito
 const POS_OUTLET = 'left-full top-0 ml-0.5 -translate-y-1/2'        // Outlet desktop: a la derecha de la palabra, sin tapar letras
+const getCartCount = () => getCart().reduce((count, item) => count + item.quantity, 0)
 function SocialLinks({ iconSize = 13, boxed = false }) {
   const linkClass = boxed
     ? 'grid h-9 w-9 place-items-center border-2 border-dark-950 text-dark-950 transition-colors hover:bg-dark-950 hover:text-white'
@@ -78,10 +80,11 @@ function DesktopNavLinks() {
   )
 }
 
-export default function NavLayout() {
+export default function NavLayout({ cartVariant = false }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isPqrOpen, setIsPqrOpen] = useState(false)
   const [favoriteCount, setFavoriteCount] = useState(() => getFavorites().length)
+  const [cartCount, setCartCount] = useState(getCartCount)
   const isHidden = useHideOnScroll(0.2)
   const closePqr = useCallback(() => setIsPqrOpen(false), [])
 
@@ -96,6 +99,13 @@ export default function NavLayout() {
 
     window.addEventListener(FAVORITES_UPDATED_EVENT, syncFavoriteCount)
     return () => window.removeEventListener(FAVORITES_UPDATED_EVENT, syncFavoriteCount)
+  }, [])
+
+  useEffect(() => {
+    const syncCartCount = () => setCartCount(getCartCount())
+
+    window.addEventListener(CART_UPDATED_EVENT, syncCartCount)
+    return () => window.removeEventListener(CART_UPDATED_EVENT, syncCartCount)
   }, [])
 
   // Cierra el menú con Escape o si la pantalla pasa a desktop (lg = 1024px)
@@ -121,23 +131,31 @@ export default function NavLayout() {
       <header className={`sticky top-0 z-50 w-full border-b border-dark-200 bg-dark-white text-dark-950 transition-transform duration-300 ease-in-out ${isHidden && !isMobileMenuOpen ? '-translate-y-full' : 'translate-y-0'}`}>
         {/* Barra negra */}
         <div className="bg-dark-950 text-dark-50">
-          <div className={`${DESKTOP_CONTAINER} hidden h-9 items-center justify-between gap-6 lg:flex`}>
-            <p className="shrink-0 text-sm text-white" style={{ fontStyle: 'italic', fontWeight: 700 }}>
-              “El negro combina con todo. Nosotros también”
-            </p>
-            <div className="flex shrink-0 flex-row items-center gap-4 text-sm text-dark-200">
-              <SocialLinks />
-              <span className="h-3 w-px bg-dark-700" />
-              <Link to="/register" className="transition-colors hover:text-dark-white">Trabaja con nosotros</Link>
-              <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="cursor-pointer transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
-              <span className="relative ml-2"><AyudaComponent /></span>
+          {cartVariant ? (
+            <div className={`${DESKTOP_CONTAINER} flex h-9 items-center justify-start px-4 text-[10px] font-medium sm:text-[11px]`}>
+              <TextPromotionComponent className="w-full overflow-hidden text-left" />
             </div>
-          </div>
-          <p className="flex h-8 items-center justify-start px-4 text-left text-[10px] font-semibold italic text-white sm:px-6 lg:hidden">“El negro combina con todo. Nosotros también”</p>
+          ) : (
+            <>
+              <div className={`${DESKTOP_CONTAINER} hidden h-9 items-center justify-between gap-6 lg:flex`}>
+                <p className="shrink-0 text-sm font-bold italic text-white">
+                  “El negro combina con todo. Nosotros también”
+                </p>
+                <div className="flex shrink-0 flex-row items-center gap-4 text-sm text-dark-200">
+                  <SocialLinks />
+                  <span className="h-3 w-px bg-dark-700" />
+                  <Link to="/register" className="transition-colors hover:text-dark-white">Trabaja con nosotros</Link>
+                  <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="cursor-pointer transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
+                  <span className="relative ml-2"><AyudaComponent /></span>
+                </div>
+              </div>
+              <p className="flex h-8 items-center justify-start px-4 text-left text-[10px] font-semibold italic text-white sm:px-6 lg:hidden">“El negro combina con todo. Nosotros también”</p>
+            </>
+          )}
         </div>
 
         {/* Barra gris */}
-        <div className="hidden bg-dark-200 text-dark-600 lg:block">
+        {!cartVariant && <div className="hidden bg-dark-200 text-dark-600 lg:block">
           <div className={`${DESKTOP_CONTAINER} flex h-9 flex-row items-center justify-between gap-6 font-medium text-dark-700`}>
             <div className="flex shrink-0 flex-row items-center gap-5 text-[11px]">
               <a href="mailto:darkshop@reportas.com" className="flex flex-row items-center gap-1.5 transition-colors hover:text-dark-950"><MailIcon size={13} /><span>darkshop@reportas.com</span></a>
@@ -145,31 +163,30 @@ export default function NavLayout() {
             </div>
             <div className="shrink-0 text-[15px] font-medium"><TextPromotionComponent /></div>
           </div>
-        </div>
+        </div>}
 
         {/* Barra blanca principal */}
         <div className="hidden bg-dark-white lg:block">
           <div className={`${DESKTOP_CONTAINER} h-24`}>
-            <div className="grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 xl:grid-cols-[auto_minmax(0,1fr)_20rem_auto] xl:gap-5 2xl:grid-cols-[auto_minmax(0,1fr)_22rem_auto] 2xl:gap-7">
+            <div className={cartVariant ? 'flex h-full items-center gap-4' : 'grid h-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 xl:grid-cols-[auto_minmax(0,1fr)_20rem_auto] xl:gap-5 2xl:grid-cols-[auto_minmax(0,1fr)_22rem_auto] 2xl:gap-7'}>
               <div className="flex shrink-0 flex-row items-center">
-                <a href="#inicio" className="shrink-0" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></a>
+                <Link to="/" className="shrink-0" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></Link>
                 {/* En lg (1024-1279px) se oculta para que los links no se aprieten; desde xl se ve igual en todos los tamaños */}
                 <div className="ml-4 hidden flex-col border-l border-dark-200 pl-4 text-[8px] uppercase leading-relaxed tracking-widest text-dark-500 2xl:flex"><span>Moda</span><span>Cultura</span><span>Comunidad</span></div>
               </div>
 
-              {/* gap fijo desde xl: sin variantes 2xl, se ve idéntico en pantallas grandes */}
-              <nav className="flex xl:ml-5 min-w-0 flex-row items-center justify-start gap-4 xl:gap-5">
+              {!cartVariant && <nav className="flex min-w-0 flex-row items-center justify-start gap-4 xl:ml-5 xl:gap-5">
                 <DesktopNavLinks />
-              </nav>
+              </nav>}
 
-              <div className="hidden min-w-0 xl:block">
+              <div className={cartVariant ? 'ml-auto w-72 shrink-0 xl:w-80' : 'hidden min-w-0 xl:block'}>
                 <SearchBar className="w-full" placeholder="Busca estilos, promociones o marcas de ropa" inputClassName="h-10 text-[14px]" />
               </div>
 
               <div className="flex shrink-0 flex-row items-center justify-end gap-3">
                 <div className="flex flex-row items-center gap-1">
                   <Link to="/favorites" aria-label="Favoritos" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><HeartIcon size={17} />{favoriteCount > 0 && <Counter>{favoriteCount}</Counter>}</Link>
-                  <button aria-label="Carrito" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><ShoppingBagIcon size={17} /><Counter>1</Counter></button>
+                  <Link to="/cart" aria-label="Carrito" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><ShoppingBagIcon size={17} />{cartCount > 0 && <Counter>{cartCount}</Counter>}</Link>
                 </div>
                 <UserButton />
               </div>
@@ -180,10 +197,10 @@ export default function NavLayout() {
         {/* Barra móvil */}
         <div className="bg-dark-white lg:hidden">
           <div className="mx-auto flex h-14 max-w-[1600px] flex-row items-center justify-between px-4">
-            <a href="#inicio" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></a>
+            <Link to="/" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></Link>
             <div className="flex flex-row items-center gap-1">
               <Link to="/favorites" aria-label="Favoritos" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><HeartIcon size={19} />{favoriteCount > 0 && <Counter mobile>{favoriteCount}</Counter>}</Link>
-              <button aria-label="Carrito" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><ShoppingBagIcon size={19} /><Counter mobile>1</Counter></button>
+              <Link to="/cart" aria-label="Carrito" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><ShoppingBagIcon size={19} />{cartCount > 0 && <Counter mobile>{cartCount}</Counter>}</Link>
               <button aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)} className="grid h-9 w-9 cursor-pointer place-items-center text-dark-950 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red">
                 {isMobileMenuOpen ? <CloseIcon size={20} /> : <MenuIcon size={20} />}
               </button>
@@ -207,7 +224,7 @@ export default function NavLayout() {
           <Link to="/login" onClick={closeMenu} className="inline-flex w-full items-center gap-3 text-sm text-dark-700 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red"><span className="grid size-9 place-items-center rounded-full bg-dark-950 text-dark-white"><User size={16} /></span><span><span className="block text-[10px] uppercase tracking-wide text-dark-500">Únete a la comunidad</span><span className="font-semibold text-dark-950">Iniciar sesión</span></span><ArrowUpRight size={16} className="ml-auto text-dark-400" /></Link>
         </div>
 
-        <nav className="relative flex-1 overflow-y-auto px-6 py-8" data-scroll-ignore aria-label="Navegación principal">
+        {!cartVariant && <nav className="relative flex-1 overflow-y-auto px-6 py-8" data-scroll-ignore aria-label="Navegación principal">
           <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-dark-red">Explora Darkshop</p>
           <div className="flex flex-col gap-3">
             {NAV_LINKS.map((link, index) => (
@@ -222,7 +239,7 @@ export default function NavLayout() {
               </a>
             ))}
           </div>
-        </nav>
+        </nav>}
 
         <div className="relative shrink-0 bg-dark-950 px-6 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 text-dark-white">
           <div className="flex flex-col gap-4">

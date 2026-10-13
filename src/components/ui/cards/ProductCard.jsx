@@ -8,6 +8,7 @@ import IconActionButton from '../buttons/IconActionButton'
 import SizeButton from '../buttons/SizeButton'
 import StoreCardButton from '../buttons/StoreCardButton'
 import { FAVORITES_UPDATED_EVENT, isFavorite as isProductFavorite, toggleFavorite } from '../../../commons/storage/favoritesStorage'
+import { addToCart } from '../../../commons/storage/cartStorage'
 
 const ACTIONS = [
   { icon: Eye, label: 'Vista rápida' },
@@ -44,6 +45,7 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
     event.stopPropagation()
     if (label === 'Vista rápida') navigate(`/preview/${productSlug}`)
     if (label === 'Agregar a favoritos') setFavorite(toggleFavorite(product).isFavorite)
+    if (label === 'Agregar al carrito') addToCart(product)
   }
 
   return (

@@ -17,7 +17,7 @@ export default function Favorite() {
 
   return (
     <div className="min-h-screen bg-dark-white text-dark-950">
-      <NavLayout />
+      <NavLayout cartVariant />
       <main className="mx-auto w-full max-w-[1600px] px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
         <nav aria-label="Miga de pan" className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-wide text-dark-500">
           <Link to="/" className="transition-colors hover:text-dark-red">Inicio</Link><span>/</span><span className="text-dark-950">Favoritos</span>
