@@ -15,6 +15,7 @@ import Preview from './features/users/consumer/preview/preview'
 import Favorite from './features/users/consumer/favorites/favorite'
 import Shopping from './features/users/consumer/shopping/shopping'
 import Legal from './features/users/consumer/legal/legal'
+import Stores from './features/users/consumer/stores/stores'
 import './css/index.css'
 import './css/App.css'
 
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/favorites" element={<Favorite />} />
         <Route path="/cart" element={<Shopping />} />
         <Route path="/legal" element={<Legal />} />
+        <Route path="/stores" element={<Stores />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />

@@ -39,7 +39,7 @@ export default function Legal() {
             </div>
           </div>
 
-          <div className="grid gap-8 pt-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[19rem_minmax(0,1fr)]">
+          <div className="grid gap-8 pt-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-24 xl:grid-cols-[19rem_minmax(0,1fr)] xl:gap-32">
             <SidebarComponent />
             <LegalContent query={query} />
           </div>
