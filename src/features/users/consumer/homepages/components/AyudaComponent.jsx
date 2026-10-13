@@ -1,10 +1,10 @@
 import { ChevronDown } from 'lucide-react'
 
 const LEGAL_LINKS = [
-  { label: 'Términos y condiciones', href: 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20t%C3%A9rminos%20y%20condiciones' },
-  { label: 'Política de privacidad', href: 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20privacidad' },
-  { label: 'Tratamiento de datos', href: 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20tratamiento%20de%20datos' },
-  { label: 'Cambios y devoluciones', href: '#comunidad' },
+  { label: 'Términos y condiciones', href: '/legal#terminos-y-condiciones' },
+  { label: 'Política de privacidad', href: '/legal#politicas-de-privacidad' },
+  { label: 'Tratamiento de datos', href: '/legal#tratamiento-datos-personales' },
+  { label: 'Cambios y devoluciones', href: '/legal#devoluciones' },
 ]
 
 export default function AyudaComponent() {
