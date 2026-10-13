@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react'
-import { STORE_CATEGORIES, STORE_REFERENCES } from '../data/storeFilters'
+import { STORE_CATEGORIES, STORE_REFERENCES } from '../../../../../components/ui/filters/StoreFilters'
 
 function SearchField({ id, label, placeholder, value, onChange }) {
   return (

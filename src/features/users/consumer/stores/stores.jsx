@@ -7,7 +7,7 @@ import businessCuatro from '../../../../assets/Sections/stores/business/business
 import businessCinco from '../../../../assets/Sections/stores/business/businessCinco.webp'
 import businessSeis from '../../../../assets/Sections/stores/business/businessSeis.webp'
 import businessSiete from '../../../../assets/Sections/stores/business/businessSiete.webp'
-import { EMPTY_STORE_FILTERS, STORE_REFERENCES } from './data/storeFilters'
+import { EMPTY_STORE_FILTERS, STORE_REFERENCES } from '../../../../components/ui/filters/StoreFilters'
 import StoresContent from './components/storesContent'
 import StoresFiltrer from './components/storesFiltrer'
 import StoresHero from './components/storesHero'
