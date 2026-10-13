@@ -1,5 +1,6 @@
 import { AlertCircle, Heart, Minus, Plus, ShoppingBag } from 'lucide-react'
 import { useState } from 'react'
+import { addToCart } from '../../../../../commons/storage/cartStorage'
 
 const money = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 })
 
@@ -45,7 +46,7 @@ export default function DescriptionComponents({ product }) {
             <span className="w-7 text-center text-sm font-semibold">{quantity}</span>
             <button type="button" onClick={() => setQuantity((value) => value + 1)} aria-label="Aumentar cantidad" className="grid size-11 cursor-pointer place-items-center hover:bg-dark-50"><Plus size={15} /></button>
           </div>
-          <button type="button" className="flex h-12 min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 bg-dark-950 px-4 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-dark-burgundy"><ShoppingBag size={17} />Añadir al carrito</button>
+          <button type="button" onClick={() => addToCart(product, { quantity, size: size ?? product.sizes[0], color })} className="flex h-12 min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 bg-dark-950 px-4 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-dark-burgundy"><ShoppingBag size={17} />Añadir al carrito</button>
         </div>
         <button type="button" className="mt-3 flex h-12 w-full cursor-pointer items-center justify-center gap-2 border border-dark-300 text-xs font-semibold uppercase tracking-wide text-dark-950 transition-colors hover:border-dark-950"><Heart size={17} />Añadir a favoritos</button>
         <button type="button" className="mt-3 h-12 w-full cursor-pointer bg-dark-950 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-dark-burgundy">Comprar ahora</button>
