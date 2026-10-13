@@ -19,7 +19,7 @@ const FOOTER_GROUPS = [
       ['Manifiesto', '#nosotros'],
       ['Comunidad', '#comunidad'],
       ['LookBook', '#conjuntos'],
-      ['Tiendas físicas', 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20tiendas%20f%C3%ADsicas'],
+      ['Tiendas físicas', '/stores'],
       ['Carrera', '/register'],
     ],
   },
