@@ -4,7 +4,7 @@ import outletOne from '../../../../../assets/Sections/homespages/outlet/products
 import outletTwo from '../../../../../assets/Sections/homespages/outlet/products/ouletDos.webp'
 import outletThree from '../../../../../assets/Sections/homespages/outlet/products/outletTres.webp'
 import GarmentSwitch from '../../../../../components/ui/buttons/GarmentSwitch'
-import ImageZoomModal from '../../../../../components/ui/ImageZoomModal'
+import ImageZoomModal from '../../../../../components/ux/ImageZoomModal'
 
 const LOCAL_IMAGES = [outletOne, outletTwo, outletThree]
 
