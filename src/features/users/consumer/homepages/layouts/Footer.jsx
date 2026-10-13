@@ -26,9 +26,9 @@ const FOOTER_GROUPS = [
   {
     title: 'Legalidad',
     links: [
-      ['Términos y condiciones', 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20t%C3%A9rminos%20y%20condiciones'],
-      ['Políticas de privacidad', 'mailto:darkshop@reportas.com?subject=Consulta%20sobre%20privacidad'],
-      ['Devoluciones', '#comunidad'],
+      ['Términos y condiciones', '/legal#terminos-y-condiciones'],
+      ['Políticas de privacidad', '/legal#politicas-de-privacidad'],
+      ['Devoluciones', '/legal#devoluciones'],
       ['Tallas', '#coleccion'],
       ['Contacto', '#contacto'],
     ],
