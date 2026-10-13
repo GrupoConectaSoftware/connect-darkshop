@@ -1,7 +1,5 @@
 import { Search } from 'lucide-react'
-
-const CATEGORIES = ['Camisetas', 'Chaquetas', 'Zapatos', 'Pantalones', 'Accesorios', 'Exclusivo']
-const REFERENCES = ['Oversize', 'Underground', 'Streetwear', 'Urbano', 'Casual', 'Vintage', 'Techwear', 'Y2K', 'Básico', 'Minimalista', 'Estampado', 'Gótico', 'Deportivo', 'Grunge', 'Oversize', 'Elegante', 'Athleisure', 'SmartCasual', 'Old Money', 'Workwear', 'DTF']
+import { STORE_CATEGORIES, STORE_REFERENCES } from '../data/storeFilters'
 
 function SearchField({ id, label, placeholder, value, onChange }) {
   return (
@@ -43,16 +41,16 @@ export default function StoresFiltrer({ filters, onChange, onClear, onApply }) {
         <fieldset>
           <legend className="mb-3 text-[11px] font-bold uppercase tracking-wide text-dark-950">Categorías</legend>
           <div className="space-y-3">
-            {CATEGORIES.map((category) => <CheckboxOption key={category} id={`category-${category}`} label={category} checked={filters.categories.includes(category)} onChange={() => toggle('categories', category)} />)}
+            {STORE_CATEGORIES.map((category) => <CheckboxOption key={category} id={`category-${category}`} label={category} checked={filters.categories.includes(category)} onChange={() => toggle('categories', category)} />)}
           </div>
         </fieldset>
 
         <div className="border-t border-dark-700 pt-6">
           <p className="mb-3 text-[11px] font-bold uppercase tracking-wide text-dark-950">Referencia</p>
           <div className="grid grid-cols-3 gap-2">
-            {REFERENCES.map((reference, index) => {
-              const checked = filters.references.includes(reference)
-              return <button key={`${reference}-${index}`} type="button" onClick={() => toggle('references', reference)} className={`h-8 w-full min-w-0 cursor-pointer truncate rounded-md border px-1 text-center text-[11px] font-light transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red ${checked ? 'border-dark-950 bg-dark-950 text-dark-white' : 'border-dark-400 bg-dark-white text-dark-400 hover:border-dark-700 hover:text-dark-950'}`}>{reference}</button>
+            {STORE_REFERENCES.map((reference) => {
+              const checked = filters.references.includes(reference.id)
+              return <button key={reference.id} type="button" aria-pressed={checked} onClick={() => toggle('references', reference.id)} className={`h-8 w-full min-w-0 cursor-pointer truncate rounded-md border px-1 text-center text-[11px] font-light transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red ${checked ? 'border-dark-950 bg-dark-950 text-dark-white' : 'border-dark-400 bg-dark-white text-dark-400 hover:border-dark-700 hover:text-dark-950'}`}>{reference.label}</button>
             })}
           </div>
         </div>
