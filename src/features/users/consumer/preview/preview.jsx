@@ -23,6 +23,7 @@ const PRODUCT = {
 
 export default function Preview() {
   const { slug } = useParams()
+  // TODO: Resolver el producto unitario real desde el catálogo usando este slug.
 
   return (
     <div className="min-h-screen bg-dark-white text-dark-950">

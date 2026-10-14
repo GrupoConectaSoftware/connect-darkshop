@@ -1,6 +1,7 @@
 import { Eye, Heart, Image as ImageIcon, MapPin, Share2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import StoreVisitButton from '../buttons/StoreVisitButton'
+import ProductBadge from '../badges/ProductBadge'
 
 function ActionButton({ label, children, to }) {
   const className = 'grid size-8 place-items-center rounded-full bg-dark-950 text-dark-white transition duration-200 hover:scale-105 hover:bg-dark-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red motion-reduce:transform-none'
@@ -11,12 +12,12 @@ function ActionButton({ label, children, to }) {
 
 export default function StoreCard({ store }) {
   return (
-    <article id={store.slug} className="min-w-0 scroll-mt-6">
+    <article id={store.slug} className="min-w-0 scroll-mt-6 pt-3">
       <div className="relative aspect-[3/4] bg-dark-200">
         <Link to={`/stores#${store.slug}`} aria-label={`Ver ${store.name}`} className="block h-full w-full overflow-hidden rounded-xl">
           <img src={store.image} alt={`Interior de ${store.name}`} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
         </Link>
-        {store.badge && <span className="absolute -top-3 left-0 z-10 rounded-br-md bg-[#8b1a1a] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-dark-white">{store.badge}</span>}
+        {store.badge && <div className="absolute -left-2 -top-3 z-20"><ProductBadge label={store.badge} variant="descuento" /></div>}
         <div className="absolute right-2 top-2 flex flex-col gap-1.5">
           <ActionButton label={`Vista rápida de ${store.name}`} to={`/stores#${store.slug}`}><Eye size={15} /></ActionButton>
           <ActionButton label={`Agregar ${store.name} a favoritos`}><Heart size={15} /></ActionButton>

@@ -23,7 +23,7 @@ const money = new Intl.NumberFormat('es-CO', {
   maximumFractionDigits: 0,
 })
 
-export default function ProductCard({ product, isOutlet = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
+export default function ProductCard({ product, isOutlet = false, compact = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
   const navigate = useNavigate()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
@@ -57,7 +57,7 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) onCardBlur?.()
       }}
-      className="group relative flex w-[264px] min-w-[264px] max-w-[264px] flex-none cursor-pointer flex-col overflow-visible border border-dark-200 bg-dark-white sm:w-72 sm:min-w-72 sm:max-w-72"
+      className={`group relative flex cursor-pointer flex-col overflow-visible border border-dark-200 bg-dark-white ${compact ? 'w-full min-w-0 max-w-none' : 'w-[264px] min-w-[264px] max-w-[264px] flex-none sm:w-72 sm:min-w-72 sm:max-w-72'}`}
     >
       {product.badge && <div className="absolute -left-2 -top-3 z-20"><ProductBadge {...product.badge} /></div>}
 
@@ -65,7 +65,8 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
         <img
           src={product.image}
           alt={product.name}
-          loading="lazy"
+          loading={isOutlet ? 'eager' : 'lazy'}
+          decoding="async"
           className={`absolute inset-0 block h-full w-full max-w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] ${viewMode === 'model' ? 'saturate-100' : 'saturate-[.85]'}`}
         />
         <div className="absolute right-3 top-3 z-10 flex translate-x-2 flex-col gap-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
@@ -76,7 +77,7 @@ export default function ProductCard({ product, isOutlet = false, onCardMouseEnte
         </div>
       </div>
 
-      <div className="flex min-h-[248px] min-w-0 flex-1 flex-col bg-dark-white p-4">
+      <div className={`flex min-w-0 flex-1 flex-col bg-dark-white ${compact ? 'min-h-[226px] p-3' : 'min-h-[248px] p-4'}`}>
         <h3 className="line-clamp-2 min-h-10 text-base font-bold uppercase leading-tight text-dark-950">{product.name}</h3>
         <p className="mt-1 line-clamp-2 min-h-9 text-xs leading-4 text-dark-500 sm:text-sm">{product.description}</p>
 

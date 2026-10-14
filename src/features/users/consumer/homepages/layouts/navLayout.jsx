@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, User } from 'lucide-react'
 import logoDarkShop from '../../../../../assets/Logometria/LogoOficial.webp'
+import profileImage from '../../../../../assets/Profile/imagesProfile.webp'
 import HeartIcon from '../../../../../commons/ui/icons/commerce/HeartIcon'
 import ShoppingBagIcon from '../../../../../commons/ui/icons/commerce/ShoppingBagIcon'
 import MenuIcon from '../../../../../commons/ui/icons/navigation/MenuIcon'
@@ -19,12 +20,20 @@ import AyudaComponent from '../components/AyudaComponent'
 import PqrComponent from '../../../../../commons/components/PqrComponent'
 import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../../commons/storage/favoritesStorage'
 import { CART_UPDATED_EVENT, getCart } from '../../../../../commons/storage/cartStorage'
+import { OUTLET_PRODUCTS_ON_SALE } from '../../../../../components/ui/cards/productCardData'
 
 const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Outlet', href: '#coleccion' },
   { label: 'Comunidad', href: '#comunidad' },
   { label: 'Categorías', href: '#categorias' },
+  { label: 'Conjuntos', href: '#conjuntos' },
+]
+const LOGGED_NAV_LINKS = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Outlet', href: '#outlet' },
+  { label: 'Categorías', href: '#categorias' },
+  { label: 'Tiendas', href: '#tiendas' },
   { label: 'Conjuntos', href: '#conjuntos' },
 ]
 
@@ -60,10 +69,10 @@ function Counter({ children, mobile = false, position = POS_ICON }) {
   )
 }
 
-function DesktopNavLinks() {
+function DesktopNavLinks({ links = NAV_LINKS }) {
   return (
     <>
-      {NAV_LINKS.map((link) => (
+      {links.map((link) => (
         <a
           key={link.label}
           href={link.href}
@@ -72,7 +81,7 @@ function DesktopNavLinks() {
           {/* El span relative envuelve SOLO la palabra: el contador se ancla a ella */}
           <span className="relative inline-block">
             {link.label}
-            {link.label === 'Outlet' && <Counter position={POS_OUTLET}>3</Counter>}
+            {link.label === 'Outlet' && <Counter position={POS_OUTLET}>{OUTLET_PRODUCTS_ON_SALE.length}</Counter>}
           </span>
         </a>
       ))}
@@ -80,11 +89,12 @@ function DesktopNavLinks() {
   )
 }
 
-export default function NavLayout({ cartVariant = false }) {
+export default function NavLayout({ cartVariant = false, loggedVariant = false, loggedUserControl = null }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isPqrOpen, setIsPqrOpen] = useState(false)
   const [favoriteCount, setFavoriteCount] = useState(() => getFavorites().length)
   const [cartCount, setCartCount] = useState(getCartCount)
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
   const isHidden = useHideOnScroll(0.2)
   const closePqr = useCallback(() => setIsPqrOpen(false), [])
 
@@ -124,11 +134,12 @@ export default function NavLayout({ cartVariant = false }) {
   }, [isMobileMenuOpen])
 
   const closeMenu = () => setIsMobileMenuOpen(false)
+  const navLinks = loggedVariant ? LOGGED_NAV_LINKS : NAV_LINKS
 
   return (
     <>
       {/* Auto-hide: baja -> se esconde, sube -> aparece. Con el menú móvil abierto nunca se esconde */}
-      <header className={`sticky top-0 z-50 w-full border-b border-dark-200 bg-dark-white text-dark-950 transition-transform duration-300 ease-in-out ${isHidden && !isMobileMenuOpen ? '-translate-y-full' : 'translate-y-0'}`}>
+      <header className={`sticky top-0 z-50 w-full border-b border-dark-200 bg-dark-white text-dark-950 shadow-[0_5px_10px_-8px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-in-out ${isHidden && !isMobileMenuOpen ? '-translate-y-full' : 'translate-y-0'}`}>
         {/* Barra negra */}
         <div className="bg-dark-950 text-dark-50">
           {cartVariant ? (
@@ -176,7 +187,7 @@ export default function NavLayout({ cartVariant = false }) {
               </div>
 
               {!cartVariant && <nav className="flex min-w-0 flex-row items-center justify-start gap-4 xl:ml-5 xl:gap-5">
-                <DesktopNavLinks />
+                <DesktopNavLinks links={navLinks} />
               </nav>}
 
               <div className={cartVariant ? 'ml-auto w-72 shrink-0 xl:w-80' : 'hidden min-w-0 xl:block'}>
@@ -188,7 +199,16 @@ export default function NavLayout({ cartVariant = false }) {
                   <Link to="/favorites" aria-label="Favoritos" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><HeartIcon size={17} />{favoriteCount > 0 && <Counter>{favoriteCount}</Counter>}</Link>
                   <Link to="/cart" aria-label="Carrito" className="relative grid size-10 cursor-pointer place-items-center text-dark-700 transition-colors hover:text-dark-red"><ShoppingBagIcon size={17} />{cartCount > 0 && <Counter>{cartCount}</Counter>}</Link>
                 </div>
-                <UserButton />
+                {loggedUserControl || (loggedVariant ? (
+                  <div className="relative ml-1">
+                    <button type="button" aria-expanded={isProfileMenuOpen} aria-haspopup="menu" onClick={() => setIsProfileMenuOpen((open) => !open)} className="flex items-center gap-3 rounded-full py-1 pl-1 pr-2 text-left transition-colors hover:bg-dark-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red">
+                      <img src={profileImage} alt="" className="size-12 rounded-full object-cover" />
+                      <span className="hidden min-w-0 xl:block"><span className="block max-w-48 truncate text-sm font-bold text-dark-950">Marlon Andres Duarte</span><span className="mt-0.5 block text-xs text-dark-400">Despliegue su navegación</span></span>
+                      <span aria-hidden="true" className={`text-lg leading-none text-dark-600 transition-transform ${isProfileMenuOpen ? 'rotate-180' : ''}`}>⌄</span>
+                    </button>
+                    {isProfileMenuOpen && <div role="menu" className="absolute right-0 top-full z-50 mt-3 w-52 border border-dark-200 bg-white p-2 shadow-xl"><p className="border-b border-dark-100 px-3 py-2 text-xs font-semibold text-dark-500 xl:hidden">Marlon Andres Duarte</p><Link role="menuitem" to="/logged" onClick={() => setIsProfileMenuOpen(false)} className="block px-3 py-2 text-sm text-dark-700 hover:bg-dark-50 hover:text-dark-red">Mi cuenta</Link><Link role="menuitem" to="/favorites" onClick={() => setIsProfileMenuOpen(false)} className="block px-3 py-2 text-sm text-dark-700 hover:bg-dark-50 hover:text-dark-red">Favoritos</Link><Link role="menuitem" to="/cart" onClick={() => setIsProfileMenuOpen(false)} className="block px-3 py-2 text-sm text-dark-700 hover:bg-dark-50 hover:text-dark-red">Mis pedidos</Link><Link role="menuitem" to="/login" onClick={() => setIsProfileMenuOpen(false)} className="block border-t border-dark-100 px-3 py-2 text-sm text-dark-700 hover:bg-dark-50 hover:text-dark-red">Cerrar sesión</Link></div>}
+                  </div>
+                ) : <UserButton />)}
               </div>
             </div>
           </div>
@@ -199,6 +219,7 @@ export default function NavLayout({ cartVariant = false }) {
           <div className="mx-auto flex h-14 max-w-[1600px] flex-row items-center justify-between px-4">
             <Link to="/" aria-label="Darkshop inicio"><img src={logoDarkShop} alt="Darkshop" className="h-8 w-auto object-contain" /></Link>
             <div className="flex flex-row items-center gap-1">
+              {loggedVariant && <button type="button" aria-label="Abrir perfil" onClick={() => setIsProfileMenuOpen((open) => !open)} className="mr-1 flex items-center gap-2 rounded-full"><img src={profileImage} alt="Perfil de Marlon Andres Duarte" className="size-8 rounded-full object-cover" /></button>}
               <Link to="/favorites" aria-label="Favoritos" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><HeartIcon size={19} />{favoriteCount > 0 && <Counter mobile>{favoriteCount}</Counter>}</Link>
               <Link to="/cart" aria-label="Carrito" className="relative grid h-9 w-9 cursor-pointer place-items-center text-dark-800"><ShoppingBagIcon size={19} />{cartCount > 0 && <Counter mobile>{cartCount}</Counter>}</Link>
               <button aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)} className="grid h-9 w-9 cursor-pointer place-items-center text-dark-950 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red">
@@ -220,21 +241,21 @@ export default function NavLayout({ cartVariant = false }) {
           <button onClick={closeMenu} aria-label="Cerrar menú" className="grid h-9 w-9 cursor-pointer place-items-center text-dark-950 transition-colors hover:rotate-90 hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red motion-reduce:transform-none"><CloseIcon size={22} /></button>
         </div>
 
-        <div className="relative mx-6 mt-2 shrink-0 bg-dark-50 px-4 py-3">
+        {loggedVariant ? <div className="relative mx-6 mt-2 shrink-0 border border-dark-100 bg-dark-50 px-4 py-3"><button type="button" aria-expanded={isProfileMenuOpen} onClick={() => setIsProfileMenuOpen((open) => !open)} className="flex w-full items-center gap-3 text-left"><img src={profileImage} alt="" className="size-10 rounded-full object-cover" /><span><span className="block text-sm font-bold">Marlon Andres Duarte</span><span className="mt-1 block text-xs text-dark-500">Despliegue su navegación</span></span><span className="ml-auto">⌄</span></button>{isProfileMenuOpen && <div className="mt-3 flex flex-col border-t border-dark-200 pt-2 text-sm"><Link to="/logged" onClick={closeMenu} className="py-2">Mi cuenta</Link><Link to="/favorites" onClick={closeMenu} className="py-2">Favoritos</Link><Link to="/cart" onClick={closeMenu} className="py-2">Mis pedidos</Link><Link to="/login" onClick={closeMenu} className="py-2">Cerrar sesión</Link></div>}</div> : <div className="relative mx-6 mt-2 shrink-0 bg-dark-50 px-4 py-3">
           <Link to="/login" onClick={closeMenu} className="inline-flex w-full items-center gap-3 text-sm text-dark-700 transition-colors hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red"><span className="grid size-9 place-items-center rounded-full bg-dark-950 text-dark-white"><User size={16} /></span><span><span className="block text-[10px] uppercase tracking-wide text-dark-500">Únete a la comunidad</span><span className="font-semibold text-dark-950">Iniciar sesión</span></span><ArrowUpRight size={16} className="ml-auto text-dark-400" /></Link>
-        </div>
+        </div>}
 
         {!cartVariant && <nav className="relative flex-1 overflow-y-auto px-6 py-8" data-scroll-ignore aria-label="Navegación principal">
           <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-dark-red">Explora Darkshop</p>
           <div className="flex flex-col gap-3">
-            {NAV_LINKS.map((link, index) => (
+            {navLinks.map((link, index) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={closeMenu}
                 className="group flex items-center justify-between py-1.5 font-display text-2xl uppercase leading-none tracking-tight text-dark-950 transition-colors hover:translate-x-1 hover:text-dark-red focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-dark-red motion-reduce:transform-none"
               >
-                <span className="flex items-center gap-3"><span className="font-body text-[10px] font-medium tracking-[0.16em] text-dark-red">0{index + 1}</span>{link.label}</span>
+                <span className="flex items-center gap-3"><span className="font-body text-[10px] font-medium tracking-[0.16em] text-dark-red">0{index + 1}</span>{link.label}{link.label === 'Outlet' && <span className="rounded-full bg-dark-red px-2 py-1 font-body text-[9px] font-bold tracking-normal text-white">{OUTLET_PRODUCTS_ON_SALE.length}</span>}</span>
                 <ArrowUpRight size={18} strokeWidth={1.5} className="text-dark-400 opacity-50 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-dark-red group-hover:opacity-100 motion-reduce:transition-none" />
               </a>
             ))}

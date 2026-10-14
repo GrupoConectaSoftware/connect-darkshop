@@ -78,7 +78,7 @@ export default function PqrComponent({ isOpen, onClose }) {
   }, [isOpen, onClose])
 
   const modal = isOpen ? (
-    <div className="fixed inset-0 z-[120] grid place-items-center overflow-y-auto bg-black/70 p-3 backdrop-blur-md [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:p-6">
+    <div className="fixed inset-0 z-120 grid place-items-center overflow-y-auto bg-black/70 p-3 backdrop-blur-md [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden sm:p-6">
       <section ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="pqr-title" className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-5xl flex-col overflow-hidden border border-white/10 bg-dark-950 text-dark-white shadow-2xl xl:max-w-6xl sm:max-h-[calc(100dvh-3rem)]">
         <header className="relative shrink-0 border-b border-white/10 px-5 py-6 sm:px-9 sm:py-8">
           <div aria-hidden="true" className="absolute left-0 top-0 h-px w-24 bg-dark-red" />
@@ -91,13 +91,13 @@ export default function PqrComponent({ isOpen, onClose }) {
               <h2 id="pqr-title" className="mt-4 font-display text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">¿Cómo podemos ayudarte?</h2>
               <p className="mt-4 max-w-2xl text-sm font-light leading-relaxed text-neutral-400 sm:text-base">Encuentra información sobre prendas, pedidos y servicios de DARKSHOP.</p>
             </div>
-            <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Cerrar preguntas frecuentes" className="grid size-10 shrink-0 cursor-pointer place-items-center text-neutral-400 transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="Cerrar preguntas frecuentes" className="grid size-10 shrink-0 cursor-pointer place-items-center text-neutral-400 transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">
               <X size={21} strokeWidth={1.4} />
             </button>
           </div>
         </header>
 
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-9">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden sm:px-9">
           <div className="flex items-center justify-between border-b border-white/10 py-4 text-[10px] font-medium uppercase tracking-widest text-neutral-500">
             <span>Preguntas frecuentes</span>
             <span>08 respuestas</span>
