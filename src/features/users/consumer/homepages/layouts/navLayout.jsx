@@ -89,7 +89,7 @@ function DesktopNavLinks({ links = NAV_LINKS }) {
   )
 }
 
-export default function NavLayout({ cartVariant = false, loggedVariant = false, loggedUserControl = null }) {
+export default function NavLayout({ cartVariant = false, loggedVariant = false, loggedUserControl = null, customNavLinks = null }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isPqrOpen, setIsPqrOpen] = useState(false)
   const [favoriteCount, setFavoriteCount] = useState(() => getFavorites().length)
@@ -134,7 +134,7 @@ export default function NavLayout({ cartVariant = false, loggedVariant = false, 
   }, [isMobileMenuOpen])
 
   const closeMenu = () => setIsMobileMenuOpen(false)
-  const navLinks = loggedVariant ? LOGGED_NAV_LINKS : NAV_LINKS
+  const navLinks = customNavLinks ?? (loggedVariant ? LOGGED_NAV_LINKS : NAV_LINKS)
 
   return (
     <>

@@ -23,12 +23,84 @@
   animation-timing-function: steps(24, end);
 }
 
+.ux-reveal--scale {
+  transform: scale(0.975);
+}
+
+.ux-reveal--scale.is-visible {
+  animation-name: ux-reveal-scale;
+  animation-duration: 750ms;
+  animation-timing-function: cubic-bezier(.2, .75, .25, 1);
+}
+
+.ux-reveal--clip {
+  transform: translate3d(0, 14px, 0);
+}
+
+.ux-reveal--clip.is-visible {
+  animation-name: ux-reveal-clip;
+  animation-duration: 750ms;
+  animation-timing-function: cubic-bezier(.2, .75, .25, 1);
+}
+
+@keyframes ux-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes ux-reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ux-reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ux-reveal-clip {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes ux-reveal-typewriter {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 1;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ux-reveal,
   .ux-reveal.is-visible {
     animation: none !important;
     opacity: 1;
     transform: none;
-    clip-path: none;
   }
 }

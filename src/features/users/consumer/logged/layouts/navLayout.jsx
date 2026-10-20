@@ -3,7 +3,7 @@ import MainNavLayout from '../../homepages/layouts/navLayout'
 import NavegationComponent from '../components/navegationComponent'
 import UserMenuTrigger from '../components/UserMenuTrigger'
 
-export default function NavLayout() {
+export default function NavLayout({ customNavLinks = null }) {
   const [isOpen, setIsOpen] = useState(false)
   const closeTimer = useRef(null)
 
@@ -32,6 +32,7 @@ export default function NavLayout() {
   return <>
     <MainNavLayout
       loggedVariant
+      customNavLinks={customNavLinks}
       loggedUserControl={<UserMenuTrigger isOpen={isOpen} onMouseEnter={openMenu} onMouseLeave={closeMenu} onClick={() => (isOpen ? closeImmediately() : openMenu())} />}
     />
     <NavegationComponent isOpen={isOpen} onMouseEnter={openMenu} onMouseLeave={closeMenu} onClose={closeImmediately} />

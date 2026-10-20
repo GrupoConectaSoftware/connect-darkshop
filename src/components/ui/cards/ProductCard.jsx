@@ -23,7 +23,7 @@ const money = new Intl.NumberFormat('es-CO', {
   maximumFractionDigits: 0,
 })
 
-export default function ProductCard({ product, isOutlet = false, compact = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
+export default function ProductCard({ product, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
   const navigate = useNavigate()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
@@ -69,7 +69,7 @@ export default function ProductCard({ product, isOutlet = false, compact = false
           decoding="async"
           className={`absolute inset-0 block h-full w-full max-w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] ${viewMode === 'model' ? 'saturate-100' : 'saturate-[.85]'}`}
         />
-        <div className="absolute right-3 top-3 z-10 flex translate-x-2 flex-col gap-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+        <div className={`absolute right-3 top-3 z-20 flex flex-col gap-2 transition-all duration-300 ${alwaysShowActions ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`}>
           {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action.label)} className={action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} />)}
         </div>
         <div className="absolute bottom-3 left-3 z-10">
@@ -86,7 +86,7 @@ export default function ProductCard({ product, isOutlet = false, compact = false
             <><Gift size={17} className="text-dark-red" /><span className="text-base font-black text-dark-red">GRATIS</span></>
           ) : (
             <>
-              <span className={`text-base font-black ${isDiscount ? 'text-dark-red' : 'text-dark-950'}`}>{money.format(product.price)}</span>
+              <span className={`text-base font-black ${isDiscount || priceAccent ? 'text-dark-red' : 'text-dark-950'}`}>{money.format(product.price)}</span>
               {product.originalPrice && <span className="text-sm text-dark-400 line-through">{money.format(product.originalPrice)}</span>}
               {isDiscount && <span className="text-[10px] font-bold text-dark-red">-{product.discount}%</span>}
             </>

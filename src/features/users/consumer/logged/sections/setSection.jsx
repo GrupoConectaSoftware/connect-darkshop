@@ -144,9 +144,10 @@ function SetInfo({ set, piecesRef, activePieceIndex, onSelectPiece }) {
   )
 }
 
-function SetCarousel({ sets, activeSetId, onSelect }) {
+function SetCarousel({ sets, activeSetId, onSelect, showEdgeAffordances = false }) {
   const carouselRef = useRef(null)
   const [isPaused, setIsPaused] = useState(false)
+  const shouldShowEdgeAffordances = showEdgeAffordances || sets.length >= 4
   const move = useCallback((direction) => {
     const carousel = carouselRef.current
     if (!carousel) return
@@ -165,8 +166,8 @@ function SetCarousel({ sets, activeSetId, onSelect }) {
     return () => window.clearInterval(timer)
   }, [isPaused, move, sets.length])
 
-  // El carrusel se oculta cuando no hay suficientes conjuntos para desplazar.
-  if (sets.length < 4) return null
+  // Se conserva la navegación entre conjuntos incluso cuando una tienda tiene dos opciones.
+  if (sets.length < 2) return null
 
   return (
     <section aria-labelledby="other-sets-title" className="relative mt-20 w-full overflow-hidden lg:mt-28">
@@ -186,31 +187,37 @@ function SetCarousel({ sets, activeSetId, onSelect }) {
             </article>
           )})}
         </div>
-        <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 hidden w-28 bg-gradient-to-r from-white via-white/75 to-transparent lg:block" />
-        <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-28 bg-gradient-to-l from-white via-white/75 to-transparent lg:block" />
-        <button type="button" aria-label="Conjunto anterior" onClick={() => move(-1)} className="absolute left-4 top-1/2 z-10 hidden size-12 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/30 bg-black/30 text-white shadow-md backdrop-blur-md transition hover:scale-105 hover:bg-black/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red lg:grid"><ArrowLeft size={20} /></button>
-        <button type="button" aria-label="Siguiente conjunto" onClick={() => move(1)} className="absolute right-4 top-1/2 z-10 hidden size-12 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/30 bg-black/30 text-white shadow-md backdrop-blur-md transition hover:scale-105 hover:bg-black/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red lg:grid"><ArrowRight size={20} /></button>
+        {shouldShowEdgeAffordances && <>
+          <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-20 hidden w-28 bg-gradient-to-r from-white via-white/75 to-transparent lg:block" />
+          <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-28 bg-gradient-to-l from-white via-white/75 to-transparent lg:block" />
+          <button type="button" aria-label="Conjunto anterior" onClick={() => move(-1)} className="absolute left-4 top-1/2 z-30 hidden size-12 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/30 bg-black/30 text-white shadow-md backdrop-blur-md transition hover:scale-105 hover:bg-black/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red lg:grid"><ArrowLeft size={20} /></button>
+          <button type="button" aria-label="Siguiente conjunto" onClick={() => move(1)} className="absolute right-4 top-1/2 z-30 hidden size-12 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/30 bg-black/30 text-white shadow-md backdrop-blur-md transition hover:scale-105 hover:bg-black/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red lg:grid"><ArrowRight size={20} /></button>
+        </>}
       </div>
     </section>
   )
 }
 
-export default function SetSection() {
+export default function SetSection({ storeFilter = null, homeHref = '/logged', collectionHref = '/catalog?category=conjuntos', showCarouselAffordances = false }) {
   const { slug } = useParams()
-  const initialSet = SETS.find((set) => set.slug === slug) ?? SETS[0]
+  const visibleSets = storeFilter
+    ? SETS.filter((set) => set.storeName.toLowerCase() === storeFilter.toLowerCase())
+    : SETS
+  const initialSet = visibleSets.find((set) => set.slug === slug) ?? visibleSets[0]
+
+  if (!initialSet) return null
+
+  return <SetSectionContent key={`${storeFilter ?? 'all'}-${initialSet.id}`} initialSet={initialSet} visibleSets={visibleSets} homeHref={homeHref} collectionHref={collectionHref} showCarouselAffordances={showCarouselAffordances} />
+}
+
+function SetSectionContent({ initialSet, visibleSets, homeHref, collectionHref, showCarouselAffordances }) {
   const [activeSetId, setActiveSetId] = useState(initialSet.id)
-  const activeSet = SETS.find((set) => set.id === activeSetId) ?? initialSet
+  const activeSet = visibleSets.find((set) => set.id === activeSetId) ?? initialSet
   const [favorite, setFavorite] = useState(() => isFavorite(initialSet))
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const sectionRef = useRef(null)
   const piecesRef = useRef(null)
   const previewRef = useRef(null)
-
-  useEffect(() => {
-    setActiveSetId(initialSet.id)
-    setActiveImageIndex(0)
-    setFavorite(isFavorite(initialSet))
-  }, [initialSet.id])
 
   const handleSelectSet = (nextSet) => {
     if (nextSet.id === activeSet.id) {
@@ -234,15 +241,15 @@ export default function SetSection() {
   }
 
   return (
-    <section ref={sectionRef} id="conjuntos" className="w-full overflow-x-hidden scroll-mt-28 bg-white text-dark-950">
+    <section ref={sectionRef} id="conjuntos" className="w-full overflow-x-hidden scroll-mt-28 bg-white pb-16 text-dark-950 sm:pb-20 lg:pb-24">
       <div className="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 xl:px-16">
-        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-dark-500"><Link to="/logged" className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link><span>/</span><Link to="/catalog?category=conjuntos" className="transition-colors hover:text-dark-950">Conjuntos</Link><span>/</span><span className="text-dark-950">{activeSet.name}</span></nav>
+        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-dark-500"><Link to={homeHref} className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link><span>/</span><Link to={collectionHref} className="transition-colors hover:text-dark-950">Conjuntos</Link><span>/</span><span className="text-dark-950">{activeSet.name}</span></nav>
         <div key={activeSet.id} className="grid gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(22rem,0.88fr)] lg:gap-12 xl:gap-16">
           <SetGallery set={activeSet} activeIndex={activeImageIndex} onImageSelect={setActiveImageIndex} favorite={favorite} onFavorite={handleFavorite} onShowPieces={() => piecesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })} previewRef={previewRef} />
           <SetInfo set={activeSet} piecesRef={piecesRef} activePieceIndex={activeImageIndex} onSelectPiece={handleSelectPiece} />
         </div>
       </div>
-      <SetCarousel sets={SETS} activeSetId={activeSet.id} onSelect={handleSelectSet} />
+      <SetCarousel sets={visibleSets} activeSetId={activeSet.id} onSelect={handleSelectSet} showEdgeAffordances={showCarouselAffordances} />
     </section>
   )
 }

@@ -63,8 +63,11 @@ function FooterLink({ label, href }) {
   )
 }
 
-export default function Footer() {
+export default function Footer({ storeLinks = null }) {
   const year = new Date().getFullYear()
+  const footerGroups = storeLinks
+    ? FOOTER_GROUPS.map((group, index) => index === 0 ? { ...group, links: storeLinks } : group)
+    : FOOTER_GROUPS
 
   return (
     <footer className="overflow-hidden bg-footer px-5 pt-10 text-white sm:px-10 sm:pt-16 lg:px-16 lg:pt-24 xl:px-28">
@@ -82,7 +85,7 @@ export default function Footer() {
         </div>
 
         <div className="hidden grid-cols-2 gap-x-6 gap-y-10 sm:grid sm:grid-cols-3 sm:gap-x-8 lg:gap-x-10">
-          {FOOTER_GROUPS.map((group) => (
+          {footerGroups.map((group) => (
             <nav key={group.title} aria-label={`Enlaces de ${group.title.toLowerCase()}`}>
               <h3 className="mb-4 font-body text-base font-medium uppercase text-white sm:text-lg lg:text-2xl">{group.title}</h3>
               <ul className="space-y-2">
