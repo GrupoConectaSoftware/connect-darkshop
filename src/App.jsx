@@ -19,6 +19,7 @@ import Stores from './features/users/consumer/stores/stores'
 import Clothes from './features/users/consumer/clothes/clothes'
 import Logged from './features/users/consumer/logged/logged'
 import Brand from './features/users/brand/brand'
+import Config from './features/users/consumer/config/config'
 import './css/index.css'
 import './css/App.css'
 
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/catalog" element={<Clothes />} />
         <Route path="/logged" element={<Logged />} />
         <Route path="/brand" element={<Brand />} />
+        <Route path="/config" element={<Config />} />
         <Route path="/set/:slug" element={<Logged />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
