@@ -1,0 +1,10 @@
+@keyframes image-zoom-breathe {
+  0%,
+  100% {
+    transform: scale(1.012);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+}

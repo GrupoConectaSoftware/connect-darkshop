@@ -50,7 +50,7 @@ export default function FormSelect() {
 
   const handleContinue = () => {
     if (!selected) return
-    navigate(selected === 'buyer' ? '/register/buyer' : '/register/seller')
+    navigate(selected === 'buyer' ? '/config' : '/register/seller')
   }
 
   return (

@@ -67,7 +67,7 @@ export default function CarouselHero({
                 <img
                   src={imageData.src}
                   alt={imageData.alt || ''}
-                  className="h-full w-full object-cover object-center"
+                  className="block h-full w-full object-cover object-center"
                 />
               </picture>
             </div>

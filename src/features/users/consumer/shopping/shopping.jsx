@@ -9,21 +9,7 @@ import outletOne from '../../../../assets/Sections/homespages/outlet/products/ou
 import outletTwo from '../../../../assets/Sections/homespages/outlet/products/ouletDos.webp'
 import outletThree from '../../../../assets/Sections/homespages/outlet/products/outletTres.webp'
 import outletFour from '../../../../assets/Sections/homespages/outlet/products/outletCuatro.webp'
-import trousersImage from '../../../../assets/Sections/homespages/categories/categoriePantalones.webp'
 import { getCart, saveCart } from '../../../../commons/storage/cartStorage'
-
-// TODO: Reemplazar esta data mock por el estado global del carrito.
-const CART_ITEMS = [
-  {
-    id: 'cart-1', name: 'Pantalón relaxed essential', description: 'Algodón de alto gramaje, corte amplio y acabado minimalista para un estilo urbano auténtico.', price: 45000, quantity: 1, size: 'L', colorName: 'Negro', colorClass: 'bg-dark-950', image: trousersImage, store: { name: 'Victory' }, inStock: true,
-  },
-  {
-    id: 'cart-2', name: 'Pantalón relaxed essential', description: 'Algodón de alto gramaje, corte amplio y acabado minimalista para un estilo urbano auténtico.', price: 45000, quantity: 1, size: 'L', colorName: 'Negro', colorClass: 'bg-dark-950', image: trousersImage, store: { name: 'Smooth' }, inStock: true, badge: 'recommended',
-  },
-  {
-    id: 'cart-3', name: 'Pantalón relaxed essential', description: 'Algodón de alto gramaje, corte amplio y acabado minimalista para un estilo urbano auténtico.', price: 27500, quantity: 1, size: 'L', colorName: 'Negro', colorClass: 'bg-dark-950', image: trousersImage, store: { name: 'Dark' }, inStock: true, badge: 'discount',
-  },
-]
 
 // TODO: Reemplazar por sugerencias obtenidas desde el catálogo.
 const RECOMMENDED_PRODUCTS = [
@@ -34,7 +20,7 @@ const RECOMMENDED_PRODUCTS = [
 ]
 
 export default function Shopping() {
-  const [items, setItems] = useState(() => getCart(CART_ITEMS))
+  const [items, setItems] = useState(() => getCart())
   const [coupon, setCoupon] = useState('')
 
   useEffect(() => {
@@ -76,8 +62,8 @@ export default function Shopping() {
           </form>
         </div>
 
-        <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(20rem,.65fr)] lg:gap-12">
-          <section className="min-w-0">
+        <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(20rem,.65fr)] lg:items-stretch lg:gap-12">
+          <section className="flex min-w-0 flex-col">
             <div className="mb-4 flex items-center justify-between gap-4">
               <p className="text-xs italic text-dark-400">{itemCount} {itemCount === 1 ? 'producto' : 'productos'}</p>
               <button type="button" onClick={handleClear} disabled={!items.length} className="inline-flex h-9 cursor-pointer items-center gap-1.5 bg-dark-100 px-3 text-[10px] font-semibold uppercase tracking-wide text-dark-800 transition-colors hover:bg-dark-200 disabled:cursor-not-allowed disabled:opacity-50"><Trash2 size={14} />Vaciar carrito</button>

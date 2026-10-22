@@ -361,16 +361,6 @@ body {
   }
 }
 
-@keyframes image-zoom-breathe {
-  0%,
-  100% {
-    transform: scale(1.012);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-}
-
 .image-zoom {
   overflow: hidden;
 }
@@ -407,15 +397,6 @@ body {
   }
 }
 
-@keyframes sets-marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
 .sets-section {
   overflow: hidden;
   padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 6rem);
@@ -444,14 +425,14 @@ body {
   flex: none;
 }
 
-.sets-marquee__group button {
+.sets-marquee__group :is(button, span) {
   appearance: none;
   border: 0;
   background: transparent;
   padding-right: clamp(3rem, 6.5vw, 7rem);
   white-space: nowrap;
   color: var(--color-dark-200);
-  cursor: pointer;
+  cursor: default;
   font-family: "Lilita One", sans-serif;
   font-size: clamp(2.25rem, 5vw, 5.25rem);
   font-weight: 400;
@@ -463,6 +444,10 @@ body {
 .sets-marquee__group button:hover,
 .sets-marquee__group button.is-selected {
   color: var(--color-dark-red);
+}
+
+.sets-marquee__group button {
+  cursor: pointer;
 }
 
 .sets-marquee__group button:focus-visible {
@@ -536,4 +521,9 @@ body {
   .sets-marquee__track {
     animation: none;
   }
+}
+
+/* Documented exception: hide scrollbars for GallerySection's filter and image scrollers. */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -1,44 +1,14 @@
 import setsImage from '../../../../../assets/Sections/homespages/sets/ImagesSets.webp'
 import ImageZoom from '../../../../../components/ux/ImageZoom'
 import Reveal from '../../../../../components/ux/Reveal'
-
-const OUTLET_BRANDS = ['DARK', 'AMERICAN EAGLE', 'MONCLER FRIEND', 'DYNAMO BRAND']
-
-const SECOND_ROW_ORDER = [...OUTLET_BRANDS].reverse()
-
-function MarqueeRow({ brands, selectedBrand, onBrandSelect, reverse = false }) {
-  return (
-    <div className={`sets-marquee ${reverse ? 'sets-marquee--reverse' : ''}`}>
-      <div className="sets-marquee__track">
-        {[0, 1].map((group) => (
-          <div className="sets-marquee__group" key={group} aria-hidden={group === 1}>
-            {brands.map((brand, index) => (
-              <button
-                key={`${brand}-${index}`}
-                type="button"
-                aria-label={`Filtrar productos de ${brand}`}
-                aria-pressed={selectedBrand === brand}
-                tabIndex={group === 0 ? 0 : -1}
-                className={`cursor-pointer ${selectedBrand === brand ? 'is-selected' : ''}`}
-                onClick={() => onBrandSelect(selectedBrand === brand ? '' : brand)}
-              >
-                {brand}
-              </button>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
+import BrandMarquee from '../../../../../components/ux/BrandMarquee'
+import { MARKETPLACE_BRANDS } from '../../../../../components/ux/brandMarqueeData'
 
 export default function SetSection({ selectedBrand = '', onBrandSelect = () => {} }) {
   return (
     <section id="conjuntos" className="sets-section">
-      <p className="sr-only">Filtra el Outlet por marca: {OUTLET_BRANDS.join(', ')}.</p>
-
-      <MarqueeRow brands={OUTLET_BRANDS} selectedBrand={selectedBrand} onBrandSelect={onBrandSelect} />
-      <MarqueeRow brands={SECOND_ROW_ORDER} selectedBrand={selectedBrand} onBrandSelect={onBrandSelect} reverse />
+      <p className="sr-only">Filtra el Outlet por marca: {MARKETPLACE_BRANDS.join(', ')}.</p>
+      <BrandMarquee interactive selectedBrand={selectedBrand} onBrandSelect={onBrandSelect} />
 
       <div className="sets-section__content">
         <ImageZoom className="w-full">

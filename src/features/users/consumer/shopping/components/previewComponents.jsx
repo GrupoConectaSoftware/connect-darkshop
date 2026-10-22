@@ -1,4 +1,5 @@
-import { Minus, Plus, X } from 'lucide-react'
+import { Minus, Plus, ReceiptText, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const money = new Intl.NumberFormat('es-CO', {
   style: 'currency',
@@ -44,7 +45,16 @@ function CartItem({ item, onQuantityChange, onRemove }) {
 
 export default function PreviewComponents({ items, onQuantityChange, onRemove }) {
   if (items.length === 0) {
-    return <div className="grid min-h-64 place-items-center border border-dashed border-dark-300 px-6 text-center"><p className="text-sm text-dark-500">Tu carrito está vacío. Explora la colección para agregar nuevas piezas.</p></div>
+    return (
+      <div className="relative flex min-h-64 flex-1 flex-col items-center justify-center overflow-hidden border border-dashed border-dark-300 bg-dark-50/60 px-6 py-10 text-center lg:min-h-0">
+        <span aria-hidden="true" className="absolute inset-x-5 top-4 border-t border-dashed border-dark-300" />
+        <span aria-hidden="true" className="absolute inset-x-5 bottom-4 border-t border-dashed border-dark-300" />
+        <ReceiptText aria-hidden="true" size={42} strokeWidth={1.2} className="text-dark-400" />
+        <h2 className="mt-5 font-display text-xl uppercase tracking-wide text-dark-800">Ticket vacío</h2>
+        <p className="mt-2 max-w-xs text-sm leading-relaxed text-dark-500">Todavía no tienes productos en tu canasta.</p>
+        <Link to="/catalog" className="mt-5 inline-flex h-10 items-center justify-center bg-dark-950 px-5 text-xs font-semibold uppercase tracking-wide text-dark-white transition-colors hover:bg-dark-burgundy">Explorar productos</Link>
+      </div>
+    )
   }
 
   return (

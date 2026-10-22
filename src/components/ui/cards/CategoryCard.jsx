@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import ImageZoom from '../../ux/ImageZoom'
 
 export default function CategoryCard({ category }) {
@@ -19,9 +20,9 @@ export default function CategoryCard({ category }) {
           <span className="text-[11px] uppercase tracking-wider text-dark-300 sm:text-xs">{itemsCount} artículos</span>
         </div>
         <p className="mt-2 max-w-xs text-xs leading-relaxed text-dark-200 sm:text-sm">{description}</p>
-        <a href="#coleccion" className="mt-3 inline-flex w-fit items-center gap-2 text-xs font-bold uppercase tracking-widest text-dark-white transition-colors hover:text-dark-red sm:text-sm">
+        <Link to={`/catalog?category=${encodeURIComponent(name)}`} className="mt-3 inline-flex w-fit items-center gap-2 text-xs font-bold uppercase tracking-widest text-dark-white transition-colors hover:text-dark-red sm:text-sm">
           Explorar <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+        </Link>
       </div>
 
     </article>

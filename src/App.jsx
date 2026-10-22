@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { useLayoutEffect } from 'react'
 import Homepages from './features/users/consumer/homepages/homepages'
 import Login from './features/auth/login/login'
 import Register from './features/auth/register/register'
@@ -17,12 +18,31 @@ import Shopping from './features/users/consumer/shopping/shopping'
 import Legal from './features/users/consumer/legal/legal'
 import Stores from './features/users/consumer/stores/stores'
 import Clothes from './features/users/consumer/clothes/clothes'
+import Logged from './features/users/consumer/logged/logged'
+import Brand from './features/users/brand/brand'
+import Collection from './features/users/consumer/collection/collection'
+import Config from './features/users/consumer/config/config'
 import './css/index.css'
 import './css/App.css'
+
+function RouteScrollReset() {
+  const { pathname, search, hash } = useLocation()
+
+  useLayoutEffect(() => {
+    if (hash) {
+      document.querySelector(hash)?.scrollIntoView({ block: 'start' })
+      return
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [pathname, search, hash])
+
+  return null
+}
 
 export default function App() {
   return (
     <BrowserRouter>
+      <RouteScrollReset />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -40,6 +60,12 @@ export default function App() {
         <Route path="/legal" element={<Legal />} />
         <Route path="/stores" element={<Stores />} />
         <Route path="/catalog" element={<Clothes />} />
+        <Route path="/logged" element={<Logged />} />
+        <Route path="/brand" element={<Brand />} />
+        <Route path="/collection" element={<Collection />} />
+        <Route path="/collection/:slug" element={<Collection />} />
+        <Route path="/config" element={<Config />} />
+        <Route path="/set/:slug" element={<Logged />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
