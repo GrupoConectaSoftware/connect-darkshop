@@ -30,8 +30,8 @@ export default function ProfileSection({ initialData, onNext, onLogout }) {
           <p className="mt-1 text-xs text-neutral-500">Personaliza tu cuenta con una imagen.</p>
           <input ref={fileInput} type="file" accept="image/*" onChange={handlePhoto} className="sr-only" aria-label="Seleccionar foto de perfil" />
           <div className="mt-3 flex flex-wrap gap-3">
-            <button type="button" onClick={() => fileInput.current?.click()} className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600"><Upload size={14} aria-hidden="true" />Subir</button>
-            <button type="button" onClick={() => setPhoto('')} className="inline-flex items-center gap-1.5 text-xs text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600"><Trash2 size={14} aria-hidden="true" />Eliminar</button>
+            <button type="button" onClick={() => fileInput.current?.click()} className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 transition-colors hover:text-white focus-visible:outline focus-visible:outline-red-600"><Upload size={14} aria-hidden="true" />Subir</button>
+            <button type="button" onClick={() => setPhoto('')} className="inline-flex items-center gap-1.5 text-xs text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-red-600"><Trash2 size={14} aria-hidden="true" />Eliminar</button>
           </div>
         </div>
       </div>

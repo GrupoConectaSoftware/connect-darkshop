@@ -23,14 +23,15 @@ const money = new Intl.NumberFormat('es-CO', {
   maximumFractionDigits: 0,
 })
 
-export default function ProductCard({ product, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
+export default function ProductCard({ product, badgeLabel = null, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
   const navigate = useNavigate()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
   const [viewMode, setViewMode] = useState('garment')
   const [favorite, setFavorite] = useState(() => isProductFavorite(product))
-  const isGift = product.badge?.variant === 'obsequio'
-  const isDiscount = product.badge?.variant === 'descuento'
+  const displayBadge = badgeLabel ? { label: badgeLabel, variant: 'recommended' } : product.badge
+  const isGift = displayBadge?.variant === 'obsequio'
+  const isDiscount = displayBadge?.variant === 'descuento'
   const productSlug = product.slug || `${product.name}-${product.id}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export default function ProductCard({ product, isOutlet = false, compact = false
       }}
       className={`group relative flex cursor-pointer flex-col overflow-visible border border-dark-200 bg-dark-white ${compact ? 'w-full min-w-0 max-w-none' : 'w-[264px] min-w-[264px] max-w-[264px] flex-none sm:w-72 sm:min-w-72 sm:max-w-72'}`}
     >
-      {product.badge && <div className="absolute -left-2 -top-3 z-20"><ProductBadge {...product.badge} /></div>}
+      {displayBadge && <div className="absolute -left-2 -top-3 z-20"><ProductBadge {...displayBadge} /></div>}
 
       <div className="relative aspect-[3/4] w-full min-w-0 shrink-0 overflow-hidden bg-dark-100">
         <img

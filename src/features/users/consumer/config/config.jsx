@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import startConfigImage from '../../../../assets/Profile/config/startConfig.webp'
+import Logged from '../logged/logged'
 import LocationSection from './sections/locationSection'
 import PaymentSection from './sections/paymentSection'
 import PreferencesSection from './sections/preferencesSection'
@@ -33,18 +34,24 @@ export default function Config() {
   if (step === 6) content = <RedirectSection data={data} onComplete={() => navigate('/logged')} onLogout={logout} onEdit={setStep} />
 
   return (
-    <main className="h-screen h-dvh overflow-hidden bg-neutral-950">
-      <div className="grid h-full w-full grid-cols-1 lg:grid-cols-[60%_40%]">
-        <aside className="relative hidden h-full w-full overflow-hidden lg:block" aria-label="Presentación de DarkShop">
-          <img src={startConfigImage} alt="Bienvenida al ecosistema de moda DarkShop" className="absolute inset-0 h-full w-full object-cover" />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/40" />
-        </aside>
+    <main className="relative min-h-dvh overflow-hidden bg-neutral-950">
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden blur-[5px] brightness-75">
+        <Logged />
+      </div>
 
-        <div className="h-full overflow-y-auto bg-[#0a0a0a]">
-          <div className="mx-auto flex min-h-full w-full max-w-lg flex-col justify-center px-5 py-8 sm:px-8 sm:py-12 lg:px-7 xl:px-8">
-            {content}
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-3 backdrop-blur-sm sm:p-5 lg:p-6">
+        <section role="dialog" aria-modal="true" aria-label="Configuración de cuenta DarkShop" className="grid h-[95dvh] w-[90vw] max-w-[1600px] grid-cols-2 overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl">
+          <aside className="relative h-full min-h-0 w-full overflow-hidden" aria-label="Presentación de DarkShop">
+            <img src={startConfigImage} alt="Bienvenida al ecosistema de moda DarkShop" className="absolute inset-0 h-full w-full object-cover object-center" />
+            <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/10 via-transparent to-black/40" />
+          </aside>
+
+          <div className="h-full min-h-0 overflow-y-auto bg-[#0a0a0a] [scrollbar-color:#dc2626_transparent] scrollbar-thin [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-red-600">
+            <div className="mx-auto flex min-h-full w-full max-w-2xl flex-col justify-center px-4 py-4 sm:px-6 sm:py-6 lg:px-8 xl:px-10">
+              {content}
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   )

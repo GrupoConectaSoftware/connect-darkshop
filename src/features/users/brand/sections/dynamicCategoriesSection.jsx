@@ -9,6 +9,7 @@ import gorrasImage from '../../../../assets/Brand/category/categoryCinco.webp'
 import Reveal from '../../../../components/ux/Reveal'
 
 const CATEGORY_IMAGES = [camisetasImage, pantalonesImage, zapatosImage, chaquetasImage, gorrasImage]
+const collectionSlug = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 
 const CATEGORY_COPY = {
   camisetas: {
@@ -174,7 +175,7 @@ export default function DynamicCategoriesSection() {
               <div aria-hidden="true" className="my-2 h-px w-full bg-white/30" />
               <p className="max-w-xs text-[0.65rem] font-light leading-relaxed text-neutral-200 sm:text-xs">{item.description}</p>
               <Link
-                to={`/catalog?category=${encodeURIComponent(item.categoryLabel)}`}
+                to={`/collection/${collectionSlug(item.title)}`}
                 className="mt-3 inline-flex items-center gap-2 whitespace-nowrap text-[0.6rem] font-bold uppercase tracking-[0.16em] text-white underline decoration-white/70 underline-offset-4 transition-colors hover:text-neutral-300"
               >
                 Explorar <span aria-hidden="true">→</span>

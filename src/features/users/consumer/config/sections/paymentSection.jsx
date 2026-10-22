@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { CalendarDays, CreditCard, LockKeyhole, Plus } from 'lucide-react'
-import OnboardingSection, { inputClass, labelClass } from '../components/OnboardingSection'
+import OnboardingSection, { actionRowClass, inputClass, labelClass, primaryActionClass, skipActionClass } from '../components/OnboardingSection'
 
 export default function PaymentSection({ initialData, onNext, onLogout }) {
   const [card, setCard] = useState(initialData.card)
@@ -25,9 +25,9 @@ export default function PaymentSection({ initialData, onNext, onLogout }) {
         </div>
       </section>
 
-      <div className="mt-8 flex w-full gap-4">
-        <button type="button" onClick={() => onNext({ card, method: 'card' })} className="flex-1 rounded-lg bg-white px-4 py-4 text-sm font-bold uppercase text-black transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Continuar</button>
-        <button type="button" onClick={() => onNext({ card: { number: '', expiry: '', cvv: '', name: '' }, method: 'omitido' })} className="w-32 rounded-lg border border-neutral-700 bg-transparent px-4 py-4 text-sm font-bold uppercase text-neutral-400 transition-colors hover:border-neutral-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600">Omitir</button>
+      <div className={actionRowClass}>
+        <button type="button" onClick={() => onNext({ card: { number: '', expiry: '', cvv: '', name: '' }, method: 'omitido' })} className={skipActionClass}>Omitir</button>
+        <button type="button" onClick={() => onNext({ card, method: 'card' })} className={primaryActionClass}>Continuar</button>
       </div>
     </OnboardingSection>
   )

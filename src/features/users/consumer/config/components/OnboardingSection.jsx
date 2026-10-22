@@ -4,14 +4,17 @@ export const inputClass = 'w-full rounded-lg border border-neutral-800 bg-neutra
 export const inputWithIconClass = `${inputClass} pl-11`
 export const labelClass = 'mb-2 block text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-neutral-500'
 export const continueClass = 'mt-8 w-full rounded-lg bg-white px-5 py-4 text-sm font-black uppercase tracking-wide text-black transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+export const actionRowClass = 'mt-5 flex w-full items-center gap-3'
+export const primaryActionClass = 'min-w-0 flex-[4] rounded-lg bg-white px-2 py-3 text-xs font-black uppercase tracking-wide text-black transition-colors hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:py-3.5 sm:text-sm'
+export const skipActionClass = 'min-w-0 flex-1 rounded-lg bg-transparent px-2 py-3 text-xs font-bold uppercase tracking-wide text-neutral-400 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:py-3.5 sm:text-sm'
 
 export default function OnboardingSection({ activeStep, eyebrow, title, subtitle, onLogout, children }) {
   const stepper = useRef(null)
   const moveStepper = (direction) => stepper.current?.scrollBy({ left: direction * 180, behavior: 'smooth' })
 
   return (
-    <section className="flex min-h-full w-full flex-col justify-center text-white" aria-labelledby={`onboarding-step-${activeStep}`}>
-      <header className="mb-8 flex items-start justify-end gap-3">
+    <section className="flex h-full min-h-0 w-full flex-col justify-center overflow-hidden text-white" aria-labelledby={`onboarding-step-${activeStep}`}>
+      <header className="mb-4 flex shrink-0 items-start justify-end gap-3">
         <p className="max-w-[14rem] text-right text-[0.65rem] leading-relaxed text-neutral-500">
           Para continuar en la plataforma debes completar este registro inicial.
         </p>
@@ -20,10 +23,10 @@ export default function OnboardingSection({ activeStep, eyebrow, title, subtitle
         </button>
       </header>
 
-      <div className="mb-10 flex w-full items-start gap-1">
+      <div className="mb-5 flex w-full shrink-0 items-start gap-1">
         <button type="button" onClick={() => moveStepper(-1)} aria-label="Ver pasos anteriores" className="mt-1 shrink-0 text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:hidden"><ChevronLeft size={24} aria-hidden="true" /></button>
-        <div ref={stepper} className="min-w-0 flex-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <ol aria-label="Progreso de configuración" className="relative flex min-w-[34rem] items-start justify-between sm:min-w-0">
+        <div ref={stepper} className="min-w-0 flex-1 overflow-hidden">
+          <ol aria-label="Progreso de configuración" className="relative flex w-full items-start justify-between">
             <span aria-hidden="true" className="absolute left-4 right-4 top-4 h-px bg-neutral-800" />
             {STEPS.map((step, index) => {
               const number = index + 1
@@ -41,7 +44,7 @@ export default function OnboardingSection({ activeStep, eyebrow, title, subtitle
         <button type="button" onClick={() => moveStepper(1)} aria-label="Ver pasos siguientes" className="mt-1 shrink-0 text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:hidden"><ChevronRight size={24} aria-hidden="true" /></button>
       </div>
 
-      <div>
+      <div className="min-h-0">
         <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-red-600">{eyebrow}</p>
         <h1 id={`onboarding-step-${activeStep}`} className="mb-2 font-display text-3xl font-black uppercase leading-none tracking-tight text-white sm:text-4xl">{title}</h1>
         {subtitle && <p className="mb-8 text-sm leading-relaxed text-neutral-400">{subtitle}</p>}
