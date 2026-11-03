@@ -1,0 +1,68 @@
+{
+  "name": "@connect-darkshop/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "prebuild": "prisma generate",
+    "build": "nest build",
+    "start": "node dist/src/main.js",
+    "start:dev": "nest start --watch",
+    "lint": "tsc --noEmit",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:seed": "prisma db seed",
+    "db:local:init": "tsx scripts/init-local-mysql.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@nestjs/common": "^12.3.2",
+    "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "^12.3.2",
+    "@nestjs/jwt": "^12.0.1",
+    "@nestjs/platform-express": "^12.3.2",
+    "@nestjs/swagger": "^12.1.0",
+    "@nestjs/throttler": "^6.5.0",
+    "@prisma/adapter-mariadb": "^7.10.1",
+    "@prisma/client": "7.10.1",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.1",
+    "mariadb": "^3.4.5",
+    "multer": "^2.0.2",
+    "prisma": "7.10.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^12.0.3",
+    "@nestjs/schematics": "^12.0.0",
+    "@nestjs/testing": "^12.3.2",
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "@types/multer": "^2.0.0",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "fast-check": "^4.10.2",
+    "jest": "^30.2.0",
+    "prettier": "^3.6.2",
+    "source-map-support": "^0.5.21",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^6.0.0"
+  }
+}

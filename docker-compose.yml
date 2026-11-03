@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: connect-darkshop-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: darkshop
+      MYSQL_USER: darkshop
+      MYSQL_PASSWORD: darkshop
+      MYSQL_ROOT_PASSWORD: local-root-password-change-me
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-plocal-root-password-change-me"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+volumes:
+  mysql_data:
