@@ -1,16 +1,27 @@
-# React + Vite
+# Connect Darkshop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Repositorio organizado como un monorepo ligero: cada aplicación conserva su ciclo de vida y dependencias, sin introducir una plataforma de monorepo adicional.
 
-Currently, two official plugins are available:
+```text
+apps/
+  web/       Frontend React + Vite original, preservado sin cambios internos
+  api/       Backend NestJS modular + Prisma
+docs/        Auditoría, arquitectura e integración de la API
+docker-compose.yml  MySQL 8 opcional para desarrollo
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Desarrollo
 
-## React Compiler
+El frontend y el backend se instalan y ejecutan de forma independiente:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```powershell
+npm --prefix apps/web install
+npm --prefix apps/web run dev
 
-## Expanding the ESLint configuration
+npm --prefix apps/api install
+npm --prefix apps/api run start:dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Atajos disponibles desde la raíz: `npm run dev:web`, `npm run dev:api`, `npm run build:web`, `npm run build:api` y `npm run test:api`.
+
+El backend puede usar MySQL local o Docker; consulte [la guía del backend](apps/api/README.md). La interfaz no se conecta todavía a la API por diseño: esa integración está descrita en [docs/frontend-integration.md](docs/frontend-integration.md). El [índice técnico del backend](docs/backend/README.md) reúne arquitectura, decisiones, datos, seguridad, operación, pruebas y contratos.
