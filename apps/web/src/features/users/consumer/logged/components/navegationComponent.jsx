@@ -11,7 +11,7 @@ import accessoriesImage from '../../../../../assets/Componentes/NavegacionUsuari
 const HIGHLIGHTS = [['Últimos lanzamientos', 'nuevo'], ['Más vendidos', 'mas-vendidos'], ['Outlets', 'outlet'], ['Exclusivos', 'exclusivos'], ['Conjuntos', 'conjuntos'], ['Ofertas', 'ofertas'], ['Descuentos', 'descuentos'], ['Obsequios', 'obsequios']]
 const REFERENCES = ['Underground', 'Gótico', 'Básico', 'Elegante', 'Old Money', 'Vintage', 'Deportivo', 'Casual']
 const CATEGORIES = [['Camisas', 'camisetas', shirtsImage], ['Chaquetas', 'chaquetas', jacketsImage], ['Pantalones', 'pantalones', pantsImage], ['Zapatos', 'zapatos', shoesImage], ['Accesorios', 'accesorios', accessoriesImage], ['Ver todos', '', allImage]]
-const ACCOUNT = [['Pedidos', '/account/orders'], ['Reportes', '/account/reports'], ['Métodos de pago', '/account/payment-methods'], ['Dirección de envío', '/account/shipping'], ['Configuración de cuenta', '/account/settings']]
+const ACCOUNT = [['Pedidos', '/account/orders'], ['Reportes', '/account/reports'], ['Métodos de pago', '/account/payment-methods'], ['Dirección de envío', '/account/shipping'], ['Configuración de cuenta', '/dashboard']]
 const SECURITY = [['Términos y condiciones', '/legal#terminos-y-condiciones'], ['Políticas de privacidad', '/legal#politicas-de-privacidad'], ['Tratamiento de datos', '/legal#tratamiento-de-datos'], ['Ayuda', '/help']]
 
 function MenuLink({ to, children, onClose }) {

@@ -23,6 +23,7 @@ import Brand from './features/users/brand/brand'
 import Collection from './features/users/consumer/collection/collection'
 import Poster from './features/users/consumer/poster/poster'
 import Config from './features/users/consumer/config/config'
+import DashboardUsers from './features/dashboards/users/dashboardUsers'
 import './css/index.css'
 import './css/App.css'
 
@@ -67,6 +68,7 @@ export default function App() {
         <Route path="/collection/:slug" element={<Collection />} />
         <Route path="/poster" element={<Poster />} />
         <Route path="/config" element={<Config />} />
+        <Route path="/dashboard" element={<DashboardUsers />} />
         <Route path="/set/:slug" element={<Logged />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />

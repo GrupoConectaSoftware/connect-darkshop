@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Eye, Gift, Heart, Share2, ShoppingCart } from 'lucide-react'
 import ProductBadge from '../badges/ProductBadge'
@@ -11,7 +11,7 @@ import { FAVORITES_UPDATED_EVENT, isFavorite as isProductFavorite, toggleFavorit
 import { addToCart } from '../../../commons/storage/cartStorage'
 
 const ACTIONS = [
-  { icon: Eye, label: 'Vista rápida' },
+  { icon: Eye, label: 'Vista rÃ¡pida' },
   { icon: Heart, label: 'Agregar a favoritos' },
   { icon: ShoppingCart, label: 'Agregar al carrito' },
   { icon: Share2, label: 'Compartir producto' },
@@ -23,7 +23,7 @@ const money = new Intl.NumberFormat('es-CO', {
   maximumFractionDigits: 0,
 })
 
-export default function ProductCard({ product, badgeLabel = null, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
+export default function ProductCard({ product, badgeLabel = null, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, iconHoverRedOnly = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
   const navigate = useNavigate()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
@@ -44,7 +44,7 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
 
   const handleAction = (label) => (event) => {
     event.stopPropagation()
-    if (label === 'Vista rápida') navigate(`/preview/${productSlug}`)
+    if (label === 'Vista rÃ¡pida') navigate(`/preview/${productSlug}`)
     if (label === 'Agregar a favoritos') setFavorite(toggleFavorite(product).isFavorite)
     if (label === 'Agregar al carrito') addToCart(product)
   }
@@ -71,7 +71,7 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
           className={`absolute inset-0 block h-full w-full max-w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] ${viewMode === 'model' ? 'saturate-100' : 'saturate-[.85]'}`}
         />
         <div className={`absolute right-3 top-3 z-20 flex flex-col gap-2 transition-all duration-300 ${alwaysShowActions ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`}>
-          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action.label)} className={action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} />)}
+          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action.label)} className={!iconHoverRedOnly && action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} hoverColorOnly={iconHoverRedOnly} />)}
         </div>
         <div className="absolute bottom-3 left-3 z-10">
           <GarmentSwitch value={viewMode} onChange={setViewMode} />
@@ -113,3 +113,5 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
     </article>
   )
 }
+
+

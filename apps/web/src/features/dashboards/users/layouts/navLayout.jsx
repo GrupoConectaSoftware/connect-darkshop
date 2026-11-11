@@ -1,0 +1,87 @@
+import { Link, useLocation } from "react-router-dom";
+import {
+  Home,
+  User,
+  Shield,
+  CreditCard,
+  ShoppingBag,
+  Truck,
+  Heart,
+  SlidersHorizontal,
+  FileText,
+  ShoppingCart,
+  X,
+  Camera,
+} from "lucide-react";
+import avatar from "../../../../assets/Profile/imagesProfile.webp";
+
+const links = [
+  [Home, "Bienvenida", "/dashboard"],
+  [User, "Perfil", "/config"],
+  [Shield, "Seguridad", "/config"],
+  [CreditCard, "Métodos de pago", "/config"],
+  [ShoppingBag, "Mis compras", "/dashboard"],
+  [Truck, "Pedidos", "/dashboard"],
+  [Heart, "Mis favoritos", "/favorites"],
+  [SlidersHorizontal, "Preferencias", "/config"],
+  [FileText, "Reportes", "/dashboard"],
+  [ShoppingCart, "Carro de compras", "/cart"],
+];
+export default function NavLayout({ open, onClose }) {
+  const { pathname } = useLocation();
+  const activeIndex = links.findIndex(([, , to]) => to === pathname);
+  return (
+    <>
+      <div
+        onClick={onClose}
+        className={`${open ? "fixed" : "hidden"} inset-0 z-40 bg-black/60 lg:hidden`}
+        aria-hidden="true"
+      />
+      <aside
+        className={`${open ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-50 flex w-67.5 flex-col overflow-y-auto bg-[#0a0a0a] px-7 py-6 text-white transition-transform duration-300 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0`}
+      >
+        <button
+          onClick={onClose}
+          aria-label="Cerrar menú"
+          className="ml-auto lg:hidden"
+        >
+          <X />
+        </button>
+        <div className="border-b border-white/20 pb-7 text-center">
+          <Link
+            to="/config"
+            aria-label="Editar perfil"
+            className="group relative mx-auto block w-fit rounded-full p-1 ring-1 ring-white/25 transition hover:ring-red-700"
+          >
+            <img
+              src={avatar}
+              alt="Foto de perfil"
+              className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
+            />
+            <span className="absolute bottom-1 right-1 grid size-7 place-items-center rounded-full border-2 border-black bg-white text-black transition group-hover:bg-red-700 group-hover:text-white">
+              <Camera size={14} />
+            </span>
+          </Link>
+          <p className="mt-4 text-sm font-bold">Alejandro Aguilón Buitrago</p>
+          <p className="mt-1 text-[10px] uppercase tracking-[.18em] text-neutral-500">
+            Mi cuenta
+          </p>
+        </div>
+        <nav className="mt-5 flex flex-col gap-1">
+          {links.map(([Icon, label, to], index) => (
+            <Link
+              key={label}
+              to={to}
+              onClick={onClose}
+              aria-current={index === activeIndex ? "page" : undefined}
+              className={`flex items-center gap-3 rounded-lg px-2 py-3 text-sm transition-colors hover:bg-white/10 ${index === activeIndex ? "bg-red-950/20 text-red-600" : "text-neutral-100"}`}
+            >
+              <Icon size={20} strokeWidth={1.5} />
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </aside>
+    </>
+  );
+}
