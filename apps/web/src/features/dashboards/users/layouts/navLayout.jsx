@@ -11,7 +11,6 @@ import {
   FileText,
   ShoppingCart,
   X,
-  Camera,
 } from "lucide-react";
 import avatar from "../../../../assets/Profile/imagesProfile.webp";
 
@@ -27,7 +26,7 @@ const links = [
   [FileText, "Reportes", "/dashboard"],
   [ShoppingCart, "Carro de compras", "/cart"],
 ];
-export default function NavLayout({ open, onClose }) {
+export default function NavLayout({ open, onClose, activeSection, onNavigateSection }) {
   const { pathname } = useLocation();
   const activeIndex = links.findIndex(([, , to]) => to === pathname);
   return (
@@ -48,38 +47,53 @@ export default function NavLayout({ open, onClose }) {
           <X />
         </button>
         <div className="border-b border-white/20 pb-7 text-center">
-          <Link
-            to="/config"
-            aria-label="Editar perfil"
-            className="group relative mx-auto block w-fit rounded-full p-1 ring-1 ring-white/25 transition hover:ring-red-700"
-          >
+          <div className="mx-auto block w-fit rounded-full p-1 ring-1 ring-white/25">
             <img
               src={avatar}
               alt="Foto de perfil"
               className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
             />
-            <span className="absolute bottom-1 right-1 grid size-7 place-items-center rounded-full border-2 border-black bg-white text-black transition group-hover:bg-red-700 group-hover:text-white">
-              <Camera size={14} />
-            </span>
-          </Link>
+          </div>
           <p className="mt-4 text-sm font-bold">Alejandro Aguilón Buitrago</p>
           <p className="mt-1 text-[10px] uppercase tracking-[.18em] text-neutral-500">
             Mi cuenta
           </p>
         </div>
         <nav className="mt-5 flex flex-col gap-1">
-          {links.map(([Icon, label, to], index) => (
-            <Link
-              key={label}
-              to={to}
-              onClick={onClose}
-              aria-current={index === activeIndex ? "page" : undefined}
-              className={`flex items-center gap-3 rounded-lg px-2 py-3 text-sm transition-colors hover:bg-white/10 ${index === activeIndex ? "bg-red-950/20 text-red-600" : "text-neutral-100"}`}
-            >
-              <Icon size={20} strokeWidth={1.5} />
-              {label}
-            </Link>
-          ))}
+          {links.map(([Icon, label, to], index) => {
+            const dashboardSection = label === "Bienvenida" || label === "Perfil";
+            const active = label === "Perfil"
+              ? activeSection === "profile"
+              : label === "Bienvenida"
+                ? activeSection === "welcome"
+                : index === activeIndex;
+            const className = `flex items-center gap-3 rounded-lg px-2 py-3 text-sm transition-colors hover:bg-white/10 ${active ? "bg-red-950/20 text-red-600" : "text-neutral-100"}`;
+
+            if (dashboardSection) {
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => {
+                    onNavigateSection?.(label === "Perfil" ? "profile" : "welcome");
+                    onClose();
+                  }}
+                  aria-current={active ? "page" : undefined}
+                  className={`${className} w-full text-left`}
+                >
+                  <Icon size={20} strokeWidth={1.5} />
+                  {label}
+                </button>
+              );
+            }
+
+            return (
+              <Link key={label} to={to} onClick={onClose} aria-current={active ? "page" : undefined} className={className}>
+                <Icon size={20} strokeWidth={1.5} />
+                {label}
+              </Link>
+            );
+          })}
         </nav>
       </aside>
     </>
