@@ -7,6 +7,8 @@ import Footer from "../homepages/layouts/Footer";
 import CategoriesSection from "../homepages/sections/categoriesSection";
 import OutletSection from "../homepages/sections/outletSection";
 import CtaSection from "../homepages/sections/ctaSection";
+import CollectionsButton from "../../../../components/ui/buttons/CollectionsButton";
+import { COLLECTIONS } from "../../../../components/ui/cards/collectionsData";
 
 export default function Logged() {
   return (
@@ -22,6 +24,7 @@ export default function Logged() {
         <SetSection />
       </main>
       <Footer />
+      <CollectionsButton count={COLLECTIONS.length} href="/poster" />
     </div>
   );
 }

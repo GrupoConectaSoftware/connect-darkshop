@@ -11,6 +11,8 @@ import SetSection from './sections/setSection'
 import CtaSection from './sections/ctaSection'
 import GenderComponents from './components/GenderComponents'
 import useGender from '../../../../hooks/useGender'
+import CollectionsButton from '../../../../components/ui/buttons/CollectionsButton'
+import { COLLECTIONS } from '../../../../components/ui/cards/collectionsData'
 
 export default function Homepages() {
   const [selectedBrand, setSelectedBrand] = useState('')
@@ -41,6 +43,7 @@ export default function Homepages() {
         <Footer />
       </div>
       {!gender && <GenderComponents />}
+      {gender && <CollectionsButton count={COLLECTIONS.length} href="/poster" />}
     </>
   )
 }

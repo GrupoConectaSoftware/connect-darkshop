@@ -21,6 +21,7 @@ import Clothes from './features/users/consumer/clothes/clothes'
 import Logged from './features/users/consumer/logged/logged'
 import Brand from './features/users/brand/brand'
 import Collection from './features/users/consumer/collection/collection'
+import Poster from './features/users/consumer/poster/poster'
 import Config from './features/users/consumer/config/config'
 import './css/index.css'
 import './css/App.css'
@@ -64,6 +65,7 @@ export default function App() {
         <Route path="/brand" element={<Brand />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/collection/:slug" element={<Collection />} />
+        <Route path="/poster" element={<Poster />} />
         <Route path="/config" element={<Config />} />
         <Route path="/set/:slug" element={<Logged />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
