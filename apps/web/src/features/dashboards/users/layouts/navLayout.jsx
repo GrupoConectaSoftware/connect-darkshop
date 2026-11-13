@@ -3,7 +3,6 @@ import {
   Home,
   User,
   Shield,
-  CreditCard,
   ShoppingBag,
   Truck,
   Heart,
@@ -18,7 +17,6 @@ const links = [
   [Home, "Bienvenida", "/dashboard"],
   [User, "Perfil", "/config"],
   [Shield, "Seguridad", "/config"],
-  [CreditCard, "Métodos de pago", "/config"],
   [ShoppingBag, "Mis compras", "/dashboard"],
   [Truck, "Pedidos", "/dashboard"],
   [Heart, "Mis favoritos", "/favorites"],
@@ -61,9 +59,11 @@ export default function NavLayout({ open, onClose, activeSection, onNavigateSect
         </div>
         <nav className="mt-5 flex flex-col gap-1">
           {links.map(([Icon, label, to], index) => {
-            const dashboardSection = label === "Bienvenida" || label === "Perfil";
+            const dashboardSection = ["Bienvenida", "Perfil", "Seguridad"].includes(label);
             const active = label === "Perfil"
               ? activeSection === "profile"
+              : label === "Seguridad"
+                ? activeSection === "security"
               : label === "Bienvenida"
                 ? activeSection === "welcome"
                 : index === activeIndex;
@@ -75,7 +75,7 @@ export default function NavLayout({ open, onClose, activeSection, onNavigateSect
                   key={label}
                   type="button"
                   onClick={() => {
-                    onNavigateSection?.(label === "Perfil" ? "profile" : "welcome");
+                    onNavigateSection?.(label === "Perfil" ? "profile" : label === "Seguridad" ? "security" : "welcome");
                     onClose();
                   }}
                   aria-current={active ? "page" : undefined}

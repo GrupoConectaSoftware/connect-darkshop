@@ -29,8 +29,8 @@ function RequirementsList({ results }) {
   )
 }
 
-export default function PasswordValidation({ password = '', error = '' }) {
-  const [isDesktop, setIsDesktop] = useState(true)
+export default function PasswordValidation({ password = '', error = '', light = false, showCount = false }) {
+  const [isDesktop, setIsDesktop] = useState(() => typeof window === 'undefined' || window.matchMedia('(min-width: 768px)').matches)
   const [isOpen, setIsOpen] = useState(false)
   const closeTimeout = useRef(null)
   const results = requirements.map((rule) => ({ ...rule, passed: rule.test(password) }))
@@ -50,7 +50,6 @@ export default function PasswordValidation({ password = '', error = '' }) {
       setIsOpen(false)
     }
 
-    setIsDesktop(mediaQuery.matches)
     mediaQuery.addEventListener('change', updateBreakpoint)
     return () => {
       mediaQuery.removeEventListener('change', updateBreakpoint)
@@ -68,27 +67,29 @@ export default function PasswordValidation({ password = '', error = '' }) {
     return () => window.removeEventListener('keydown', closeOnEscape)
   }, [isDesktop, isOpen])
 
-  const helpIconColor = hasStarted && !allValid
+  const helpIconColor = light
+    ? 'text-neutral-500 hover:text-red-700'
+    : hasStarted && !allValid
     ? 'text-red-500 hover:text-red-400'
     : 'text-dark-400 hover:text-dark-white'
 
   return (
     <div className="relative mt-3 w-full min-w-0">
       <div className="flex w-full min-w-0 flex-nowrap items-center gap-2">
-        <p id="register-password-error" aria-live="polite" className="min-w-0 flex-1 truncate font-body text-[9px] leading-tight text-red-500 sm:text-[10px]">
-          {error}
+        <p id={light ? undefined : 'register-password-error'} aria-live="polite" className={`min-w-0 flex-1 truncate font-body text-[9px] leading-tight sm:text-[10px] ${error ? 'text-red-500' : light ? 'text-neutral-500' : 'text-red-500'}`}>
+          {error || (showCount ? `${password.length} / 8 caracteres mínimos` : '')}
         </p>
         <div className="flex w-28 shrink-0 flex-nowrap items-center gap-1 sm:w-32">
           {results.map(({ id, passed }) => (
             <span
               key={id}
               aria-hidden="true"
-              className={`h-1.5 min-w-0 flex-1 rounded-full transition-colors duration-300 ease-out ${passed ? 'bg-emerald-500' : 'bg-dark-700/60'}`}
+              className={`h-1.5 min-w-0 flex-1 rounded-full transition-colors duration-300 ease-out ${passed ? 'bg-emerald-500' : light ? 'bg-neutral-200' : 'bg-dark-700/60'}`}
             />
           ))}
           <button
             type="button"
-          className={`ml-1 flex size-5 shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${helpIconColor} focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-dark-white`}
+          className={`ml-1 flex size-5 shrink-0 cursor-pointer items-center justify-center transition-colors duration-200 ${helpIconColor} focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 ${light ? 'focus-visible:outline-red-700' : 'focus-visible:outline-dark-white'}`}
             aria-label="Ver requisitos de contraseña"
             aria-expanded={isOpen}
             aria-controls="password-rules-popover"
