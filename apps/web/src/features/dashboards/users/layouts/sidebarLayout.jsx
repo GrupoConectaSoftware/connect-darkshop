@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Moon, MessageSquare, BarChart3, LogOut } from "lucide-react";
 import { notifications } from "../../../../components/ui/mockData";
 
-export default function SidebarLayout() {
+export default function SidebarLayout({ activeSection, onNavigateSection }) {
   const actions = [
     [MessageSquare, "Notificaciones", "/dashboard#notifications"],
     [BarChart3, "Resumen", "/dashboard"],
@@ -20,7 +20,9 @@ export default function SidebarLayout() {
         >
           <Moon size={22} strokeWidth={1.7} />
         </span>
-        {actions.map(([Icon, label, to]) => (
+        {actions.map(([Icon, label, to]) => label === "Resumen" ? (
+          <button key={label} type="button" title={label} aria-label={label} aria-pressed={activeSection === "summary"} onClick={() => onNavigateSection("summary")} className={`grid size-10 place-items-center transition-colors hover:text-red-700 focus-visible:outline focus-visible:outline-red-700 ${activeSection === "summary" ? "text-red-700" : "text-neutral-900"}`}><Icon size={22} strokeWidth={1.7} /></button>
+        ) : (
           <Link
             key={label}
             to={to}

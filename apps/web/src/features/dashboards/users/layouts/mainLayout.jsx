@@ -7,7 +7,7 @@ export default function MainLayout({ children, activeSection, onNavigateSection 
   const [open, setOpen] = useState(false);
   return (
     <div className="min-h-screen bg-[#f4f5f7] text-neutral-950 lg:flex">
-      <SidebarLayout />
+      <SidebarLayout activeSection={activeSection} onNavigateSection={onNavigateSection} />
       <NavLayout
         open={open}
         onClose={() => setOpen(false)}

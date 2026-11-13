@@ -61,13 +61,15 @@ export default function NavLayout({ open, onClose, activeSection, onNavigateSect
         </div>
         <nav className="mt-5 flex flex-col gap-1">
           {links.map(([Icon, label, to], index) => {
-            const dashboardSection = ["Bienvenida", "Perfil", "Seguridad", "Métodos de pago"].includes(label);
+            const dashboardSection = ["Bienvenida", "Perfil", "Seguridad", "Métodos de pago", "Reportes"].includes(label);
             const active = label === "Perfil"
               ? activeSection === "profile"
               : label === "Seguridad"
                 ? activeSection === "security"
               : label === "Métodos de pago"
                 ? activeSection === "payment"
+              : label === "Reportes"
+                ? activeSection === "reports"
               : label === "Bienvenida"
                 ? activeSection === "welcome"
                 : index === activeIndex;
@@ -79,7 +81,7 @@ export default function NavLayout({ open, onClose, activeSection, onNavigateSect
                   key={label}
                   type="button"
                   onClick={() => {
-                    onNavigateSection?.(label === "Perfil" ? "profile" : label === "Seguridad" ? "security" : label === "Métodos de pago" ? "payment" : "welcome");
+                    onNavigateSection?.(label === "Perfil" ? "profile" : label === "Seguridad" ? "security" : label === "Métodos de pago" ? "payment" : label === "Reportes" ? "reports" : "welcome");
                     onClose();
                   }}
                   aria-current={active ? "page" : undefined}
