@@ -1,10 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Camera, ImagePlus, Trash2, Upload } from "lucide-react";
 import defaultAvatar from "../../../../../assets/Profile/imagesProfile.webp";
 
 export default function ProfilePictureCard() {
   const inputRef = useRef(null);
   const [photo, setPhoto] = useState(defaultAvatar);
+
+  useEffect(() => () => {
+    if (photo.startsWith("blob:")) URL.revokeObjectURL(photo);
+  }, [photo]);
 
   const selectPhoto = (event) => {
     const file = event.target.files?.[0];
@@ -17,7 +21,7 @@ export default function ProfilePictureCard() {
   };
 
   return (
-    <section className="h-full min-h-60 rounded-xl border border-neutral-200/80 bg-white p-5 shadow-[0_5px_18px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-md sm:p-6" aria-labelledby="profile-photo-title">
+    <section className="h-full min-h-60 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md sm:p-6" aria-labelledby="profile-photo-title">
       <div className="flex items-center gap-3">
         <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-red-50 text-red-800"><Camera size={19} strokeWidth={1.7} /></span>
         <div>

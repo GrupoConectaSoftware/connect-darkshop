@@ -7,13 +7,15 @@ import PaymentSection from "./sections/paymentSection";
 import ReportsSection from "./sections/reportsSection";
 import ModerationReportsSection from "./sections/moderationReportsSection";
 import PurchasesSection from "./sections/purchasesSection";
+import OrdersSection from "./sections/ordersSection";
+import PreferencesSection from "./sections/preferencesSection";
 
 export default function DashboardUsers() {
   const [activeSection, setActiveSection] = useState("welcome");
 
   return (
     <MainLayout activeSection={activeSection} onNavigateSection={setActiveSection}>
-      {activeSection === "purchases" ? <PurchasesSection /> : activeSection === "summary" ? <ReportsSection /> : activeSection === "reports" ? <ModerationReportsSection /> : activeSection === "payment" ? <PaymentSection /> : activeSection === "security" ? <SecuritySection /> : activeSection === "profile" ? <ProfileSection /> : <WelcomeSection />}
+      {activeSection === "orders" ? <OrdersSection /> : activeSection === "purchases" ? <PurchasesSection /> : activeSection === "summary" ? <ReportsSection /> : activeSection === "reports" ? <ModerationReportsSection /> : activeSection === "payment" ? <PaymentSection /> : activeSection === "security" ? <SecuritySection /> : activeSection === "profile" ? <ProfileSection /> : activeSection === "preferences" ? <PreferencesSection /> : <WelcomeSection />}
     </MainLayout>
   );
 }

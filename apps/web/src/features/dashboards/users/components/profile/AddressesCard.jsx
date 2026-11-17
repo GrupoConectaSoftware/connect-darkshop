@@ -21,7 +21,7 @@ export default function AddressesCard() {
   };
 
   return (
-    <section className="rounded-xl border border-neutral-200/80 bg-white p-5 shadow-[0_5px_18px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-md sm:p-6" aria-labelledby="addresses-title">
+    <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md sm:p-6" aria-labelledby="addresses-title">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-lg bg-red-50 text-red-800"><MapPin size={19} strokeWidth={1.7} /></span><div><h2 id="addresses-title" className="text-sm font-bold sm:text-base">Direcciones</h2><p className="text-xs text-neutral-500">Administra dónde recibes tus pedidos.</p></div></div>
         <button type="button" onClick={() => setAdding((value) => !value)} className="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-3.5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-red-800">{adding ? <X size={15} /> : <Plus size={15} />}{adding ? "Cancelar" : "Agregar dirección"}</button>
@@ -40,7 +40,7 @@ export default function AddressesCard() {
             </article>
           ))}
         </div>
-        <div className="relative min-h-52 overflow-hidden rounded-lg border border-neutral-200 bg-[linear-gradient(135deg,#e5e7eb_25%,transparent_25%),linear-gradient(225deg,#e5e7eb_25%,transparent_25%),linear-gradient(45deg,#e5e7eb_25%,transparent_25%),linear-gradient(315deg,#e5e7eb_25%,#f3f4f6_25%)] bg-size-[36px_36px]g:min-h-full">
+        <div className="relative min-h-52 overflow-hidden rounded-xl border border-neutral-200 bg-[linear-gradient(135deg,#e5e7eb_25%,transparent_25%),linear-gradient(225deg,#e5e7eb_25%,transparent_25%),linear-gradient(45deg,#e5e7eb_25%,transparent_25%),linear-gradient(315deg,#e5e7eb_25%,#f3f4f6_25%)] bg-size-[36px_36px] lg:min-h-full">
           <iframe title="Mapa de direcciones en Cali" src="https://maps.google.com/maps?q=Cali%2C%20Colombia&z=14&output=embed" className="absolute inset-0 h-full w-full border-0 grayscale-[.2]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           <span className="pointer-events-none absolute left-1/2 top-1/2 grid size-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-red-800 text-white shadow-lg"><MapPin size={19} fill="currentColor" /></span>
         </div>

@@ -4,7 +4,7 @@ const controlClass = "mt-1.5 w-full rounded-lg border border-neutral-200/70 bg-n
 
 export default function AdditionalInfoCard() {
   return (
-    <section className="rounded-xl border border-neutral-200/80 bg-white p-5 shadow-[0_5px_18px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-md sm:p-6" aria-labelledby="additional-info-title">
+    <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md sm:p-6" aria-labelledby="additional-info-title">
       <div className="flex items-center gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-lg bg-red-50 text-red-800"><FileText size={19} strokeWidth={1.7} /></span><div><h2 id="additional-info-title" className="text-sm font-bold sm:text-base">Información adicional</h2><p className="text-xs text-neutral-500">Completa estos datos opcionales para una mejor experiencia.</p></div></div>
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <label className="text-[11px] font-semibold text-neutral-500">Tipo de documento<select className={controlClass} defaultValue=""><option value="">Seleccionar</option><option>Cédula de ciudadanía</option><option>Cédula de extranjería</option><option>Pasaporte</option></select></label>

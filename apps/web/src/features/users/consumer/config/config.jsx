@@ -13,7 +13,7 @@ const INITIAL_DATA = {
   profile: { name: '', email: '', phone: '', photo: '' },
   location: { address: 'Cra 12D #58-09, La Base - Cali, Colombia' },
   payment: { method: 'nequi', card: { number: '', expiry: '', cvv: '', name: '' } },
-  preferences: { styles: ['urban'], categories: ['shirts', 'pants', 'shorts'], brands: ['DARK'] },
+  preferences: { styles: ['urban'], categories: ['shirts', 'pants', 'shorts'], colors: ['black'], brands: ['dark'], sizes: { top: 'L', bottom: '32', shoes: '41' } },
 }
 
 export default function Config() {

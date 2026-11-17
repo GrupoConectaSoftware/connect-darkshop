@@ -9,7 +9,7 @@ export default function NotificationsComponent({ notifications }) {
   return (
     <section
       id="notifications"
-      className="h-full rounded-xl bg-white p-6 shadow-md transition-shadow hover:shadow-lg"
+      className="h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
     >
       <div className="flex gap-3">
         <Bell size={25} />

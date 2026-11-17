@@ -1,9 +1,9 @@
 import { ShoppingCart, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-export default function CartComponent({ items }) {
+export default function CartComponent({ items = [] }) {
   const quantity = new Set(items.map((item) => item.id)).size;
   return (
-    <section className="h-full rounded-xl bg-white p-5 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <section className="h-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ShoppingCart size={24} />
