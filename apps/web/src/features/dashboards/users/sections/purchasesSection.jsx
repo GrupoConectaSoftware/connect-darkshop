@@ -2,7 +2,7 @@ import hero from "../../../../assets/Brand/category/categoryUno.webp";
 import setOne from "../../../../assets/Brand/sets/setDos.webp";
 import setTwo from "../../../../assets/Brand/sets/setCuatro.webp";
 import setThree from "../../../../assets/Brand/sets/setCinco.webp";
-import { products } from "../../../../components/ui/mockData";
+import { products } from "../../../../data/dashboardData.js";
 import PurchasesListComponent from "../components/purchases/PurchasesListComponent";
 import PurchasesSidebarComponent from "../components/purchases/PurchasesSidebarComponent";
 

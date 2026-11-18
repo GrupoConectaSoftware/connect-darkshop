@@ -5,7 +5,7 @@ import Reveal from '../../../../../components/ux/Reveal'
 import bannerOutlet from '../../../../../assets/Sections/homespages/outlet/banner/bannerOutlet.webp'
 import sectionOutlet from '../../../../../assets/Sections/homespages/outlet/sections/sectionOutlet.webp'
 import filterByGender from '../../../../../utils/filterByGender'
-import { OUTLET_PRODUCTS_ON_SALE } from '../../../../../components/ui/cards/productCardData'
+import { OUTLET_PRODUCTS_ON_SALE } from '../../../../../data/products.js'
 
 const BANNER_DIRECTION = 'left'
 
@@ -37,7 +37,7 @@ export default function OutletSection({ selectedBrand = '', gender = null }) {
       ) : <p className="px-6 py-12 text-center text-base text-dark-500">No hay productos de esta marca en Outlet por ahora.</p>}
 
       <div className="px-5 pb-8 sm:pb-10 lg:pb-12">
-        <Link to="/catalog" className="sets-section__link" aria-label="Visualizar todo el Outlet en el catálogo">
+        <Link to="/catalog?category=outlet" className="sets-section__link" aria-label="Visualizar todo el Outlet en el catálogo">
           <span aria-hidden="true" /><span><strong>Visualizar todo el Outlet</strong></span><span aria-hidden="true" />
         </Link>
       </div>

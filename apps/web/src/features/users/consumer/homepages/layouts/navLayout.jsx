@@ -20,7 +20,7 @@ import AyudaComponent from '../components/AyudaComponent'
 import PqrComponent from '../../../../../commons/components/PqrComponent'
 import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../../commons/storage/favoritesStorage'
 import { CART_UPDATED_EVENT, getCart } from '../../../../../commons/storage/cartStorage'
-import { OUTLET_PRODUCTS_ON_SALE } from '../../../../../components/ui/cards/productCardData'
+import { OUTLET_PRODUCTS_ON_SALE } from '../../../../../data/products.js'
 
 const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
@@ -155,7 +155,7 @@ export default function NavLayout({ cartVariant = false, loggedVariant = false, 
                 <div className="flex shrink-0 flex-row items-center gap-4 text-sm text-dark-200">
                   <SocialLinks />
                   <span className="h-3 w-px bg-dark-700" />
-                  <Link to="/register" className="transition-colors hover:text-dark-white">Trabaja con nosotros</Link>
+                  <Link to="/select-account" className="transition-colors hover:text-dark-white">Trabaja con nosotros</Link>
                   <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="cursor-pointer transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
                   <span className="relative ml-2"><AyudaComponent /></span>
                 </div>

@@ -1,6 +1,6 @@
 import { CheckCircle2, ChevronLeft, ChevronRight, Ruler } from 'lucide-react'
 import { useMemo, useRef } from 'react'
-import { preferenceSizeGroups } from '../../../../../data/user'
+import { preferenceSizeGroups } from '../../../../../data/users.js'
 
 export default function SizeCarousel({ selectedCategories, value, onChange }) {
   const rail = useRef(null)

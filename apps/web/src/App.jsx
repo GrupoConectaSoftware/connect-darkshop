@@ -25,8 +25,12 @@ import Poster from './features/users/consumer/poster/poster'
 import Config from './features/users/consumer/config/config'
 import DashboardUsers from './features/dashboards/users/dashboardUsers'
 import CheckoutPage from './features/users/consumer/checkout/CheckoutPage'
+import NotFound from './components/ui/feedback/NotFound'
+import ToastViewport from './components/ui/feedback/ToastViewport'
+import { ThemeProvider } from './context/ThemeContext'
 import './css/index.css'
 import './css/App.css'
+import './styles/DarkMode.css'
 
 function RouteScrollReset() {
   const { pathname, search, hash } = useLocation()
@@ -44,8 +48,10 @@ function RouteScrollReset() {
 
 export default function App() {
   return (
+    <ThemeProvider>
     <BrowserRouter>
       <RouteScrollReset />
+      <ToastViewport />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -70,14 +76,16 @@ export default function App() {
         <Route path="/poster" element={<Poster />} />
         <Route path="/config" element={<Config />} />
         <Route path="/dashboard" element={<DashboardUsers />} />
+        <Route path="/dashboard/notifications" element={<DashboardUsers />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/set/:slug" element={<Logged />} />
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
-        <Route path="/:gender" element={<Homepages />} />
-        <Route path="*" element={<Homepages />} />
+        {['hombre', 'mujer', 'unisex', 'ninos', 'todo'].map((gender) => <Route key={gender} path={`/${gender}`} element={<Homepages />} />)}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   )
 }

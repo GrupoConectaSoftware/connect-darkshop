@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { preferencesOptionsData } from '../../../../../data/user'
+import { preferencesOptionsData } from '../../../../../data/users.js'
 import CarouselSelector from '../components/CarouselSelector'
 import OnboardingSection, { actionRowClass, primaryActionClass, skipActionClass } from '../components/OnboardingSection'
 

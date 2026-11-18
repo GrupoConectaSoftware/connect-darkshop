@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import GoogleButton from '../../../../components/ui/buttons/GoogleButton'
 import PasswordValidation from '../../../../components/ui/forms/PasswordValidation'
 import SessionButton from '../../../../components/ui/buttons/SessionButton'
+import { showToast } from '../../../../utils/toast'
 
 const validateEmail = (value) => {
   if (!value.trim()) return 'Ingresa tu email.'
@@ -17,7 +18,7 @@ const validatePassword = (value) => {
   return ''
 }
 
-export default function RegisterForm() {
+export default function RegisterForm({ role }) {
   const navigate = useNavigate()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -37,7 +38,14 @@ export default function RegisterForm() {
     }
     setErrors(nextErrors)
     setNotice('')
-    if (Object.values(nextErrors).every((error) => !error)) navigate('/select-account')
+    if (Object.values(nextErrors).some(Boolean)) {
+      showToast('error', 'Completa los campos requeridos para crear tu cuenta.')
+      return
+    }
+    if (Object.values(nextErrors).every((error) => !error)) {
+      showToast('success', 'Datos listos. Continuemos con la configuración de tu cuenta.')
+      navigate(role === 'buyer' ? '/config' : '/register/seller')
+    }
   }
 
   const inputClass = (hasError) => `h-9 w-full border bg-dark-white px-4 font-body text-sm text-dark-950 outline-none transition-colors duration-200 placeholder:text-dark-400 focus:ring-2 focus:ring-dark-red/20 sm:h-10 ${hasError ? 'border-red-500' : 'border-dark-200 focus:border-dark-red'}`

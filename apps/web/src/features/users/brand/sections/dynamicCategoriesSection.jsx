@@ -1,7 +1,7 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { COLLECTIONS, COLLECTION_CATEGORIES } from '../../../../components/ui/cards/collectionsData'
+import { COLLECTIONS, COLLECTION_CATEGORIES } from '../../../../data/collections.js'
 import Reveal from '../../../../components/ux/Reveal'
 
 const CATEGORIES = COLLECTION_CATEGORIES.map(({ id, label }) => [id, label])
@@ -53,20 +53,20 @@ export default function DynamicCategoriesSection() {
   }
 
   return (
-    <section id="categorias" aria-label="Explora categorÃ­as DARK" className="bg-white text-dark-950">
+    <section id="categorias" aria-label="Explora categorías DARK" className="bg-white text-dark-950">
       <Reveal effect="clip">
         <div className={`grid grid-cols-2 gap-0 transition-[opacity,transform] duration-300 ease-out sm:grid-cols-3 lg:grid-cols-5 ${isChanging ? 'translate-y-1 opacity-0' : 'translate-y-0 opacity-100'}`}>
           {items.map((item) => (
           <article key={item.id} className="group relative isolate h-[340px] overflow-hidden bg-dark-950 sm:h-[420px] lg:h-[500px]">
             <img
               src={item.image}
-              alt={`${item.title}, colecciÃ³n ${item.categoryLabel} de DARK`}
+              alt={`${item.title}, colección ${item.categoryLabel} de DARK`}
               loading="lazy"
               className="absolute inset-0 z-0 size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
             />
             <div aria-hidden="true" className="absolute inset-0 z-10 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 z-20 p-4 text-white sm:p-5 lg:p-6">
-              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-300">ColecciÃ³n</p>
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-300">Colección</p>
               <h3 className="mt-1 font-display text-lg font-black uppercase leading-tight tracking-[-0.03em] sm:text-xl">{item.title}</h3>
               <div aria-hidden="true" className="my-2 h-px w-full bg-white/30" />
               <p className="max-w-xs text-[0.65rem] font-light leading-relaxed text-neutral-200 sm:text-xs">{item.description}</p>
@@ -74,7 +74,7 @@ export default function DynamicCategoriesSection() {
                 to={`/collection/${item.slug}`}
                 className="mt-3 inline-flex items-center gap-2 whitespace-nowrap text-[0.6rem] font-bold uppercase tracking-[0.16em] text-white underline decoration-white/70 underline-offset-4 transition-colors hover:text-neutral-300"
               >
-                Explorar <span aria-hidden="true">â†’</span>
+                Explorar <span aria-hidden="true">→</span>
               </Link>
             </div>
           </article>
@@ -82,12 +82,12 @@ export default function DynamicCategoriesSection() {
         </div>
       </Reveal>
 
-      <Reveal as="nav" effect="rise" delay={100} aria-label="CategorÃ­as de productos" className="border-y border-neutral-200 bg-white px-6 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
+      <Reveal as="nav" effect="rise" delay={100} aria-label="Categorías de productos" className="border-y border-neutral-200 bg-white px-6 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
         <div className="relative mx-auto max-w-[1500px]">
           {categoriesOverflow && (
             <button
               type="button"
-              aria-label="Desplazar categorÃ­as a la izquierda"
+              aria-label="Desplazar categorías a la izquierda"
               onClick={() => scrollCategories(-1)}
               className="absolute left-0 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-950 shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red"
             >
@@ -117,7 +117,7 @@ export default function DynamicCategoriesSection() {
           {categoriesOverflow && (
             <button
               type="button"
-              aria-label="Desplazar categorÃ­as a la derecha"
+              aria-label="Desplazar categorías a la derecha"
               onClick={() => scrollCategories(1)}
               className="absolute right-0 top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-950 shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red"
             >
@@ -126,9 +126,6 @@ export default function DynamicCategoriesSection() {
           )}
         </div>
       </Reveal>
-      <div className="bg-white px-6 pb-10 text-center">
-        <Link to="/poster" className="text-xs font-bold uppercase tracking-[0.16em] text-dark-red underline underline-offset-4 transition-colors hover:text-dark-950">Ver pÃ³ster de colecciones</Link>
-      </div>
     </section>
   )
 }

@@ -1,7 +1,7 @@
-import { ArrowUpRight, CheckCircle2, Clock, Truck, XCircle } from "lucide-react";
+import { Eye, CheckCircle2, Clock, Truck, XCircle } from "lucide-react";
 
 const statusStyles = {
-  "En preparaciÃ³n": [Clock, "bg-blue-50 text-blue-700"],
+  "En preparación": [Clock, "bg-blue-50 text-blue-700"],
   "En camino": [Truck, "bg-green-50 text-green-700"],
   Entregados: [CheckCircle2, "bg-green-50 text-green-700"],
   Cancelados: [XCircle, "bg-red-50 text-red-700"],
@@ -35,9 +35,10 @@ export default function OrderCard({ order, selected, onSelect, onViewDetails }) 
       <button
         type="button"
         onClick={() => onViewDetails(order)}
+        aria-label={`Ver detalle del pedido ${order.id}`}
         className="col-span-2 flex items-center justify-center gap-2 rounded-md bg-neutral-950 px-3 py-2.5 text-xs font-bold text-white transition hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-red-700 md:col-span-1"
       >
-        Ver detalle <ArrowUpRight size={14}/>
+        <Eye size={16}/> Ver detalle
       </button>
     </article>
   );

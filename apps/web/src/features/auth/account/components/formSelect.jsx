@@ -50,7 +50,7 @@ export default function FormSelect() {
 
   const handleContinue = () => {
     if (!selected) return
-    navigate(selected === 'buyer' ? '/config' : '/register/seller')
+    navigate(`/register?role=${selected}`)
   }
 
   return (
@@ -63,7 +63,7 @@ export default function FormSelect() {
 
       <div role="group" aria-label="Elige cómo quieres usar DARKSHOP" className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
         {options.map((option) => (
-          <OptionCard key={option.id} option={option} isSelected={selected === option.id} onSelect={() => setSelected(option.id)} />
+          <OptionCard key={option.id} option={option} isSelected={selected === option.id} onSelect={() => { setSelected(option.id); navigate(`/register?role=${option.id}`) }} />
         ))}
       </div>
 

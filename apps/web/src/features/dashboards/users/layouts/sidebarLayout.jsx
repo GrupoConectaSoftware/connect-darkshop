@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Moon, MessageSquare, BarChart3, LogOut } from "lucide-react";
-import { notifications } from "../../../../components/ui/mockData";
+import { notifications } from "../../../../data/dashboardData.js";
+import { useTheme } from "../../../../context/ThemeContext";
 
 export default function SidebarLayout({ activeSection, onNavigateSection }) {
+  const { isDark, toggleTheme } = useTheme();
   const actions = [
-    [MessageSquare, "Notificaciones", "/dashboard#notifications"],
+    [MessageSquare, "Notificaciones", "/dashboard/notifications"],
     [BarChart3, "Resumen", "/dashboard"],
   ];
   return (
@@ -13,13 +15,16 @@ export default function SidebarLayout({ activeSection, onNavigateSection }) {
       className="sticky top-0 hidden h-screen w-16 shrink-0 flex-col items-center border-r border-neutral-300 bg-neutral-200 py-6 lg:flex"
     >
       <div className="flex flex-col gap-5">
-        <span
-          title="Modo oscuro"
-          aria-label="Modo oscuro"
-          className="grid size-10 place-items-center text-neutral-900"
+        <button
+          type="button"
+          title={isDark ? "Activar modo claro" : "Activar modo oscuro"}
+          aria-label={isDark ? "Activar modo claro" : "Activar modo oscuro"}
+          aria-pressed={isDark}
+          onClick={toggleTheme}
+          className="grid size-10 place-items-center rounded-xl text-neutral-900 transition-colors hover:text-red-700 focus-visible:outline focus-visible:outline-red-700 dark:text-neutral-100"
         >
           <Moon size={22} strokeWidth={1.7} />
-        </span>
+        </button>
         {actions.map(([Icon, label, to]) => label === "Resumen" ? (
           <button key={label} type="button" title={label} aria-label={label} aria-pressed={activeSection === "summary"} onClick={() => onNavigateSection("summary")} className={`grid size-10 place-items-center transition-colors hover:text-red-700 focus-visible:outline focus-visible:outline-red-700 ${activeSection === "summary" ? "text-red-700" : "text-neutral-900"}`}><Icon size={22} strokeWidth={1.7} /></button>
         ) : (

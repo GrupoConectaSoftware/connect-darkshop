@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import presentationSection from '../../../../assets/Sections/clothes/presentation/presentationSection.webp'
 import camisetasSection from '../../../../assets/Sections/clothes/category/camisetasSection.webp'
@@ -7,6 +7,7 @@ import pantalonesSection from '../../../../assets/Sections/clothes/category/pant
 import zapatosSection from '../../../../assets/Sections/clothes/category/zapatosSection.webp'
 import accesoriosSection from '../../../../assets/Sections/clothes/category/accesoriosSection.webp'
 import exclusivoSection from '../../../../assets/Sections/clothes/category/exclusivoSection.webp'
+import sectionOutlet from '../../../../assets/Sections/homespages/outlet/sections/sectionOutlet.webp'
 import outletOne from '../../../../assets/Sections/homespages/outlet/products/outletUno.webp'
 import outletTwo from '../../../../assets/Sections/homespages/outlet/products/ouletDos.webp'
 import outletThree from '../../../../assets/Sections/homespages/outlet/products/outletTres.webp'
@@ -24,6 +25,7 @@ const categories = [
   { name: 'Zapatos', image: zapatosSection },
   { name: 'Accesorios', image: accesoriosSection },
   { name: 'Exclusivo', image: exclusivoSection },
+  { name: 'Outlet', image: sectionOutlet },
 ]
 
 const templates = [
@@ -41,6 +43,8 @@ const products = templates.concat(templates.slice(1, 5)).map((template, index) =
 
   return {
     ...template,
+    isOutlet: template.badge?.variant === 'descuento',
+    rating: [5, 4, 3, 5, 4][index % 5],
     id: `catalog-${index + 1}`,
     slug: `${template.name}-${index + 1}`,
     name: index > 5 ? `${template.name} ${String(index + 1).padStart(2, '0')}` : template.name,
@@ -59,6 +63,7 @@ const INITIAL_FILTERS = {
   sizes: [],
   colors: [],
   cities: [],
+  ratings: [],
   price: [0, 250000],
 }
 
@@ -67,22 +72,37 @@ const formatPrice = (value) => `$${value.toLocaleString('es-CO')}`
 
 export default function Clothes() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => { const timer = setTimeout(() => setIsLoading(false), 400); return () => clearTimeout(timer) }, [])
   const [filters, setFilters] = useState(() => {
-    const category = searchParams.get('category')
-    return categories.some((item) => item.name === category) ? { ...INITIAL_FILTERS, categories: [category] } : INITIAL_FILTERS
+    const category = categories.find((item) => item.name.toLowerCase() === searchParams.get('category')?.toLowerCase())
+    return category ? { ...INITIAL_FILTERS, categories: [category.name] } : INITIAL_FILTERS
   })
+  useEffect(() => {
+    const category = categories.find((item) => item.name.toLowerCase() === searchParams.get('category')?.toLowerCase())
+    setFilters((current) => ({ ...current, categories: category ? [category.name] : [] }))
+  }, [searchParams])
+  const updateFilters = (updater) => {
+    const next = typeof updater === 'function' ? updater(filters) : updater
+    setFilters(next)
+    const params = new URLSearchParams(searchParams)
+    if (next.categories.length === 1) params.set('category', next.categories[0].toLowerCase())
+    else params.delete('category')
+    setSearchParams(params)
+  }
   const filteredProducts = useMemo(() => products.filter((product) => (
-    includesAny([product.category], filters.categories)
+    includesAny([product.category, ...(product.isOutlet ? ['Outlet'] : [])], filters.categories)
     && includesAny([product.gender], filters.genders)
     && includesAny(product.references, filters.references)
     && includesAny([product.brand], filters.brands)
     && includesAny(product.sizes, filters.sizes)
     && includesAny(product.colorFilters, filters.colors)
     && includesAny([product.city], filters.cities)
+    && (filters.ratings.length === 0 || filters.ratings.some((rating) => product.rating >= rating))
     && product.price >= filters.price[0]
     && product.price <= filters.price[1]
   )), [filters])
-  const productCounts = useMemo(() => Object.fromEntries(categories.map(({ name }) => [name, products.filter((product) => product.category === name).length])), [])
+  const productCounts = useMemo(() => Object.fromEntries(categories.map(({ name }) => [name, products.filter((product) => (name === 'Outlet' ? product.isOutlet : product.category === name)).length])), [])
   const activeCrumbs = [
     ...filters.categories,
     ...filters.genders.map((value) => `Género: ${value}`),
@@ -99,7 +119,7 @@ export default function Clothes() {
   }
   const selectCategory = (category) => {
     setFilters((current) => ({ ...current, categories: [category] }))
-    setSearchParams({ category })
+    setSearchParams({ category: category.toLowerCase() })
     requestAnimationFrame(() => document.getElementById('catalog-products')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 
@@ -116,8 +136,8 @@ export default function Clothes() {
           {activeCrumbs.length === 0 ? <><span aria-hidden="true">/</span><span className="text-dark-950">Todos los productos</span></> : activeCrumbs.map((crumb, index) => <span key={`${crumb}-${index}`} className="contents"><span aria-hidden="true">/</span><span className={index === activeCrumbs.length - 1 ? 'text-dark-950' : ''}>{crumb}</span></span>)}
         </nav>
         <div id="catalog-products" className="mt-5 grid scroll-mt-6 gap-8 lg:grid-cols-[17.5rem_minmax(0,1fr)] lg:items-start xl:gap-10">
-          <ClothesFilter filters={filters} onChange={setFilters} onClear={clearFilters} />
-          <ClothesContent products={filteredProducts} onClear={clearFilters} />
+          <ClothesFilter filters={filters} onChange={updateFilters} onClear={clearFilters} />
+          <ClothesContent isLoading={isLoading} products={filteredProducts} onClear={clearFilters} />
         </div>
       </main>
     </div>

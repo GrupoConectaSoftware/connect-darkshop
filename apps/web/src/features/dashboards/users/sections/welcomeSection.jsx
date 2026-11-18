@@ -3,7 +3,7 @@ import {
   products,
   orders,
   notifications,
-} from "../../../../components/ui/mockData";
+} from "../../../../data/dashboardData.js";
 import OrderComponent from "../components/welcome/orderComponent";
 import PurchaseComponent from "../components/welcome/purchaseComponent";
 import CartComponent from "../components/welcome/cartComponent";

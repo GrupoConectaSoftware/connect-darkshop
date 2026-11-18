@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Search, X } from "lucide-react";
 import PurchaseCard from "./PurchaseCard";
-import { products } from "../../../../../components/ui/mockData";
+import { products } from "../../../../../data/dashboardData.js";
 
 const filters = ["Todas", "Completadas", "En proceso", "Canceladas"];
 export default function PurchasesListComponent({ orders }) {

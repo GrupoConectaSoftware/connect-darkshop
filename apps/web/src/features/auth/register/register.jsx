@@ -1,7 +1,13 @@
 import registerVideo from '../../../movies/register/vidRegister.mp4'
 import RegisterForm from './components/formComponents'
+import { Navigate, useSearchParams } from 'react-router-dom'
 
 export default function Register() {
+  const [searchParams] = useSearchParams()
+  const role = searchParams.get('role')
+
+  if (!['buyer', 'seller'].includes(role)) return <Navigate to="/select-account" replace />
+
   return (
     <main className="grid h-screen w-full grid-cols-1 overflow-hidden bg-dark-950 text-dark-white lg:grid-cols-2">
       <section className="order-1 relative hidden min-h-0 overflow-hidden bg-dark-900 lg:block" aria-label="Editorial DARKSHOP">
@@ -23,7 +29,7 @@ export default function Register() {
             <h1 className="font-display text-2xl uppercase leading-none tracking-[-0.04em] text-dark-white sm:text-3xl">Entra o pierde.</h1>
             <p className="mt-2 font-body text-base font-light leading-tight tracking-[-0.035em] text-dark-400 sm:text-lg">Samples, últimas piezas y archivo.<br />Cero segundas oportunidades.</p>
           </div>
-          <RegisterForm />
+          <RegisterForm role={role} />
         </div>
       </section>
     </main>

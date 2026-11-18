@@ -1,32 +1,23 @@
-import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
-
-const SPECS = [
-  { title: 'Descripción', content: 'La Nocturne Oversize Tee redefine el básico urbano con una silueta arquitectónica y un drapeado impecable. Construida en algodón premium de alto gramaje, mantiene una forma boxy y una caída limpia durante el uso.', highlight: 'Algodón pesado de 280 gsm. Cuello en rib grueso, hombros caídos y acabado mate profundo.' },
-  { title: 'Composición', content: '100% algodón premium. Tejido de punto compacto, prelavado para conservar su estructura y tacto.' },
-  { title: 'Devolución', content: 'Tienes hasta 30 días calendario desde la entrega para solicitar cambios o devoluciones, siempre que la prenda conserve etiquetas y estado original.' },
-  { title: 'Envíos', content: 'Despachamos a toda Colombia. Recibirás el número de guía por correo cuando tu pedido sea entregado a la transportadora.' },
-]
+import { ChevronDown, Star } from 'lucide-react'
+import ImageZoomModal from '../../../../../components/ux/ImageZoomModal'
+import { productDetailsData, reviewsData } from '../../../../../data/reviewsData'
 
 export default function AdventageComponents() {
-  const [open, setOpen] = useState(0)
-
-  return (
-    <section aria-label="Información adicional del producto" className="mx-auto max-w-5xl">
-      {SPECS.map((spec, index) => {
-        const isOpen = open === index
-        return (
-          <article key={spec.title} className="border-b border-dark-200 first:border-t">
-            <button type="button" onClick={() => setOpen(isOpen ? -1 : index)} aria-expanded={isOpen} className="flex w-full cursor-pointer items-center justify-between gap-6 py-6 text-left sm:py-7">
-              <span className="font-body text-sm font-semibold uppercase tracking-tight text-dark-950 sm:text-base">{spec.title}</span>
-              <ChevronDown size={19} className={`shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-            </button>
-            <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-              <div className="overflow-hidden"><div className="max-w-3xl pb-7 text-sm leading-relaxed text-dark-600 sm:text-base"><p>{spec.content}</p>{spec.highlight && <p className="mt-4 font-semibold italic text-dark-950">{spec.highlight}</p>}</div></div>
-            </div>
-          </article>
-        )
-      })}
-    </section>
-  )
+  const [open, setOpen] = useState('description')
+  const [zoomImage, setZoomImage] = useState(null)
+  return <section aria-label="Información adicional del producto" className="mx-auto max-w-5xl">
+    {productDetailsData.map((spec) => {
+      const isOpen = open === spec.id
+      return <article key={spec.id} className="border-b border-dark-200 first:border-t">
+        <button type="button" onClick={() => setOpen(isOpen ? null : spec.id)} aria-expanded={isOpen} className="flex w-full items-center justify-between gap-6 py-6 text-left sm:py-7"><span className="text-sm font-semibold uppercase text-dark-950 sm:text-base">{spec.title}</span><ChevronDown size={19} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} /></button>
+        {isOpen && <div className="pb-7 text-sm leading-relaxed text-dark-600">{spec.id === 'reviews' ? <div className="space-y-6">{reviewsData.length === 0 ? <p>Aún no hay reseñas para este producto.</p> : reviewsData.map((review) => <article key={review.id} className="grid grid-cols-[3rem_1fr] gap-4 border-t border-neutral-100 pt-5 first:border-0 first:pt-0 sm:grid-cols-[3rem_minmax(0,1fr)_auto]">
+          <img src={review.avatar} alt={`Foto de ${review.name}`} className="size-12 rounded-md object-cover" />
+          <div><p className="text-sm font-bold text-neutral-950">{review.name}</p><p className="mt-1 text-xs text-neutral-500">{review.date}</p><div className="mt-2 flex gap-0.5" aria-label={`${review.rating} de 5 estrellas`}>{Array.from({ length: 5 }, (_, index) => <Star key={index} size={15} aria-hidden="true" className={index < review.rating ? 'fill-red-600 text-red-600' : 'fill-neutral-200 text-neutral-200'} />)}</div><p className="mt-2 text-sm text-neutral-700">{review.comment}</p></div>
+          <div className="col-start-2 flex gap-2 sm:col-auto">{review.images.slice(0, 3).map((image, index) => <button key={`${image}-${index}`} type="button" onClick={() => setZoomImage(image)} aria-label={`Ampliar foto ${index + 1} de ${review.name}`} className="overflow-hidden rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-700"><img src={image} alt="" className="size-16 object-cover transition-transform hover:scale-105" /></button>)}</div>
+        </article>)}</div> : <><p>{spec.content}</p>{spec.highlight && <p className="mt-4 font-semibold italic text-dark-950">{spec.highlight}</p>}</>}</div>}
+      </article>
+    })}
+    <ImageZoomModal isOpen={Boolean(zoomImage)} onClose={() => setZoomImage(null)} src={zoomImage} alt="Foto adjunta a la reseña" />
+  </section>
 }

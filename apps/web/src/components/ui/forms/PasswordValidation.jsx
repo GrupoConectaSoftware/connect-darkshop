@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, Circle, CircleHelp, X } from 'lucide-react'
 
-const requirements = [
-  { id: 'length', label: 'Mínimo 8 caracteres', test: (value) => value.length >= 8 },
-  { id: 'upper', label: 'Una mayúscula', test: (value) => /[A-ZÁÉÍÓÚÑ]/.test(value) },
-  { id: 'lower', label: 'Una minúscula', test: (value) => /[a-záéíóúñ]/.test(value) },
-  { id: 'number', label: 'Un número', test: (value) => /\d/.test(value) },
-]
+import { passwordRequirements as requirements } from '../../../data/ui.js'
 
 function RequirementsList({ results }) {
   return (

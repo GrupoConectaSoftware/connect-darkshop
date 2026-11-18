@@ -10,6 +10,7 @@ import outletTwo from '../../../../assets/Sections/homespages/outlet/products/ou
 import outletThree from '../../../../assets/Sections/homespages/outlet/products/outletTres.webp'
 import outletFour from '../../../../assets/Sections/homespages/outlet/products/outletCuatro.webp'
 import { getCart, saveCart } from '../../../../commons/storage/cartStorage'
+import { showToast } from '../../../../utils/toast'
 
 // TODO: Reemplazar por sugerencias obtenidas desde el catálogo.
 const RECOMMENDED_PRODUCTS = [
@@ -29,15 +30,23 @@ export default function Shopping() {
 
   const handleQuantityChange = (itemId, quantity) => {
     setItems((currentItems) => currentItems.map((item) => (item.id === itemId ? { ...item, quantity: Math.max(1, quantity) } : item)))
+    showToast('success', 'Cantidad del producto actualizada.')
   }
 
   const handleRemove = (itemId) => {
     setItems((currentItems) => currentItems.filter((item) => item.id !== itemId))
+    showToast('info', 'Producto eliminado del carrito.')
   }
 
   const handleClear = () => {
     // TODO: Confirmar y sincronizar el vaciado con el carrito global.
     setItems([])
+    showToast('success', 'El carrito quedó vacío.')
+  }
+
+  const handleCouponSubmit = (event) => {
+    event.preventDefault()
+    showToast(coupon.trim() ? 'info' : 'error', coupon.trim() ? 'La validación de cupones estará disponible próximamente.' : 'Escribe un cupón para continuar.')
   }
 
   const itemCount = items.reduce((count, item) => count + item.quantity, 0)
@@ -53,7 +62,7 @@ export default function Shopping() {
             <p className="mt-4 text-base text-dark-500 sm:text-lg">Revisa tus productos antes de finalizar tus pedidos.</p>
           </div>
 
-          <form onSubmit={(event) => event.preventDefault()} className="border-b border-dark-200 pb-5 lg:border-0 lg:pb-0">
+          <form onSubmit={handleCouponSubmit} className="border-b border-dark-200 pb-5 lg:border-0 lg:pb-0">
             <label htmlFor="coupon" className="flex items-center gap-2 text-xs text-dark-500"><Ticket size={17} className="text-dark-950" />¿Tienes algún cupón de descuento?</label>
             <div className="mt-3 flex gap-2">
               <input id="coupon" value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="Digita el código aquí." className="h-11 min-w-0 flex-1 border border-transparent bg-dark-100 px-4 text-sm text-dark-950 outline-none transition-colors placeholder:text-dark-500 focus:border-dark-400" />

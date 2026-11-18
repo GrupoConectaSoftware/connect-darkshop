@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import GoogleButton from '../../../../components/ui/buttons/GoogleButton'
 import SessionButton from '../../../../components/ui/buttons/SessionButton'
+import { showToast } from '../../../../utils/toast'
 
 const validateEmail = (value) => {
   if (!value.trim()) return 'Ingresa tu email.'
@@ -23,13 +24,21 @@ export default function LoginForm() {
   const [remember, setRemember] = useState(false)
   const [errors, setErrors] = useState({ email: '', password: '' })
   const [notice, setNotice] = useState('')
+  const [loading, setLoading] = useState(false)
+  const timerRef = useRef(null)
+  useEffect(() => () => clearTimeout(timerRef.current), [])
+  useEffect(() => { if (notice) showToast('info', notice) }, [notice])
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const nextErrors = { email: validateEmail(email), password: validatePassword(password) }
     setErrors(nextErrors)
     setNotice('')
-    if (!nextErrors.email && !nextErrors.password) setNotice('La autenticación estará disponible próximamente.')
+    if (nextErrors.email || nextErrors.password) {
+      showToast('error', 'Revisa el correo y la contraseña antes de continuar.')
+      return
+    }
+    if (!nextErrors.email && !nextErrors.password) { setLoading(true); timerRef.current = setTimeout(() => { setLoading(false); setNotice('La autenticación estará disponible próximamente.') }, 900) }
   }
 
   const fieldClass = (hasError) => `h-12 w-full border bg-dark-white px-4 font-body text-sm text-dark-950 outline-none transition-colors duration-200 placeholder:text-dark-400 focus:ring-2 focus:ring-dark-red/20 ${hasError ? 'border-red-500' : 'border-dark-200 focus:border-dark-red'}`
@@ -61,10 +70,10 @@ export default function LoginForm() {
           <label htmlFor="remember-login" className="inline-flex shrink-0 cursor-pointer items-center gap-2 text-dark-300"><input id="remember-login" type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="size-4 accent-dark-red" />Recuérdame</label>
           <Link to="/recovery" className="ml-auto max-w-[65%] wrap-break-word text-right text-dark-300 underline decoration-dark-500 underline-offset-4 transition-colors hover:text-dark-white">¿Olvidaste tu contraseña?</Link>
         </div>
-        <SessionButton type="submit" fullWidth>Iniciar sesión</SessionButton>
+        <SessionButton type="submit" fullWidth loading={loading}>{!loading && 'Iniciar sesión'}</SessionButton>
         <p role="status" aria-live="polite" className="min-h-5 pt-1 font-body text-xs text-dark-300">{notice}</p>
       </form>
-      <p className="mt-3 text-center font-body text-sm font-light text-dark-400">Si aún no tienes cuenta, <Link to="/register" className="font-medium text-dark-white transition-colors hover:text-dark-red">Regístrate aquí</Link></p>
+      <p className="mt-3 text-center font-body text-sm font-light text-dark-400">Si aún no tienes cuenta, <Link to="/select-account" className="font-medium text-dark-white transition-colors hover:text-dark-red">Regístrate aquí</Link></p>
     </div>
   )
 }

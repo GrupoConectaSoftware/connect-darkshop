@@ -108,7 +108,7 @@ function CollectionCard({ collection, offset, active, didDragRef, onMove }) {
           if (active) navigate(`/collection/${collection.slug}`)
           else onMove(offset)
         }}
-        aria-label={active ? `Explorar colecciÃ³n ${collection.label}` : `Seleccionar colecciÃ³n ${collection.label}`}
+        aria-label={active ? `Explorar colección ${collection.label}` : `Seleccionar colección ${collection.label}`}
         aria-pressed={active}
         tabIndex={Math.abs(offset) > 2 ? -1 : 0}
         className={`group relative block size-full cursor-pointer overflow-hidden rounded-2xl border text-left transition-[transform,filter,box-shadow,opacity,border-color] duration-700 ease-[cubic-bezier(.22,.61,.36,1)] hover:-translate-y-1.5 hover:scale-[1.025] hover:border-red-700/70 focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-red-700 ${active ? 'border-[#c0000a] shadow-[0_0_40px_rgba(192,0,10,.35),0_30px_60px_rgba(0,0,0,.5)]' : 'border-white/55 shadow-[0_0_0_1px_rgba(255,255,255,.15),0_0_24px_rgba(255,255,255,.25),0_20px_40px_rgba(0,0,0,.3)]'}`}

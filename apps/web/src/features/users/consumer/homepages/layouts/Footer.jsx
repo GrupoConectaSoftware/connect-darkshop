@@ -20,7 +20,7 @@ const FOOTER_GROUPS = [
       ['Comunidad', '#comunidad'],
       ['LookBook', '#conjuntos'],
       ['Tiendas físicas', '/stores'],
-      ['Carrera', '/register'],
+      ['Carrera', '/select-account'],
     ],
   },
   {

@@ -1,6 +1,8 @@
 import { AlertCircle, Heart, Minus, Plus, ShoppingBag } from 'lucide-react'
 import { useState } from 'react'
 import { addToCart } from '../../../../../commons/storage/cartStorage'
+import { isFavorite, toggleFavorite } from '../../../../../commons/storage/favoritesStorage'
+import { showToast } from '../../../../../utils/toast'
 
 const money = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 })
 
@@ -8,6 +10,7 @@ export default function DescriptionComponents({ product }) {
   const [size, setSize] = useState(null)
   const [color, setColor] = useState(product.colors[0])
   const [quantity, setQuantity] = useState(1)
+  const [favorite, setFavorite] = useState(() => isFavorite(product))
 
   return (
     <section className="min-w-0 pt-1 lg:pt-6">
@@ -46,9 +49,9 @@ export default function DescriptionComponents({ product }) {
             <span className="w-7 text-center text-sm font-semibold">{quantity}</span>
             <button type="button" onClick={() => setQuantity((value) => value + 1)} aria-label="Aumentar cantidad" className="grid size-11 cursor-pointer place-items-center hover:bg-dark-50"><Plus size={15} /></button>
           </div>
-          <button type="button" onClick={() => addToCart(product, { quantity, size: size ?? product.sizes[0], color })} className="flex h-12 min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 bg-dark-950 px-4 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-dark-burgundy"><ShoppingBag size={17} />Añadir al carrito</button>
+          <button type="button" onClick={() => { addToCart(product, { quantity, size: size ?? product.sizes[0], color }); showToast('success', 'Producto agregado al carrito.') }} className="flex h-12 min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 bg-dark-950 px-4 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-dark-burgundy"><ShoppingBag size={17} />Añadir al carrito</button>
         </div>
-        <button type="button" className="mt-3 flex h-12 w-full cursor-pointer items-center justify-center gap-2 border border-dark-300 text-xs font-semibold uppercase tracking-wide text-dark-950 transition-colors hover:border-dark-950"><Heart size={17} />Añadir a favoritos</button>
+        <button type="button" aria-pressed={favorite} onClick={() => { const result = toggleFavorite(product); setFavorite(result.isFavorite); showToast('success', result.isFavorite ? 'Producto agregado a tus favoritos.' : 'Producto eliminado de tus favoritos.') }} className="mt-3 flex h-12 w-full cursor-pointer items-center justify-center gap-2 border border-dark-300 text-xs font-semibold uppercase tracking-wide text-dark-950 transition-colors hover:border-dark-950"><Heart size={17} className={favorite ? 'fill-dark-red text-dark-red' : ''} />{favorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}</button>
         <button type="button" className="mt-3 h-12 w-full cursor-pointer bg-dark-950 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-dark-burgundy">Comprar ahora</button>
         <p className="mt-3 text-[11px] text-dark-500">Compra protegida por DARKSHOP.</p>
       </div>

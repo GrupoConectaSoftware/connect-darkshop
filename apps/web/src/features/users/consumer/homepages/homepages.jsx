@@ -12,7 +12,7 @@ import CtaSection from './sections/ctaSection'
 import GenderComponents from './components/GenderComponents'
 import useGender from '../../../../hooks/useGender'
 import CollectionsButton from '../../../../components/ui/buttons/CollectionsButton'
-import { COLLECTIONS } from '../../../../components/ui/cards/collectionsData'
+import { COLLECTIONS } from '../../../../data/collections.js'
 
 export default function Homepages() {
   const [selectedBrand, setSelectedBrand] = useState('')

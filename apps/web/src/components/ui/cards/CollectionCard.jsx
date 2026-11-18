@@ -1,0 +1,2 @@
+import { Link } from 'react-router-dom'
+export default function CollectionCard({ collection }) { return <Link to={`/collection/${collection.slug || collection.id}`} className="group relative block overflow-hidden bg-black"><img src={collection.image} alt={collection.label} className="aspect-[3/4] w-full object-cover transition-transform duration-300 group-hover:scale-105"/><span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black p-4 text-xl font-bold uppercase text-white">{collection.label}</span></Link> }

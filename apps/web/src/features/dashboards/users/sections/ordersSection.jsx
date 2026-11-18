@@ -1,9 +1,10 @@
 import { useState } from "react";
 import hero from "../../../../assets/Brand/category/categoryUno.webp";
-import { products } from "../../../../components/ui/mockData";
+import { products } from "../../../../data/dashboardData.js";
 import OrdersFilters from "../components/orders/OrdersFilters";
 import OrdersListComponent from "../components/orders/OrdersListComponent";
-import TrackingSidebarComponent, { OrderDetailsModal } from "../components/orders/TrackingSidebarComponent";
+import TrackingSidebarComponent from "../components/orders/TrackingSidebarComponent";
+import OrderDetailsModal from "../../../../components/ui/OrderDetailsModal";
 import SupportCard from "../components/orders/SupportCard";
 
 const images = products.slice(0, 4).map((product) => product.image);

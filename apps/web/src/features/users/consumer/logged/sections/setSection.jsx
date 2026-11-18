@@ -10,6 +10,7 @@ import { isFavorite, toggleFavorite } from '../../../../../commons/storage/favor
 import ImageZoomModal from '../../../../../components/ux/ImageZoomModal'
 import IconActionButton from '../../../../../components/ui/buttons/IconActionButton'
 import StoreCardButton from '../../../../../components/ui/buttons/StoreCardButton'
+import { showToast } from '../../../../../utils/toast'
 
 const money = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 })
 const description = 'Un conjunto casual de estética limpia y versátil, creado para llevarse como una sola pieza visual. Sus prendas combinan siluetas amplias, materiales cómodos y una paleta fácil de usar en cualquier momento del día.'
@@ -51,8 +52,8 @@ function SetGallery({ set, favorite, activeIndex, onImageSelect, onFavorite, onS
 
   const handleShare = async () => {
     const data = { title: set.name, text: `Mira este conjunto completo en Darkshop: ${set.name}`, url: window.location.href }
-    if (navigator.share) await navigator.share(data).catch(() => {})
-    else if (navigator.clipboard) await navigator.clipboard.writeText(window.location.href).catch(() => {})
+    if (navigator.share) await navigator.share(data).then(() => showToast('success', 'Conjunto compartido.')).catch(() => {})
+    else if (navigator.clipboard) await navigator.clipboard.writeText(window.location.href).then(() => showToast('success', 'Enlace del conjunto copiado.')).catch(() => showToast('error', 'No se pudo copiar el enlace.'))
   }
 
   return (
@@ -113,6 +114,7 @@ function SetInfo({ set, piecesRef, activePieceIndex, onSelectPiece }) {
   const handleAddToCart = () => {
     addToCart({ ...set, image: set.images[0], sizes: SIZES, colors: COLORS.map((item) => item.value), store: { name: 'DARK', label: 'TIENDA OFICIAL', slug: 'dark' } }, { quantity: 1, size, color: color.value, colorName: color.name, colorClass: color.className })
     setAdded(true)
+    showToast('success', 'Conjunto agregado al carrito.')
     window.setTimeout(() => setAdded(false), 1800)
   }
 
@@ -233,6 +235,7 @@ function SetSectionContent({ initialSet, visibleSets, homeHref, collectionHref, 
   const handleFavorite = () => {
     const result = toggleFavorite({ ...activeSet, image: activeSet.images[0], category: 'Conjuntos', brand: 'DARK' })
     setFavorite(result.isFavorite)
+    showToast('success', result.isFavorite ? 'Conjunto agregado a tus favoritos.' : 'Conjunto eliminado de tus favoritos.')
   }
 
   const handleSelectPiece = (index) => {

@@ -8,7 +8,7 @@ import CategoriesSection from "../homepages/sections/categoriesSection";
 import OutletSection from "../homepages/sections/outletSection";
 import CtaSection from "../homepages/sections/ctaSection";
 import CollectionsButton from "../../../../components/ui/buttons/CollectionsButton";
-import { COLLECTIONS } from "../../../../components/ui/cards/collectionsData";
+import { COLLECTIONS } from "../../../../data/collections.js";
 
 export default function Logged() {
   return (

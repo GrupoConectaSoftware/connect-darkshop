@@ -1,6 +1,6 @@
 import { Check, ChevronDown, Search } from 'lucide-react'
 import { useState } from 'react'
-import { STORE_CATEGORIES, STORE_REFERENCES } from '../../../../../components/ui/filters/StoreFilters'
+import { STORE_CATEGORIES, STORE_REFERENCES } from '../../../../../data/storeFilters.js'
 
 function SearchField({ id, placeholder, value, onChange }) { return <label htmlFor={id} className="relative block"><Search size={18} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-dark-500" /><input id={id} value={value} onChange={onChange} placeholder={placeholder} className="h-11 w-full border border-dark-200 bg-dark-50 pl-10 pr-3 text-xs font-light text-dark-950 outline-none transition focus:border-dark-500 focus:bg-dark-white" /></label> }
 function CheckboxOption({ id, label, checked, onChange }) { return <label htmlFor={id} className="group flex cursor-pointer items-center gap-3 text-[13px] font-light uppercase tracking-[0.08em] text-dark-500"><input id={id} type="checkbox" checked={checked} onChange={onChange} className="peer sr-only" /><span aria-hidden="true" className="grid size-5 shrink-0 place-items-center border border-dark-400 bg-dark-white text-xs font-bold text-transparent transition-colors after:content-['✓'] peer-checked:border-dark-950 peer-checked:bg-dark-950 peer-checked:text-dark-white" />{label}</label> }

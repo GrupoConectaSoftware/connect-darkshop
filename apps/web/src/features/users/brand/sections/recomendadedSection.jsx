@@ -1,4 +1,4 @@
-import { OUTLET_PRODUCTS_ON_SALE } from '../../../../components/ui/cards/productCardData'
+import { OUTLET_PRODUCTS_ON_SALE } from '../../../../data/products.js'
 import videoOne from '../../../../movies/brand/recomendaded/videoUno.mp4'
 import videoTwo from '../../../../movies/brand/recomendaded/videoDos.mp4'
 import videoThree from '../../../../movies/brand/recomendaded/videoTres.mp4'

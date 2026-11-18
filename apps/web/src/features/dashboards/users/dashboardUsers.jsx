@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import NotificationsSection from "./sections/notificationsSection";
 import MainLayout from "./layouts/mainLayout";
 import WelcomeSection from "./sections/welcomeSection";
 import ProfileSection from "./sections/profileSection";
@@ -11,11 +13,15 @@ import OrdersSection from "./sections/ordersSection";
 import PreferencesSection from "./sections/preferencesSection";
 
 export default function DashboardUsers() {
-  const [activeSection, setActiveSection] = useState("welcome");
+  const [section, setSection] = useState("welcome");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activeSection = location.pathname === "/dashboard/notifications" ? "notifications" : section;
+  const setActiveSection = (next) => { setSection(next); if (location.pathname !== "/dashboard") navigate("/dashboard"); };
 
   return (
     <MainLayout activeSection={activeSection} onNavigateSection={setActiveSection}>
-      {activeSection === "orders" ? <OrdersSection /> : activeSection === "purchases" ? <PurchasesSection /> : activeSection === "summary" ? <ReportsSection /> : activeSection === "reports" ? <ModerationReportsSection /> : activeSection === "payment" ? <PaymentSection /> : activeSection === "security" ? <SecuritySection /> : activeSection === "profile" ? <ProfileSection /> : activeSection === "preferences" ? <PreferencesSection /> : <WelcomeSection />}
+      {activeSection === "notifications" ? <NotificationsSection /> : activeSection === "orders" ? <OrdersSection /> : activeSection === "purchases" ? <PurchasesSection /> : activeSection === "summary" ? <ReportsSection /> : activeSection === "reports" ? <ModerationReportsSection /> : activeSection === "payment" ? <PaymentSection /> : activeSection === "security" ? <SecuritySection /> : activeSection === "profile" ? <ProfileSection /> : activeSection === "preferences" ? <PreferencesSection /> : <WelcomeSection />}
     </MainLayout>
   );
 }

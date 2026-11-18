@@ -11,7 +11,7 @@ import {
   Truck,
   X,
 } from "lucide-react";
-import { products } from "../../../../../components/ui/mockData";
+import { products } from "../../../../../data/dashboardData.js";
 
 const formatPrice = (value) => `$ ${Number(value || 0).toLocaleString("es-CO")}`;
 
@@ -92,6 +92,7 @@ function OrderDetails({ order, items }) {
           <p className="mt-2 text-sm font-semibold">{order.carrier}</p>
           <p className="mt-1 text-xs text-neutral-600">Guía {order.guide}</p>
           <p className="mt-2 text-xs leading-relaxed text-neutral-600">{order.address}</p>
+          <p className="mt-2 text-xs text-neutral-600">Método de pago: {order.paymentMethod || 'No especificado'}</p>
         </div>
         <div className="rounded-xl bg-neutral-950 p-4 text-white">
           <p className="text-[10px] font-bold uppercase tracking-wider text-white/55">Resumen de pago</p>

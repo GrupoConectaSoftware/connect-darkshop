@@ -1,3 +1,42 @@
-import storeImage from '../assets/Sections/stores/catalogo/storesSection.webp'
-export const storesData = [{ id: 'dark', name: 'DARK', type: 'Tienda oficial', image: storeImage, city: 'Cali' }, { id: 'american-eagle', name: 'AMERICAN EAGLE', type: 'Tienda oficial', image: storeImage, city: 'Bogotá' }, { id: 'dynamo-brand', name: 'DYNAMO BRAND', type: 'Tienda oficial', image: storeImage, city: 'Medellín' }]
-export const advantagesData = [{ id: 'secure', title: 'Compra segura', description: 'Pagos protegidos y seguimiento de cada compra.' }, { id: 'shipping', title: 'Envíos nacionales', description: 'Recibe tus prendas donde estés.' }, { id: 'community', title: 'Comunidad real', description: 'Marcas, estilos y personas en un solo lugar.' }]
+import storeImage from "../assets/Sections/stores/catalogo/storesSection.webp";
+export const storesData = [
+  {
+    id: "dark",
+    name: "DARK",
+    type: "Tienda oficial",
+    image: storeImage,
+    city: "Cali",
+  },
+  {
+    id: "american-eagle",
+    name: "AMERICAN EAGLE",
+    type: "Tienda oficial",
+    image: storeImage,
+    city: "Bogotá",
+  },
+  {
+    id: "dynamo-brand",
+    name: "DYNAMO BRAND",
+    type: "Tienda oficial",
+    image: storeImage,
+    city: "Medellín",
+  },
+];
+
+export const advantagesData = [
+  {
+    id: "secure",
+    title: "Compra segura",
+    description: "Pagos protegidos y seguimiento de cada compra.",
+  },
+  {
+    id: "shipping",
+    title: "Envíos nacionales",
+    description: "Recibe tus prendas donde estés.",
+  },
+  {
+    id: "community",
+    title: "Comunidad real",
+    description: "Marcas, estilos y personas en un solo lugar.",
+  },
+];
