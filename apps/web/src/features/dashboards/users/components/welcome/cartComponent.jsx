@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function CartComponent({ items = [] }) {
   const quantity = new Set(items.map((item) => item.id)).size;
   return (
-    <section className="h-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+    <section className="h-full rounded-2xl border border-gray-200 dark:border-neutral-700 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md dark:border-[#2a2a2d] dark:bg-[#1a1a1d]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ShoppingCart size={24} />
@@ -17,7 +17,7 @@ export default function CartComponent({ items = [] }) {
           <ArrowRight size={16} />
         </Link>
       </div>
-      <p className="mt-2 text-xs text-neutral-500">
+      <p className="mt-2 text-xs text-neutral-500 dark:text-gray-400">
         {quantity} productos ingresados
       </p>
       <div className="mt-5 flex flex-wrap gap-2">
@@ -34,7 +34,7 @@ export default function CartComponent({ items = [] }) {
               />
             ))
         ) : (
-          <p className="text-sm text-neutral-500">Tu carrito está vacío.</p>
+          <p className="text-sm text-neutral-500 dark:text-gray-400">Tu carrito está vacío.</p>
         )}
       </div>
     </section>

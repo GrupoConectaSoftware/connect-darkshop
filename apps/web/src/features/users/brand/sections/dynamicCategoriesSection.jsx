@@ -82,7 +82,7 @@ export default function DynamicCategoriesSection() {
         </div>
       </Reveal>
 
-      <Reveal as="nav" effect="rise" delay={100} aria-label="Categorías de productos" className="border-y border-neutral-200 bg-white px-6 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
+      <Reveal as="nav" effect="rise" delay={100} aria-label="Categorías de productos" className="border-y border-neutral-200 dark:border-neutral-700 bg-white px-6 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
         <div className="relative mx-auto max-w-[1500px]">
           {categoriesOverflow && (
             <button

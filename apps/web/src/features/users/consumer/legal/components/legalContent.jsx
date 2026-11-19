@@ -11,8 +11,8 @@ export default function LegalContent({ query = '' }) {
     return (
       <div className="grid min-h-72 place-items-center border border-dashed border-dark-300 p-8 text-center">
         <div>
-          <p className="font-display text-2xl uppercase tracking-tight text-dark-950">Sin resultados</p>
-          <p className="mt-2 text-sm text-dark-500">Prueba con otra palabra o revisa el índice de contenido.</p>
+          <p className="font-display text-2xl uppercase tracking-tight text-dark-950 dark:text-white">Sin resultados</p>
+          <p className="mt-2 text-sm text-dark-500 dark:text-gray-400">Prueba con otra palabra o revisa el índice de contenido.</p>
         </div>
       </div>
     )

@@ -27,14 +27,14 @@ export default function StoreCard({ store }) {
 
       <div className="px-1 pt-4">
         <div className="flex items-center gap-3">
-          <div className="grid size-16 shrink-0 place-items-center border border-dark-500 bg-dark-white font-display text-5xl font-black leading-none text-dark-950">{store.initial}</div>
+          <div className="grid size-16 shrink-0 place-items-center border border-dark-500 bg-dark-white font-display text-5xl font-black leading-none text-dark-950 dark:bg-[#1a1a1d] dark:text-white">{store.initial}</div>
           <div className="min-w-0">
-            <h2 className="font-display text-2xl uppercase leading-none tracking-[-0.04em] text-dark-950">{store.name}</h2>
-            <p className="mt-2 text-[9px] font-bold uppercase tracking-[0.16em] text-dark-500">{store.subtitle}</p>
+            <h2 className="font-display text-2xl uppercase leading-none tracking-[-0.04em] text-dark-950 dark:text-white">{store.name}</h2>
+            <p className="mt-2 text-[9px] font-bold uppercase tracking-[0.16em] text-dark-500 dark:text-gray-400">{store.subtitle}</p>
           </div>
         </div>
-        <p className="mt-4 min-h-24 text-sm font-light leading-relaxed text-dark-500">{store.description}</p>
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-medium text-dark-700">
+        <p className="mt-4 min-h-24 text-sm font-light leading-relaxed text-dark-500 dark:text-gray-400">{store.description}</p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-medium text-dark-700 dark:text-neutral-200">
           <span className="inline-flex items-center gap-1.5"><MapPin size={13} fill="currentColor" />{store.city}</span>
           <span className="inline-flex items-center gap-1.5"><ImageIcon size={14} />{store.productsCount} Productos disponibles</span>
         </div>

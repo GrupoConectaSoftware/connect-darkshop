@@ -2,7 +2,7 @@ import { ArrowUpRight, SearchX, SlidersHorizontal, Store } from 'lucide-react'
 
 export default function EmptyStores({ onClear }) {
   return (
-    <section className="relative col-span-full overflow-hidden border border-dark-200 bg-dark-white" aria-labelledby="empty-stores-title">
+    <section className="relative col-span-full overflow-hidden border border-dark-200 bg-dark-white dark:border-[#2a2a2d] dark:bg-[#1a1a1d]" aria-labelledby="empty-stores-title">
       <span aria-hidden="true" className="pointer-events-none absolute -right-5 -top-8 z-0 font-display text-[clamp(11rem,28vw,23rem)] leading-none tracking-[-0.1em] text-dark-950/[0.035]">0</span>
       <div className="relative z-10 grid min-h-[32rem] lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
         <div className="flex flex-col justify-between bg-dark-950 p-7 text-dark-white sm:p-10">
@@ -19,14 +19,14 @@ export default function EmptyStores({ onClear }) {
         </div>
 
         <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
-          <span className="grid size-14 place-items-center border border-dark-950 bg-dark-white text-dark-950"><SearchX size={27} strokeWidth={1.4} /></span>
+          <span className="grid size-14 place-items-center border border-dark-950 bg-dark-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white"><SearchX size={27} strokeWidth={1.4} /></span>
           <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.2em] text-dark-red">Sin coincidencias</p>
-          <h3 className="mt-3 max-w-md font-display text-3xl uppercase leading-[0.92] tracking-[-0.04em] text-dark-950 sm:text-4xl">Prueba otra combinación.</h3>
-          <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-dark-500">No hay tiendas que coincidan con los filtros actuales. Elimina una categoría, cambia la ciudad o vuelve a explorar el catálogo completo.</p>
+          <h3 className="mt-3 max-w-md font-display text-3xl uppercase leading-[0.92] tracking-[-0.04em] text-dark-950 sm:text-4xl dark:text-white">Prueba otra combinación.</h3>
+          <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-dark-500 dark:text-gray-400">No hay tiendas que coincidan con los filtros actuales. Elimina una categoría, cambia la ciudad o vuelve a explorar el catálogo completo.</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <button type="button" onClick={onClear} className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 bg-dark-950 px-5 text-xs font-bold uppercase tracking-wide text-dark-white transition-colors hover:bg-dark-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark-red"><SlidersHorizontal size={16} />Limpiar filtros</button>
-            <span className="inline-flex items-center gap-2 text-[11px] text-dark-500"><Store size={15} /><span>Vuelve a ver todas las tiendas.</span><ArrowUpRight size={14} /></span>
+            <span className="inline-flex items-center gap-2 text-[11px] text-dark-500 dark:text-gray-400"><Store size={15} /><span>Vuelve a ver todas las tiendas.</span><ArrowUpRight size={14} /></span>
           </div>
         </div>
       </div>

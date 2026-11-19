@@ -11,24 +11,24 @@ export default function OrderCard({ order, selected, onSelect, onViewDetails }) 
   const [Icon, tone] = statusStyles[order.status] || [Clock, "bg-neutral-100 text-neutral-700"];
 
   return (
-    <article className={`grid w-full grid-cols-2 items-center gap-x-3 gap-y-2 rounded-xl border bg-white p-3 md:grid-cols-[minmax(145px,1fr)_minmax(125px,1fr)_100px_100px] ${selected ? "border-red-500 shadow-sm" : "border-neutral-200"}`}>
+    <article className={`grid w-full grid-cols-2 items-center gap-x-3 gap-y-2 rounded-xl border bg-white dark:bg-[#1a1a1d] dark:text-neutral-100 p-3 md:grid-cols-[minmax(145px,1fr)_minmax(125px,1fr)_100px_100px] ${selected ? "border-neutral-200 dark:border-neutral-700 border-l-4 border-l-red-600 bg-gray-50 dark:bg-[#222226] shadow-sm" : "border-neutral-200"}`}>
       <button
         type="button"
         onClick={() => onSelect(order)}
-        aria-pressed={selected}
+        aria-current={selected ? "true" : undefined}
         aria-label={`Ver seguimiento de la compra ${order.id}`}
         className="col-span-2 grid grid-cols-2 items-center gap-3 text-left focus-visible:outline-2 focus-visible:outline-red-700 md:col-span-3 md:grid-cols-[minmax(145px,1fr)_minmax(125px,1fr)_100px]"
       >
         <span>
           <strong className="block text-sm">{order.id}</strong>
-          <span className="text-[11px] text-neutral-500">{order.date} · {order.images.length} productos</span>
+          <span className="text-[11px] text-neutral-500 dark:text-gray-400">{order.date} · {order.images.length} productos</span>
         </span>
         <span>
           <span className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-bold ${tone}`}><Icon size={13}/>{order.status}</span>
-          <span className="mt-1 block text-[11px] leading-tight text-neutral-500">{order.status === "Cancelados" ? "Cancelado" : order.status === "Entregados" ? "Entregado" : "Entrega estimada"}<br/>{order.delivery}</span>
+          <span className="mt-1 block text-[11px] leading-tight text-neutral-500 dark:text-gray-400">{order.status === "Cancelados" ? "Cancelado" : order.status === "Entregados" ? "Entregado" : "Entrega estimada"}<br/>{order.delivery}</span>
         </span>
         <span className="text-xs md:text-right">
-          <span className="block text-[10px] text-neutral-500">Total</span>
+          <span className="block text-[10px] text-neutral-500 dark:text-gray-400">Total</span>
           <strong className="text-sm">$ {order.total.toLocaleString("es-CO")}</strong>
         </span>
       </button>

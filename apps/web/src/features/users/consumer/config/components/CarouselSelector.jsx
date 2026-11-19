@@ -8,8 +8,8 @@ export default function CarouselSelector({ title, subtitle, items, selectedItems
   return (
     <section className="rounded-xl border border-neutral-800 bg-neutral-950/50 p-4 shadow-sm transition-all duration-200 hover:border-neutral-700">
       <div className="flex items-start justify-between gap-4">
-        <div><h2 className="text-sm font-bold text-white">{title}</h2><p className="mt-1 text-xs text-neutral-500">{subtitle}</p></div>
-        <span className="shrink-0 text-xs text-neutral-500">{selectedItems.length}/{items.length}</span>
+        <div><h2 className="text-sm font-bold text-white">{title}</h2><p className="mt-1 text-xs text-neutral-500 dark:text-gray-400">{subtitle}</p></div>
+        <span className="shrink-0 text-xs text-neutral-500 dark:text-gray-400">{selectedItems.length}/{items.length}</span>
       </div>
       <div className="relative mt-4">
         <button type="button" onClick={() => move(-1)} aria-label={`Ver opciones anteriores de ${ariaLabel || title}`} className="absolute left-0 top-1/2 z-10 grid size-8 -translate-y-1/2 place-items-center rounded-full border border-neutral-700 bg-neutral-900 text-neutral-400 shadow-md transition-all duration-200 hover:border-neutral-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600"><ChevronLeft size={16}/></button>

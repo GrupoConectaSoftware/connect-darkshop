@@ -2,7 +2,7 @@ import { ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 export default function PurchaseComponent({ product }) {
   return (
-    <section className="h-full rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
+    <section className="h-full rounded-2xl border border-gray-200 dark:border-neutral-700 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md dark:border-[#2a2a2d] dark:bg-[#1a1a1d]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ShoppingBag size={24} />
@@ -40,7 +40,7 @@ export default function PurchaseComponent({ product }) {
           </div>
         </div>
       ) : (
-        <p className="mt-5 text-sm text-neutral-500">Aún no tienes compras.</p>
+        <p className="mt-5 text-sm text-neutral-500 dark:text-gray-400">Aún no tienes compras.</p>
       )}
     </section>
   );

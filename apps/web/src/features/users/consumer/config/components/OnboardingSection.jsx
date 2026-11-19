@@ -15,7 +15,7 @@ export default function OnboardingSection({ activeStep, eyebrow, title, subtitle
   return (
     <section className="flex h-full min-h-0 w-full flex-col justify-center overflow-hidden text-white" aria-labelledby={`onboarding-step-${activeStep}`}>
       <header className="mb-4 flex shrink-0 items-start justify-end gap-3">
-        <p className="max-w-[14rem] text-right text-[0.65rem] leading-relaxed text-neutral-500">
+        <p className="max-w-[14rem] text-right text-[0.65rem] leading-relaxed text-neutral-500 dark:text-gray-400">
           Para continuar en la plataforma debes completar este registro inicial.
         </p>
         <button type="button" onClick={onLogout} className="shrink-0 rounded-md bg-red-700 px-4 py-2.5 text-xs font-bold uppercase text-white transition-colors hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
@@ -24,7 +24,7 @@ export default function OnboardingSection({ activeStep, eyebrow, title, subtitle
       </header>
 
       <div className="mb-5 flex w-full shrink-0 items-start gap-1">
-        <button type="button" onClick={() => moveStepper(-1)} aria-label="Ver pasos anteriores" className="mt-1 shrink-0 text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:hidden"><ChevronLeft size={24} aria-hidden="true" /></button>
+        <button type="button" onClick={() => moveStepper(-1)} aria-label="Ver pasos anteriores" className="mt-1 shrink-0 text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:hidden dark:text-gray-400"><ChevronLeft size={24} aria-hidden="true" /></button>
         <div ref={stepper} className="min-w-0 flex-1 overflow-hidden">
           <ol aria-label="Progreso de configuración" className="relative flex w-full items-start justify-between">
             <span aria-hidden="true" className="absolute left-4 right-4 top-4 h-px bg-neutral-800" />
@@ -41,7 +41,7 @@ export default function OnboardingSection({ activeStep, eyebrow, title, subtitle
             })}
           </ol>
         </div>
-        <button type="button" onClick={() => moveStepper(1)} aria-label="Ver pasos siguientes" className="mt-1 shrink-0 text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:hidden"><ChevronRight size={24} aria-hidden="true" /></button>
+        <button type="button" onClick={() => moveStepper(1)} aria-label="Ver pasos siguientes" className="mt-1 shrink-0 text-neutral-500 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 sm:hidden dark:text-gray-400"><ChevronRight size={24} aria-hidden="true" /></button>
       </div>
 
       <div className="min-h-0">

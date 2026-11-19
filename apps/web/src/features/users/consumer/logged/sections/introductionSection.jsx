@@ -91,11 +91,11 @@ export default function IntroductionSection() {
                 </p>
                 <p className="mt-4 text-sm font-light uppercase tracking-[0.32em] text-white/80 sm:text-lg sm:tracking-[0.4em]">{slide.brandSubline}</p>
                 <p className="mt-7 max-w-2xl text-lg font-light uppercase leading-snug tracking-[0.12em] text-white sm:mt-8 sm:text-2xl sm:tracking-[0.16em]">{slide.tagline}</p>
-                <span aria-hidden="true" className="mt-6 block h-px w-16 bg-white sm:w-20" />
+                <span aria-hidden="true" className="mt-6 block h-px w-16 bg-white sm:w-20 dark:bg-[#1a1a1d]" />
                 <Link
                   to={`/stores#${slide.id}`}
                   tabIndex={isActive ? 0 : -1}
-                  className="group mt-8 inline-flex items-center gap-5 bg-white px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] text-dark-950 transition-colors hover:bg-dark-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  className="group mt-8 inline-flex items-center gap-5 bg-white px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] text-dark-950 transition-colors hover:bg-dark-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white dark:bg-[#1a1a1d] dark:text-white"
                 >
                   Ver tienda
                   <ArrowUpRight size={17} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

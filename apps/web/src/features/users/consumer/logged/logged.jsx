@@ -12,7 +12,7 @@ import { COLLECTIONS } from "../../../../data/collections.js";
 
 export default function Logged() {
   return (
-    <div className="min-h-screen bg-white text-dark-950">
+    <div className="min-h-screen bg-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white">
       <NavLayout />
       <main>
         <IntroductionSection />

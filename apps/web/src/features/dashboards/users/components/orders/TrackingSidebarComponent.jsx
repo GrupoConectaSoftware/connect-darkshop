@@ -33,12 +33,12 @@ function Dialog({ title, eyebrow, onClose, children, wide = false }) {
         aria-label={title}
         className={`max-h-[90vh] w-full overflow-hidden rounded-2xl border border-white/15 bg-white shadow-2xl ${wide ? "max-w-4xl" : "max-w-xl"}`}
       >
-        <header className="flex items-start justify-between border-b border-neutral-200 px-5 py-4 sm:px-6">
+        <header className="flex items-start justify-between border-b border-neutral-200 dark:border-neutral-700 px-5 py-4 sm:px-6 dark:border-[#2a2a2d]">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[.2em] text-red-700">{eyebrow}</p>
-            <h2 className="mt-1 text-xl font-bold text-neutral-950">{title}</h2>
+            <h2 className="mt-1 text-xl font-bold text-neutral-950 dark:text-white">{title}</h2>
           </div>
-          <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-full p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:outline-2 focus-visible:outline-red-700">
+          <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-full p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:outline-2 focus-visible:outline-red-700 dark:text-gray-400">
             <X size={18} />
           </button>
         </header>
@@ -58,41 +58,41 @@ function OrderDetails({ order, items }) {
           ["Estado", order.status],
           ["Total", formatPrice(order.total)],
         ].map(([label, value]) => (
-          <div key={label} className="rounded-xl bg-neutral-50 p-3">
-            <p className="text-[10px] uppercase tracking-wider text-neutral-500">{label}</p>
-            <p className="mt-1 text-sm font-semibold text-neutral-900">{value}</p>
+          <div key={label} className="rounded-xl bg-neutral-50 dark:bg-[#222226] p-3">
+            <p className="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-gray-400">{label}</p>
+            <p className="mt-1 text-sm font-semibold text-neutral-900 dark:text-white">{value}</p>
           </div>
         ))}
       </div>
 
       <div>
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-bold text-neutral-900">Productos de la compra</h3>
-          <span className="text-xs text-neutral-500">{items.length} {items.length === 1 ? "producto" : "productos"}</span>
+          <h3 className="font-bold text-neutral-900 dark:text-white">Productos de la compra</h3>
+          <span className="text-xs text-neutral-500 dark:text-gray-400">{items.length} {items.length === 1 ? "producto" : "productos"}</span>
         </div>
-        <div className="divide-y divide-neutral-100 rounded-xl border border-neutral-200">
+        <div className="divide-y divide-neutral-100 rounded-xl border border-neutral-200 dark:border-neutral-700 dark:border-[#2a2a2d]">
           {items.map((item, index) => (
             <article key={`${item.id}-${index}`} className="flex items-center gap-3 p-3">
-              <img src={item.image} alt={item.name} className="h-16 w-14 shrink-0 rounded-lg bg-neutral-100 object-cover object-top" />
+              <img src={item.image} alt={item.name} className="h-16 w-14 shrink-0 rounded-lg bg-neutral-100 object-cover object-top dark:bg-[#27272a]" />
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-neutral-950">{item.name}</p>
-                <p className="mt-1 text-xs text-neutral-500">Tienda: {item.brand || "DARK"}</p>
-                <p className="text-xs text-neutral-500">Cantidad: 1</p>
+                <p className="truncate text-sm font-semibold text-neutral-950 dark:text-white">{item.name}</p>
+                <p className="mt-1 text-xs text-neutral-500 dark:text-gray-400">Tienda: {item.brand || "DARK"}</p>
+                <p className="text-xs text-neutral-500 dark:text-gray-400">Cantidad: 1</p>
               </div>
               <strong className="shrink-0 text-sm">{formatPrice(item.price)}</strong>
             </article>
           ))}
-          {!items.length && <p className="p-4 text-sm text-neutral-500">El detalle de productos no está disponible.</p>}
+          {!items.length && <p className="p-4 text-sm text-neutral-500 dark:text-gray-400">El detalle de productos no está disponible.</p>}
         </div>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-xl border border-neutral-200 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Envío</p>
+        <div className="rounded-xl border border-neutral-200 dark:border-neutral-700 p-4 dark:border-[#2a2a2d]">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 dark:text-gray-400">Envío</p>
           <p className="mt-2 text-sm font-semibold">{order.carrier}</p>
-          <p className="mt-1 text-xs text-neutral-600">Guía {order.guide}</p>
-          <p className="mt-2 text-xs leading-relaxed text-neutral-600">{order.address}</p>
-          <p className="mt-2 text-xs text-neutral-600">Método de pago: {order.paymentMethod || 'No especificado'}</p>
+          <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">Guía {order.guide}</p>
+          <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{order.address}</p>
+          <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-300">Método de pago: {order.paymentMethod || 'No especificado'}</p>
         </div>
         <div className="rounded-xl bg-neutral-950 p-4 text-white">
           <p className="text-[10px] font-bold uppercase tracking-wider text-white/55">Resumen de pago</p>
@@ -118,7 +118,7 @@ export default function TrackingSidebarComponent({ order, orders = [], onSelect 
   const [reportDescription, setReportDescription] = useState("");
   const [reportSent, setReportSent] = useState(false);
 
-  if (!order) return <aside className="flex h-full items-center justify-center rounded-2xl border border-neutral-200 bg-white p-6 text-sm text-neutral-500">Selecciona una compra para consultar su seguimiento.</aside>;
+  if (!order) return <aside className="flex h-full items-center justify-center rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white p-6 text-sm text-neutral-500 dark:border-[#2a2a2d] dark:bg-[#1a1a1d] dark:text-gray-400">Selecciona una compra para consultar su seguimiento.</aside>;
 
   const currentStep = order.status === "Entregados" ? 4 : order.status === "En camino" ? 3 : order.status === "En preparación" ? 1 : 0;
   const steps = [
@@ -146,13 +146,13 @@ export default function TrackingSidebarComponent({ order, orders = [], onSelect 
 
   return (
     <>
-      <aside className="flex h-full min-h-[570px] flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
-        <div className="flex items-start justify-between gap-3 border-b border-neutral-100 px-4 py-4 sm:px-5">
+      <aside className="flex h-full min-h-[570px] flex-col overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white shadow-sm dark:border-[#2a2a2d] dark:bg-[#1a1a1d]">
+        <div className="flex items-start justify-between gap-3 border-b border-neutral-100 dark:border-neutral-700 px-4 py-4 sm:px-5">
           <div className="flex items-start gap-3">
-            <span className="rounded-xl bg-neutral-100 p-2 text-neutral-950"><Package size={20} /></span>
+            <span className="rounded-xl bg-neutral-100 p-2 text-neutral-950 dark:bg-[#27272a] dark:text-white"><Package size={20} /></span>
             <div>
-              <h2 className="text-sm font-bold text-neutral-950">Seguimiento de la compra</h2>
-              <p className="mt-1 text-[11px] text-neutral-500">{order.id} <span className="mx-1">·</span> realizada el {order.date}</p>
+              <h2 className="text-sm font-bold text-neutral-950 dark:text-white">Seguimiento de la compra</h2>
+              <p className="mt-1 text-[11px] text-neutral-500 dark:text-gray-400">{order.id} <span className="mx-1">·</span> realizada el {order.date}</p>
             </div>
           </div>
           <span className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold ${order.status === "Cancelados" ? "bg-red-50 text-red-700" : order.status === "Entregados" ? "bg-blue-50 text-blue-700" : "bg-emerald-50 text-emerald-700"}`}>{order.status}</span>
@@ -165,44 +165,44 @@ export default function TrackingSidebarComponent({ order, orders = [], onSelect 
               const active = index === currentStep;
               return (
                 <li key={label} className="relative flex gap-3">
-                  <span className={`relative z-10 mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border ${completed ? "border-neutral-950 bg-neutral-950 text-white" : active ? "border-red-700 bg-red-700 text-white ring-4 ring-red-100" : "border-neutral-200 bg-white text-neutral-400"}`}>
+                  <span className={`relative z-10 mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border ${completed ? "border-neutral-950 bg-neutral-950 text-white" : active ? "border-red-700 bg-red-700 text-white ring-4 ring-red-100" : "border-neutral-200 dark:border-neutral-700 bg-white text-neutral-400"}`}>
                     {completed ? <Check size={13} /> : <Icon size={12} />}
                   </span>
                   <div className="min-w-0 pb-1">
                     <p className={`text-xs font-bold ${active ? "text-red-700" : completed ? "text-neutral-900" : "text-neutral-500"}`}>{label}</p>
-                    <p className="mt-1 text-[11px] leading-relaxed text-neutral-500">{detail}</p>
+                    <p className="mt-1 text-[11px] leading-relaxed text-neutral-500 dark:text-gray-400">{detail}</p>
                   </div>
                 </li>
               );
             })}
           </ol>
 
-          <div className="mt-4 grid grid-cols-2 gap-2 rounded-xl bg-neutral-50 p-3">
-            <div className="flex min-w-0 items-center gap-2"><Truck size={17} className="shrink-0 text-neutral-700"/><div className="min-w-0"><p className="text-[10px] text-neutral-500">Transportadora</p><p className="truncate text-xs font-semibold">{order.carrier}</p></div></div>
-            <div className="flex min-w-0 items-center gap-2 border-l border-neutral-200 pl-3"><Package size={16} className="shrink-0 text-neutral-700"/><div className="min-w-0"><p className="text-[10px] text-neutral-500">Número de guía</p><p className="truncate text-xs font-semibold">{order.guide}</p></div></div>
+          <div className="mt-4 grid grid-cols-2 gap-2 rounded-xl bg-neutral-50 dark:bg-[#222226] p-3">
+            <div className="flex min-w-0 items-center gap-2"><Truck size={17} className="shrink-0 text-neutral-700 dark:text-neutral-200"/><div className="min-w-0"><p className="text-[10px] text-neutral-500 dark:text-gray-400">Transportadora</p><p className="truncate text-xs font-semibold">{order.carrier}</p></div></div>
+            <div className="flex min-w-0 items-center gap-2 border-l border-neutral-200 dark:border-neutral-700 pl-3 dark:border-[#2a2a2d]"><Package size={16} className="shrink-0 text-neutral-700 dark:text-neutral-200"/><div className="min-w-0"><p className="text-[10px] text-neutral-500 dark:text-gray-400">Número de guía</p><p className="truncate text-xs font-semibold">{order.guide}</p></div></div>
           </div>
 
-          <div className="mt-2 flex items-start gap-2 rounded-xl border border-neutral-200 p-3"><MapPin size={17} className="mt-0.5 shrink-0 text-red-700"/><div><p className="text-[10px] text-neutral-500">Dirección de entrega</p><p className="text-xs leading-relaxed text-neutral-800">{order.address}</p></div></div>
+          <div className="mt-2 flex items-start gap-2 rounded-xl border border-neutral-200 dark:border-neutral-700 p-3 dark:border-[#2a2a2d]"><MapPin size={17} className="mt-0.5 shrink-0 text-red-700"/><div><p className="text-[10px] text-neutral-500 dark:text-gray-400">Dirección de entrega</p><p className="text-xs leading-relaxed text-neutral-800 dark:text-neutral-100">{order.address}</p></div></div>
 
-          <form onSubmit={lookupGuide} className="mt-3 rounded-xl border border-neutral-200 p-3">
-            <label htmlFor="tracking-guide" className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-neutral-600">Consultar otra guía o compra</label>
+          <form onSubmit={lookupGuide} className="mt-3 rounded-xl border border-neutral-200 dark:border-neutral-700 p-3 dark:border-[#2a2a2d]">
+            <label htmlFor="tracking-guide" className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-300">Consultar otra guía o compra</label>
             <div className="flex gap-2">
-              <input id="tracking-guide" value={guideQuery} onChange={(event) => { setGuideQuery(event.target.value); setLookupMessage(""); }} placeholder="Número de guía o compra" className="min-w-0 flex-1 rounded-lg border border-neutral-200 px-3 py-2 text-xs outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100" />
+              <input id="tracking-guide" value={guideQuery} onChange={(event) => { setGuideQuery(event.target.value); setLookupMessage(""); }} placeholder="Número de guía o compra" className="min-w-0 flex-1 rounded-lg border border-neutral-200 dark:border-neutral-700 px-3 py-2 text-xs outline-none transition focus:border-red-600 focus:ring-2 focus:ring-red-100 dark:border-[#2a2a2d]" />
               <button type="submit" aria-label="Consultar seguimiento" className="grid w-10 shrink-0 place-items-center rounded-lg bg-neutral-950 text-white transition hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-red-700"><Search size={15} /></button>
             </div>
-            {lookupMessage && <p aria-live="polite" className="mt-2 text-[11px] text-neutral-600">{lookupMessage}</p>}
+            {lookupMessage && <p aria-live="polite" className="mt-2 text-[11px] text-neutral-600 dark:text-neutral-300">{lookupMessage}</p>}
           </form>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 border-t border-neutral-100 p-3 sm:p-4">
+        <div className="grid grid-cols-2 gap-2 border-t border-neutral-100 dark:border-neutral-700 p-3 sm:p-4">
           <button type="button" onClick={() => setDialog("map")} className="flex items-center justify-center gap-2 rounded-lg bg-neutral-950 px-3 py-2.5 text-xs font-bold text-white transition hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-red-700"><MapPin size={15} /> Ver mapa</button>
-          <button type="button" onClick={() => { setReportSent(false); setDialog("report"); }} className="flex items-center justify-center gap-2 rounded-lg border border-neutral-300 px-3 py-2.5 text-xs font-bold text-neutral-800 transition hover:border-red-300 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700"><AlertCircle size={15} /> Reportar compra</button>
+          <button type="button" onClick={() => { setReportSent(false); setDialog("report"); }} className="flex items-center justify-center gap-2 rounded-lg border border-neutral-300 px-3 py-2.5 text-xs font-bold text-neutral-800 dark:text-neutral-100 transition hover:border-red-300 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-700"><AlertCircle size={15} /> Reportar compra</button>
         </div>
       </aside>
 
       {dialog === "map" && <Dialog title="Mapa y seguimiento" eyebrow={`Guía ${order.guide}`} onClose={() => setDialog(null)} wide>
         <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
-          <div className="overflow-hidden rounded-xl border border-neutral-200 bg-neutral-100">
+          <div className="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:border-[#2a2a2d] dark:bg-[#27272a]">
             <iframe title={`Mapa de entrega de ${order.id}`} src={mapUrl} className="h-72 w-full border-0 sm:h-96" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           </div>
           <div className="flex flex-col rounded-xl bg-neutral-950 p-5 text-white">
@@ -217,25 +217,25 @@ export default function TrackingSidebarComponent({ order, orders = [], onSelect 
             </div>
           </div>
         </div>
-        <p className="mt-3 text-[11px] leading-relaxed text-neutral-500">El mapa muestra la dirección de entrega. Para novedades en tiempo real del transportador, consulta su servicio con el número de guía.</p>
+        <p className="mt-3 text-[11px] leading-relaxed text-neutral-500 dark:text-gray-400">El mapa muestra la dirección de entrega. Para novedades en tiempo real del transportador, consulta su servicio con el número de guía.</p>
       </Dialog>}
 
       {dialog === "report" && <Dialog title={reportSent ? "Reporte recibido" : "Reportar un problema"} eyebrow={`Compra ${order.id}`} onClose={() => setDialog(null)}>
         {reportSent ? (
-          <div className="py-5 text-center"><span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-50 text-emerald-700"><CheckCircle2 size={28} /></span><h3 className="mt-4 text-lg font-bold">Ya registramos tu reporte</h3><p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-neutral-600">Guardamos la novedad sobre la compra {order.id}. El equipo de soporte podrá revisar el motivo y los detalles que compartiste.</p><button type="button" onClick={() => setDialog(null)} className="mt-5 rounded-lg bg-neutral-950 px-6 py-3 text-xs font-bold text-white transition hover:bg-neutral-800">Listo</button></div>
+          <div className="py-5 text-center"><span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-50 text-emerald-700"><CheckCircle2 size={28} /></span><h3 className="mt-4 text-lg font-bold">Ya registramos tu reporte</h3><p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">Guardamos la novedad sobre la compra {order.id}. El equipo de soporte podrá revisar el motivo y los detalles que compartiste.</p><button type="button" onClick={() => setDialog(null)} className="mt-5 rounded-lg bg-neutral-950 px-6 py-3 text-xs font-bold text-white transition hover:bg-neutral-800">Listo</button></div>
         ) : (
           <form onSubmit={(event) => { event.preventDefault(); setReportSent(true); }} className="space-y-4">
-            <p className="text-sm leading-relaxed text-neutral-600">Cuéntanos qué ocurrió con esta compra para dejar el caso asociado a su número y seguimiento.</p>
-            <label className="block text-xs font-semibold text-neutral-700">Motivo del reporte
-              <select required value={reportReason} onChange={(event) => setReportReason(event.target.value)} className="mt-2 w-full rounded-lg border border-neutral-200 bg-white px-3 py-3 text-sm outline-none focus:border-red-600 focus:ring-2 focus:ring-red-100">
+            <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">Cuéntanos qué ocurrió con esta compra para dejar el caso asociado a su número y seguimiento.</p>
+            <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-200">Motivo del reporte
+              <select required value={reportReason} onChange={(event) => setReportReason(event.target.value)} className="mt-2 w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white px-3 py-3 text-sm outline-none focus:border-red-600 focus:ring-2 focus:ring-red-100 dark:border-[#2a2a2d] dark:bg-[#1a1a1d]">
                 <option value="">Selecciona un motivo</option><option>El producto no llegó</option><option>Recibí un producto diferente</option><option>Producto con daño o defecto</option><option>Demora en la entrega</option><option>Problema con el cobro</option><option>Otro motivo</option>
               </select>
             </label>
-            <label className="block text-xs font-semibold text-neutral-700">Detalles
-              <textarea required minLength={8} rows={4} value={reportDescription} onChange={(event) => setReportDescription(event.target.value)} placeholder="Describe brevemente lo sucedido…" className="mt-2 w-full resize-y rounded-lg border border-neutral-200 px-3 py-3 text-sm outline-none focus:border-red-600 focus:ring-2 focus:ring-red-100" />
+            <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-200">Detalles
+              <textarea required minLength={8} rows={4} value={reportDescription} onChange={(event) => setReportDescription(event.target.value)} placeholder="Describe brevemente lo sucedido…" className="mt-2 w-full resize-y rounded-lg border border-neutral-200 dark:border-neutral-700 px-3 py-3 text-sm outline-none focus:border-red-600 focus:ring-2 focus:ring-red-100 dark:border-[#2a2a2d]" />
             </label>
-            <div className="flex items-center justify-between gap-3 border-t border-neutral-100 pt-4">
-              <span className="text-[11px] text-neutral-500">Compra {order.id} · Guía {order.guide}</span>
+            <div className="flex items-center justify-between gap-3 border-t border-neutral-100 dark:border-neutral-700 pt-4">
+              <span className="text-[11px] text-neutral-500 dark:text-gray-400">Compra {order.id} · Guía {order.guide}</span>
               <button type="submit" className="flex items-center gap-2 rounded-lg bg-red-700 px-4 py-3 text-xs font-bold text-white transition hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"><Send size={14} /> Enviar reporte</button>
             </div>
           </form>

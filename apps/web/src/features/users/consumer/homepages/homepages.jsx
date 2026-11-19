@@ -37,9 +37,9 @@ export default function Homepages() {
           <CtaSection />
         </main>
 
-        <div aria-hidden="true" className="h-10 bg-white sm:h-16 lg:h-24" />
+        <div aria-hidden="true" className="h-10 bg-white sm:h-16 lg:h-24 dark:bg-[#1a1a1d]" />
         <NewsletterSection />
-        <div aria-hidden="true" className="h-10 bg-white sm:h-16 lg:h-24" />
+        <div aria-hidden="true" className="h-10 bg-white sm:h-16 lg:h-24 dark:bg-[#1a1a1d]" />
         <Footer />
       </div>
       {!gender && <GenderComponents />}

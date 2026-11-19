@@ -22,8 +22,8 @@ export default function PaymentResult({ status, onRetry }) {
     return (
       <div className="flex min-h-92 w-full flex-col items-center justify-center text-center">
         <XCircle className="mb-4 size-16 text-red-600" />
-        <h1 className="text-2xl font-black text-gray-900">Pago rechazado</h1>
-        <p className="mt-2 text-sm leading-relaxed text-gray-500">
+        <h1 className="text-2xl font-black text-gray-900 dark:text-white">Pago rechazado</h1>
+        <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
           No pudimos procesar tu pago. Verifica los datos de tu tarjeta o
           intenta con otro método.
         </p>
@@ -39,8 +39,8 @@ export default function PaymentResult({ status, onRetry }) {
   return (
     <div className="flex min-h-92 w-full flex-col items-center justify-center text-center">
       <CheckCircle className="mb-4 size-16 text-emerald-500" />
-      <h1 className="text-2xl font-black text-gray-900">¡Pago exitoso!</h1>
-      <p className="mb-8 mt-2 max-w-sm text-sm leading-relaxed text-gray-500">
+      <h1 className="text-2xl font-black text-gray-900 dark:text-white">¡Pago exitoso!</h1>
+      <p className="mb-8 mt-2 max-w-sm text-sm leading-relaxed text-gray-500 dark:text-gray-400">
         Tu pedido ha sido confirmado. Te enviaremos un correo con los detalles.
       </p>
       <button
@@ -53,7 +53,7 @@ export default function PaymentResult({ status, onRetry }) {
       <button
         type="button"
         onClick={downloadReceipt}
-        className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-transparent py-3.5 text-sm font-bold text-gray-800 transition-colors hover:bg-gray-50"
+        className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-transparent py-3.5 text-sm font-bold text-gray-800 dark:text-gray-100 transition-colors hover:bg-gray-50"
       >
         <Download size={17} />
         Descargar comprobante

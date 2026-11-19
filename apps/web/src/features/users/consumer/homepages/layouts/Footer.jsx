@@ -105,7 +105,7 @@ export default function Footer({ storeLinks = null }) {
 
       <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-2 py-6 text-center font-body text-xs sm:py-8 sm:text-sm lg:flex-row lg:justify-between lg:gap-6 lg:text-left lg:text-base">
         <p className="text-white">© {year} DARKSHOP — Todos los derechos reservados.</p>
-        <p className="text-neutral-500">Elaborado por Grupo Conecta Software</p>
+        <p className="text-neutral-500 dark:text-gray-400">Elaborado por Grupo Conecta Software</p>
       </div>
     </footer>
   )

@@ -143,7 +143,7 @@ export default function ResetComponent({ onSubmit, onBack }) {
             Volver a mi cuenta
           </button>
         </div>
-        {notice && <p role="status" aria-live="polite" className="font-body text-xs leading-relaxed text-neutral-600">{notice}</p>}
+        {notice && <p role="status" aria-live="polite" className="font-body text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{notice}</p>}
       </form>
     </div>
   )

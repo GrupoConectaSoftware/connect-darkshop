@@ -10,7 +10,7 @@ export default function SearchBar({
       <span className="sr-only">Buscar en Darkshop</span>
       <Search
         size={20}
-        className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-500"
+        className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-dark-500 dark:text-gray-400"
         aria-hidden="true"
       />
       <input

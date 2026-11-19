@@ -17,10 +17,10 @@ function CardFields() {
   return (
     <div className="grid h-full content-start gap-3 sm:grid-cols-2">
       <label className="sm:col-span-2">
-        <span className="mb-1.5 block text-xs font-bold text-gray-700">
+        <span className="mb-1.5 block text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">
           Número de tarjeta
         </span>
-        <span className="flex items-center rounded-xl border border-gray-200 bg-white px-3 focus-within:ring-2 focus-within:ring-red-500">
+        <span className="flex items-center rounded-xl border border-gray-200 dark:border-neutral-700 bg-white px-3 focus-within:ring-2 focus-within:ring-red-500 dark:border-[#2a2a2d] dark:bg-[#1a1a1d]">
           <CreditCard size={17} className="mr-2 text-gray-400" />
           <input
             className="h-11 w-full outline-none placeholder:text-gray-400"
@@ -30,19 +30,19 @@ function CardFields() {
         </span>
       </label>
       <label>
-        <span className="mb-1.5 block text-xs font-bold text-gray-700">
+        <span className="mb-1.5 block text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">
           Fecha de expiración
         </span>
         <input
-          className="h-11 w-full rounded-xl border border-gray-200 px-3 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-red-500"
+          className="h-11 w-full rounded-xl border border-gray-200 dark:border-neutral-700 px-3 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-red-500 dark:border-[#2a2a2d]"
           placeholder="MM/AA"
         />
       </label>
       <label>
-        <span className="mb-1.5 block text-xs font-bold text-gray-700">
+        <span className="mb-1.5 block text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">
           CVC
         </span>
-        <span className="flex items-center rounded-xl border border-gray-200 px-3 focus-within:ring-2 focus-within:ring-red-500">
+        <span className="flex items-center rounded-xl border border-gray-200 dark:border-neutral-700 px-3 focus-within:ring-2 focus-within:ring-red-500 dark:border-[#2a2a2d]">
           <input
             className="h-11 w-full outline-none placeholder:text-gray-400"
             placeholder="123"
@@ -51,19 +51,19 @@ function CardFields() {
         </span>
       </label>
       <label className="sm:col-span-2">
-        <span className="mb-1.5 block text-xs font-bold text-gray-700">
+        <span className="mb-1.5 block text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">
           Nombre en la tarjeta
         </span>
         <input
-          className="h-11 w-full rounded-xl border border-gray-200 px-3 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-red-500"
+          className="h-11 w-full rounded-xl border border-gray-200 dark:border-neutral-700 px-3 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-red-500 dark:border-[#2a2a2d]"
           placeholder="Como aparece en la tarjeta"
         />
       </label>
       <label className="sm:col-span-2">
-        <span className="mb-1.5 block text-xs font-bold text-gray-700">
+        <span className="mb-1.5 block text-xs font-bold text-gray-700 dark:text-gray-200 dark:text-gray-300">
           Cuotas
         </span>
-        <select className="h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-red-500">
+        <select className="h-11 w-full rounded-xl border border-gray-200 dark:border-neutral-700 bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-red-500 dark:border-[#2a2a2d] dark:bg-[#1a1a1d]">
           <option>1 cuota</option>
           <option>2 cuotas</option>
           <option>3 cuotas</option>
@@ -96,10 +96,10 @@ export default function PaymentFormCard({ onPay }) {
 
   return (
     <div className="w-full">
-      <h1 className="text-3xl font-black tracking-tight text-gray-950">
+      <h1 className="text-3xl font-black tracking-tight text-gray-950 dark:text-white">
         Finalizar compra
       </h1>
-      <p className="mt-2 text-sm text-gray-500">
+      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
         Completa tus datos para procesar el pago.
       </p>
 
@@ -111,7 +111,7 @@ export default function PaymentFormCard({ onPay }) {
             onClick={() => setMethod(item.id)}
             aria-label={`Pagar con ${item.label}`}
             aria-pressed={method === item.id}
-            className={`!flex !h-12 !w-full !min-w-0 items-center justify-center overflow-hidden rounded-xl border px-2 transition-colors ${method === item.id ? "border-black bg-white shadow-sm" : "border-gray-200 bg-gray-50 opacity-70 hover:border-gray-300"}`}
+            className={`!flex !h-12 !w-full !min-w-0 items-center justify-center overflow-hidden rounded-xl border px-2 transition-colors ${method === item.id ? "border-black bg-white shadow-sm" : "border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-[#222226] opacity-70 hover:border-gray-300"}`}
           >
             <img
               src={item.logo}
@@ -134,16 +134,16 @@ export default function PaymentFormCard({ onPay }) {
         {method === "card" ? (
           <CardFields />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 p-6 text-center">
+          <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-[#222226] p-6 text-center dark:border-[#2a2a2d] dark:bg-[#0f0f11]">
             <img
               src={selectedMethod.logo}
               alt={selectedMethod.label}
               className="mb-4 h-12 max-w-40 object-contain"
             />
-            <p className="text-sm font-bold text-gray-900">
+            <p className="text-sm font-bold text-gray-900 dark:text-white">
               {methodCopy[method]}
             </p>
-            <p className="mt-1 max-w-xs text-xs leading-relaxed text-gray-500">
+            <p className="mt-1 max-w-xs text-xs leading-relaxed text-gray-500 dark:text-gray-400">
               Al continuar, te guiaremos para autorizar tu pago de forma segura.
             </p>
           </div>
@@ -166,7 +166,7 @@ export default function PaymentFormCard({ onPay }) {
           <>Pagar {money.format(total)}</>
         )}
       </button>
-      <div className="mt-3 flex items-center justify-center gap-2 text-xs text-gray-500">
+      <div className="mt-3 flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
         <Lock size={13} className="text-emerald-600" />
         <span>Compra protegida con</span>
         <img src={wompi} alt="Wompi" className="h-5 w-14 object-contain" />

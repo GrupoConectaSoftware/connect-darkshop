@@ -136,7 +136,7 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) onCardBlur?.()
       }}
-      className={`group relative flex cursor-pointer flex-col overflow-visible border border-dark-200 bg-dark-white ${compact ? 'w-full min-w-0 max-w-none' : 'w-[264px] min-w-[264px] max-w-[264px] flex-none sm:w-72 sm:min-w-72 sm:max-w-72'}`}
+      className={`group relative flex cursor-pointer flex-col overflow-visible border border-dark-200 bg-dark-white dark:border-[#2a2a2d] dark:bg-[#1a1a1d] ${compact ? 'w-full min-w-0 max-w-none' : 'w-[264px] min-w-[264px] max-w-[264px] flex-none sm:w-72 sm:min-w-72 sm:max-w-72'}`}
     >
       {displayBadge && <div className="absolute -left-2 -top-3 z-20"><ProductBadge {...displayBadge} /></div>}
 
@@ -158,16 +158,16 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
         </div>
       </div>
 
-      <div className={`flex min-w-0 flex-1 flex-col bg-dark-white ${compact ? 'min-h-[226px] p-3' : 'min-h-[248px] p-4'}`}>
-        <h3 className="line-clamp-2 min-h-10 text-base font-bold uppercase leading-tight text-dark-950">{product.name}</h3>
-        <p className="mt-1 line-clamp-2 min-h-9 text-xs leading-4 text-dark-500 sm:text-sm">{product.description}</p>
+      <div className={`flex min-w-0 flex-1 flex-col bg-dark-white dark:bg-[#1a1a1d] ${compact ? 'min-h-[226px] p-3' : 'min-h-[248px] p-4'}`}>
+        <h3 className="line-clamp-2 min-h-10 text-base font-bold uppercase leading-tight text-dark-950 dark:text-white">{product.name}</h3>
+        <p className="mt-1 line-clamp-2 min-h-9 text-xs leading-4 text-dark-500 sm:text-sm dark:text-gray-400">{product.description}</p>
 
         <div className="mt-2 flex min-h-6 flex-wrap items-center gap-x-2 gap-y-0.5">
           {isGift ? (
             <><Gift size={17} className="text-dark-red" /><span className="text-base font-black text-dark-red">GRATIS</span></>
           ) : (
             <>
-              <span className={`text-base font-black transition-all duration-300 ${isDiscount || priceAccent ? 'text-dark-red' : 'text-dark-950'}`}>{money.format(currentPrice)}</span>
+              <span className={`text-base font-black transition-all duration-300 ${isDiscount || priceAccent ? 'text-dark-red' : 'text-dark-950 dark:text-white'}`}>{money.format(currentPrice)}</span>
               {product.originalPrice && <span className="text-sm text-dark-400 line-through">{money.format(product.originalPrice)}</span>}
               {isDiscount && <span className="text-[10px] font-bold text-dark-red">-{product.discount}%</span>}
             </>

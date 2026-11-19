@@ -7,7 +7,6 @@ import pantalonesSection from '../../../../assets/Sections/clothes/category/pant
 import zapatosSection from '../../../../assets/Sections/clothes/category/zapatosSection.webp'
 import accesoriosSection from '../../../../assets/Sections/clothes/category/accesoriosSection.webp'
 import exclusivoSection from '../../../../assets/Sections/clothes/category/exclusivoSection.webp'
-import sectionOutlet from '../../../../assets/Sections/homespages/outlet/sections/sectionOutlet.webp'
 import outletOne from '../../../../assets/Sections/homespages/outlet/products/outletUno.webp'
 import outletTwo from '../../../../assets/Sections/homespages/outlet/products/ouletDos.webp'
 import outletThree from '../../../../assets/Sections/homespages/outlet/products/outletTres.webp'
@@ -25,7 +24,6 @@ const categories = [
   { name: 'Zapatos', image: zapatosSection },
   { name: 'Accesorios', image: accesoriosSection },
   { name: 'Exclusivo', image: exclusivoSection },
-  { name: 'Outlet', image: sectionOutlet },
 ]
 
 const templates = [
@@ -75,12 +73,14 @@ export default function Clothes() {
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => { const timer = setTimeout(() => setIsLoading(false), 400); return () => clearTimeout(timer) }, [])
   const [filters, setFilters] = useState(() => {
-    const category = categories.find((item) => item.name.toLowerCase() === searchParams.get('category')?.toLowerCase())
-    return category ? { ...INITIAL_FILTERS, categories: [category.name] } : INITIAL_FILTERS
+    const categoryParam = searchParams.get('category')?.toLowerCase()
+    const category = categories.find((item) => item.name.toLowerCase() === categoryParam)
+    return category || categoryParam === 'outlet' ? { ...INITIAL_FILTERS, categories: [category?.name || 'Outlet'] } : INITIAL_FILTERS
   })
   useEffect(() => {
-    const category = categories.find((item) => item.name.toLowerCase() === searchParams.get('category')?.toLowerCase())
-    setFilters((current) => ({ ...current, categories: category ? [category.name] : [] }))
+    const categoryParam = searchParams.get('category')?.toLowerCase()
+    const category = categories.find((item) => item.name.toLowerCase() === categoryParam)
+    setFilters((current) => ({ ...current, categories: category || categoryParam === 'outlet' ? [category?.name || 'Outlet'] : [] }))
   }, [searchParams])
   const updateFilters = (updater) => {
     const next = typeof updater === 'function' ? updater(filters) : updater
@@ -124,16 +124,16 @@ export default function Clothes() {
   }
 
   return (
-    <div className="min-h-dvh bg-dark-white text-dark-950">
+    <div className="min-h-dvh bg-dark-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white">
       <NavClothes />
       <main className="mx-auto w-full max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8 lg:py-8">
         <ClothesHero image={presentationSection} />
         <ClothesCategories categories={categories} productCounts={productCounts} selectedCategories={filters.categories} onSelect={selectCategory} />
-        <nav aria-label="Miga de pan del catálogo" className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wide text-dark-500 sm:text-[11px]">
+        <nav aria-label="Miga de pan del catálogo" className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wide text-dark-500 sm:text-[11px] dark:text-gray-400">
           <Link to="/" className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link>
           <span aria-hidden="true">/</span>
           <span>Catálogo</span>
-          {activeCrumbs.length === 0 ? <><span aria-hidden="true">/</span><span className="text-dark-950">Todos los productos</span></> : activeCrumbs.map((crumb, index) => <span key={`${crumb}-${index}`} className="contents"><span aria-hidden="true">/</span><span className={index === activeCrumbs.length - 1 ? 'text-dark-950' : ''}>{crumb}</span></span>)}
+          {activeCrumbs.length === 0 ? <><span aria-hidden="true">/</span><span className="text-dark-950 dark:text-white">Todos los productos</span></> : activeCrumbs.map((crumb, index) => <span key={`${crumb}-${index}`} className="contents"><span aria-hidden="true">/</span><span className={index === activeCrumbs.length - 1 ? 'text-dark-950' : ''}>{crumb}</span></span>)}
         </nav>
         <div id="catalog-products" className="mt-5 grid scroll-mt-6 gap-8 lg:grid-cols-[17.5rem_minmax(0,1fr)] lg:items-start xl:gap-10">
           <ClothesFilter filters={filters} onChange={updateFilters} onClear={clearFilters} />

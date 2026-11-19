@@ -10,7 +10,7 @@ export default function AdvantageCard({ number, eyebrow, title, details }) {
 
         {/* Bloque de texto */}
         <div className="flex-1 pt-2 sm:pt-3">
-          <p className="mb-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-dark-500">
+          <p className="mb-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-dark-500 dark:text-gray-400">
             {eyebrow}
           </p>
 
@@ -38,7 +38,7 @@ export default function AdvantageCard({ number, eyebrow, title, details }) {
       />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 h-px w-0 bg-dark-white transition-all duration-700 ease-out group-hover:w-full"
+        className="pointer-events-none absolute bottom-0 left-0 h-px w-0 bg-dark-white transition-all duration-700 ease-out group-hover:w-full dark:bg-[#1a1a1d]"
       />
     </article>
   )

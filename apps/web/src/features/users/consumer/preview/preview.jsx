@@ -26,12 +26,12 @@ export default function Preview() {
   // TODO: Resolver el producto unitario real desde el catálogo usando este slug.
 
   return (
-    <div className="min-h-screen bg-dark-white text-dark-950">
+    <div className="min-h-screen bg-dark-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white">
       <NavLayout />
       <main>
         <section className="mx-auto w-full max-w-[1500px] px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14 xl:px-16">
-          <nav aria-label="Miga de pan" className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[10px] font-semibold uppercase tracking-wide text-dark-500 sm:mb-10 sm:text-[11px]">
-            <Link to="/" className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link><span>/</span><Link to="/#coleccion" className="hover:text-dark-950">Todo el catálogo</Link><span>/</span><span>Camisetas</span><span>/</span><span className="text-dark-950">{slug?.replaceAll('-', ' ') || PRODUCT.name}</span>
+          <nav aria-label="Miga de pan" className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[10px] font-semibold uppercase tracking-wide text-dark-500 sm:mb-10 sm:text-[11px] dark:text-gray-400">
+            <Link to="/" className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link><span>/</span><Link to="/#coleccion" className="hover:text-dark-950">Todo el catálogo</Link><span>/</span><span>Camisetas</span><span>/</span><span className="text-dark-950 dark:text-white">{slug?.replaceAll('-', ' ') || PRODUCT.name}</span>
           </nav>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)] lg:gap-12 xl:gap-16">
             <ImagesComponents images={PRODUCT.images} productName={PRODUCT.name} />

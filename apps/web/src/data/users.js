@@ -1,4 +1,4 @@
-import profileImage from "../assets/Profile/imagesProfile.webp";
+﻿import profileImage from "../assets/Profile/imagesProfile.webp";
 export const userProfile = {
   id: "alejandro-aguilon",
   name: "Alejandro Aguilón Buitrago",
@@ -67,6 +67,14 @@ export const userOrders = [
     carrier: "Coordinadora",
     address: "Cra. 80 # 44-32, Cali, Colombia",
   },
+  ...Array.from({ length: 15 }, (_, index) => ({
+    id: `#DS-${String(150 - index * 5).padStart(5, "0")}`,
+    date: `${String(19 - index).padStart(2, "0")} ago. 2026`,
+    delivery: `${String(24 - index).padStart(2, "0")} ago. 2026`,
+    status: ["En camino", "Entregados", "En preparaci?n", "Cancelados"][index % 4],
+    total: 89000 + index * 7300, images: pickImages([index % 4, (index + 1) % 4]),
+    guide: `CDR-${884592306 + index}`, carrier: "Coordinadora", address: "Cra. 80 # 44-32, Cali, Colombia"
+  }))
 ];
 
 export const userPurchases = userOrders.map((order) => ({
@@ -171,19 +179,9 @@ export const preferencesBenefitsData = [
     text: "Recibe lanzamientos y promociones de tus estilos favoritos.",
   },
   {
-    icon: "clock",
-    title: "Ahorra tiempo",
-    text: "Encuentra tus favoritos sin empezar desde cero.",
-  },
-  {
     icon: "shield",
     title: "Compra más segura",
-    text: "Tus decisiones se basan en información más útil.",
-  },
-  {
-    icon: "headphones",
-    title: "Soporte prioritario",
-    text: "Recibe ayuda contextual cuando la necesites.",
+    text: "Tus decisiones se basan en información más Ãºtil.",
   },
 ];
 

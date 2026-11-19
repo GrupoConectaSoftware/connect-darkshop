@@ -95,7 +95,7 @@ export default function GenderComponents() {
             ))}
           </div>
 
-          <p className="border-t border-neutral-900 px-6 py-3 text-left text-[9px] font-medium uppercase tracking-widest text-neutral-500 sm:px-10 sm:text-[10px] lg:px-12 lg:py-4">Tu elección se recuerda solo en este dispositivo. Puedes cambiarla en cualquier momento.</p>
+          <p className="border-t border-neutral-900 px-6 py-3 text-left text-[9px] font-medium uppercase tracking-widest text-neutral-500 sm:px-10 sm:text-[10px] lg:px-12 lg:py-4 dark:text-gray-400">Tu elección se recuerda solo en este dispositivo. Puedes cambiarla en cualquier momento.</p>
         </div>
       </section>
     </div>

@@ -11,7 +11,7 @@ export default function CheckoutLayout({ children }) {
       <span className="absolute inset-0 bg-black/55" />
       <span className="absolute inset-0 bg-linear-to-l from-black/20 via-transparent to-black/50" />
       <section className="relative z-10 w-full max-w-[680px]">
-        <div className="max-h-[90vh] w-full overflow-y-auto rounded-2xl border border-white/30 bg-white p-6 shadow-2xl [scrollbar-width:none] sm:p-8 [&::-webkit-scrollbar]:hidden">
+        <div className="max-h-[90vh] w-full overflow-y-auto rounded-2xl border border-white/30 bg-white p-6 shadow-2xl [scrollbar-width:none] sm:p-8 [&::-webkit-scrollbar]:hidden dark:bg-[#1a1a1d]">
           {children}
         </div>
       </section>

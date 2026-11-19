@@ -1,32 +1,4 @@
-:root {
-  --bg-dark: #121212;
-  --card-dark: #1a1a1a;
-  --text-dark: #f5f5f5;
-  --border-dark: #2a2a2a;
-}
-
 .dark body {
-  background-color: var(--bg-dark) !important;
-  color: var(--text-dark) !important;
-}
-
-.dark .bg-white {
-  background-color: var(--card-dark) !important;
-  border-color: var(--border-dark) !important;
-}
-
-.dark .text-gray-900,
-.dark .text-gray-800,
-.dark .text-black {
-  color: var(--text-dark) !important;
-}
-
-.dark .text-gray-500,
-.dark .text-gray-600 {
-  color: #a3a3a3 !important;
-}
-
-.dark .border-gray-100,
-.dark .border-gray-200 {
-  border-color: var(--border-dark) !important;
+  background-color: #0f0f11;
+  color: #f5f5f5;
 }

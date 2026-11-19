@@ -18,7 +18,7 @@ export default function NewsletterSection() {
         <div>
           <p className="mb-3 font-body text-[10px] font-medium uppercase tracking-wide text-dark-red sm:mb-4 sm:text-xs">Suscríbete en la comunidad</p>
           <h2 id="newsletter-title" className="font-display text-xl uppercase leading-none tracking-[-0.04em] sm:text-4xl lg:text-5xl xl:text-6xl">
-            <span className="block text-neutral-500">10% de descuento</span>
+            <span className="block text-neutral-500 dark:text-gray-400">10% de descuento</span>
             <span className="block whitespace-nowrap text-white">En tu primera compra</span>
           </h2>
           <p className="mt-4 max-w-2xl font-body text-xs font-light leading-relaxed text-neutral-400 sm:mt-5 sm:text-sm lg:mt-6 lg:text-lg">Drops nuevos, accesos anticipados y códigos privados. Sin spam, solo lo importante.</p>
@@ -37,7 +37,7 @@ export default function NewsletterSection() {
               placeholder="tu@email.com"
               className="h-14 min-w-0 flex-1 border border-neutral-700 bg-transparent px-5 font-body text-base font-light text-white outline-none transition-colors placeholder:text-neutral-500 focus:border-white focus:ring-2 focus:ring-white/20 lg:h-16 lg:px-6 lg:text-lg"
             />
-            <button type="submit" className="group inline-flex h-14 shrink-0 cursor-pointer items-center justify-center gap-5 rounded-sm bg-white px-5 font-body text-[10px] font-semibold uppercase tracking-wide text-dark-950 transition-colors hover:bg-dark-red hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none sm:px-6 lg:h-16 lg:gap-7 lg:px-8 lg:text-xs">
+            <button type="submit" className="group inline-flex h-14 shrink-0 cursor-pointer items-center justify-center gap-5 rounded-sm bg-white px-5 font-body text-[10px] font-semibold uppercase tracking-wide text-dark-950 transition-colors hover:bg-dark-red hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none sm:px-6 lg:h-16 lg:gap-7 lg:px-8 lg:text-xs dark:bg-[#1a1a1d] dark:text-white">
               Suscribirme ahora
               <ArrowRight size={22} strokeWidth={1.25} className="transition-transform duration-300 group-hover:translate-x-1.5 motion-reduce:transition-none" />
             </button>

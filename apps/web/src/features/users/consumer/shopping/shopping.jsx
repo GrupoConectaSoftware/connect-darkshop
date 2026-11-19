@@ -52,20 +52,20 @@ export default function Shopping() {
   const itemCount = items.reduce((count, item) => count + item.quantity, 0)
 
   return (
-    <div className="min-h-screen bg-dark-white text-dark-950">
+    <div className="min-h-screen bg-dark-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white">
       <NavLayout cartVariant />
       <main className="mx-auto w-full max-w-[1600px] px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(20rem,.65fr)] lg:items-end lg:gap-12">
           <div>
-            <nav aria-label="Miga de pan" className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-wide text-dark-500"><Link to="/" className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link><span>/</span><span className="text-dark-950">Carrito de compras</span></nav>
+            <nav aria-label="Miga de pan" className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-wide text-dark-500 dark:text-gray-400"><Link to="/" className="text-dark-red transition-colors hover:text-dark-burgundy">Inicio</Link><span>/</span><span className="text-dark-950 dark:text-white">Carrito de compras</span></nav>
             <h1 className="mt-5 font-display text-[clamp(2.35rem,6vw,4.7rem)] uppercase leading-[0.86] tracking-[-0.06em]">Carrito de compras</h1>
-            <p className="mt-4 text-base text-dark-500 sm:text-lg">Revisa tus productos antes de finalizar tus pedidos.</p>
+            <p className="mt-4 text-base text-dark-500 sm:text-lg dark:text-gray-400">Revisa tus productos antes de finalizar tus pedidos.</p>
           </div>
 
-          <form onSubmit={handleCouponSubmit} className="border-b border-dark-200 pb-5 lg:border-0 lg:pb-0">
-            <label htmlFor="coupon" className="flex items-center gap-2 text-xs text-dark-500"><Ticket size={17} className="text-dark-950" />¿Tienes algún cupón de descuento?</label>
+          <form onSubmit={handleCouponSubmit} className="border-b border-dark-200 pb-5 lg:border-0 lg:pb-0 dark:border-[#2a2a2d]">
+            <label htmlFor="coupon" className="flex items-center gap-2 text-xs text-dark-500 dark:text-gray-400"><Ticket size={17} className="text-dark-950 dark:text-white" />¿Tienes algún cupón de descuento?</label>
             <div className="mt-3 flex gap-2">
-              <input id="coupon" value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="Digita el código aquí." className="h-11 min-w-0 flex-1 border border-transparent bg-dark-100 px-4 text-sm text-dark-950 outline-none transition-colors placeholder:text-dark-500 focus:border-dark-400" />
+              <input id="coupon" value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="Digita el código aquí." className="h-11 min-w-0 flex-1 border border-transparent bg-dark-100 px-4 text-sm text-dark-950 outline-none transition-colors placeholder:text-dark-500 focus:border-dark-400 dark:text-white" />
               <button type="submit" className="h-11 shrink-0 cursor-pointer bg-dark-950 px-4 text-[10px] font-semibold uppercase tracking-wide text-dark-white transition-colors hover:bg-dark-burgundy sm:px-5">Aplicar cupón</button>
             </div>
           </form>
@@ -75,7 +75,7 @@ export default function Shopping() {
           <section className="flex min-w-0 flex-col">
             <div className="mb-4 flex items-center justify-between gap-4">
               <p className="text-xs italic text-dark-400">{itemCount} {itemCount === 1 ? 'producto' : 'productos'}</p>
-              <button type="button" onClick={handleClear} disabled={!items.length} className="inline-flex h-9 cursor-pointer items-center gap-1.5 bg-dark-100 px-3 text-[10px] font-semibold uppercase tracking-wide text-dark-800 transition-colors hover:bg-dark-200 disabled:cursor-not-allowed disabled:opacity-50"><Trash2 size={14} />Vaciar carrito</button>
+              <button type="button" onClick={handleClear} disabled={!items.length} className="inline-flex h-9 cursor-pointer items-center gap-1.5 bg-dark-100 px-3 text-[10px] font-semibold uppercase tracking-wide text-dark-800 dark:text-neutral-100 transition-colors hover:bg-dark-200 disabled:cursor-not-allowed disabled:opacity-50"><Trash2 size={14} />Vaciar carrito</button>
             </div>
             <PreviewComponents items={items} onQuantityChange={handleQuantityChange} onRemove={handleRemove} />
           </section>

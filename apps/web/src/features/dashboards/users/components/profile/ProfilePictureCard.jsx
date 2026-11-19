@@ -21,12 +21,12 @@ export default function ProfilePictureCard() {
   };
 
   return (
-    <section className="h-full min-h-60 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md sm:p-6" aria-labelledby="profile-photo-title">
+    <section className="h-full min-h-60 rounded-2xl border border-gray-200 dark:border-neutral-700 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md sm:p-6 dark:border-[#2a2a2d] dark:bg-[#1a1a1d]" aria-labelledby="profile-photo-title">
       <div className="flex items-center gap-3">
         <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-red-50 text-red-800"><Camera size={19} strokeWidth={1.7} /></span>
         <div>
           <h2 id="profile-photo-title" className="text-sm font-bold sm:text-base">Foto de perfil</h2>
-          <p className="text-xs text-neutral-500">Elige una foto clara para que sea legible para DarkShop.</p>
+          <p className="text-xs text-neutral-500 dark:text-gray-400">Elige una foto clara para que sea legible para DarkShop.</p>
         </div>
       </div>
       <div className="mt-5 flex flex-wrap items-center gap-4 sm:gap-5">
@@ -36,10 +36,10 @@ export default function ProfilePictureCard() {
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-bold">Cambia tu foto de perfil</p>
-          <p className="mt-1 text-xs text-neutral-500">JPG, PNG o WEBP. Máximo 5 MB.</p>
+          <p className="mt-1 text-xs text-neutral-500 dark:text-gray-400">JPG, PNG o WEBP. Máximo 5 MB.</p>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <button type="button" onClick={() => inputRef.current?.click()} className="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-red-800"><Upload size={14} /> Subir imagen</button>
-            <button type="button" onClick={() => setPhoto(defaultAvatar)} className="inline-flex items-center gap-2 px-2 py-2 text-xs text-neutral-500 transition-colors hover:text-red-700"><Trash2 size={14} /> Eliminar</button>
+            <button type="button" onClick={() => setPhoto(defaultAvatar)} className="inline-flex items-center gap-2 px-2 py-2 text-xs text-neutral-500 transition-colors hover:text-red-700 dark:text-gray-400"><Trash2 size={14} /> Eliminar</button>
             <input ref={inputRef} type="file" accept="image/png,image/jpeg,image/webp" onChange={selectPhoto} className="sr-only" aria-label="Seleccionar foto de perfil" />
           </div>
         </div>

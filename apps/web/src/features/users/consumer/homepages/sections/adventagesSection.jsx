@@ -61,7 +61,7 @@ export default function AdvantagesSection() {
               ¿Por qué Darkshop?
             </p>
             <h2 className="text-[clamp(2rem,5.7vw,7rem)] font-black uppercase leading-[0.88] tracking-[-0.07em]">
-              <span className="block whitespace-nowrap text-dark-500">No es moda</span>
+              <span className="block whitespace-nowrap text-dark-500 dark:text-gray-400">No es moda</span>
               <span className="mt-2 block whitespace-nowrap text-dark-white">Es la Darkshop</span>
             </h2>
           </Reveal>

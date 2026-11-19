@@ -23,7 +23,7 @@ const FILTERS = ['TODOS', 'EDITORIAL', 'CALLEJERO', 'STUDIO', 'UNDERGROUND']
 
 function GalleryImage({ item, className = '' }) {
   return (
-    <figure className={`group min-h-0 min-w-0 overflow-hidden bg-neutral-100 ${className}`}>
+    <figure className={`group min-h-0 min-w-0 overflow-hidden bg-neutral-100 dark:bg-[#27272a] ${className}`}>
       <img
         src={item.src}
         alt={item.alt}
@@ -124,7 +124,7 @@ export default function GallerySection() {
                   type="button"
                   aria-pressed={activeFilter === filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`shrink-0 cursor-pointer border-b pb-1 text-xs font-semibold uppercase tracking-[0.08em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark-red sm:text-sm ${activeFilter === filter ? 'border-dark-red text-dark-red' : 'border-transparent text-neutral-700 hover:border-neutral-900 hover:text-neutral-950'}`}
+                  className={`shrink-0 cursor-pointer border-b pb-1 text-xs font-semibold uppercase tracking-[0.08em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark-red sm:text-sm ${activeFilter === filter ? 'border-dark-red text-dark-red' : 'border-transparent text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 hover:text-neutral-950'}`}
                 >
                   {filter}
                 </button>
@@ -171,7 +171,7 @@ export default function GallerySection() {
                   </div>
                 </div>
               </div>
-              <div aria-hidden="true" className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-white via-white/70 to-transparent transition-opacity duration-500 ease-out sm:h-40 ${galleryHasMore ? 'opacity-100' : 'opacity-0'}`} />
+              <div aria-hidden="true" className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-white dark:from-[#0f0f11] via-white/70 to-transparent transition-opacity duration-500 ease-out sm:h-40 ${galleryHasMore ? 'opacity-100' : 'opacity-0'}`} />
             </Reveal>
 
             <div className="flex items-center justify-center gap-4 py-8 text-center sm:gap-6 sm:py-10">

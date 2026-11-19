@@ -26,17 +26,17 @@ export default function ShareCollectionModal({ collection, isOpen, onClose }) {
 
   return (
     <div role="presentation" onMouseDown={onClose} className="fixed inset-0 z-[90] grid place-items-center bg-black/60 px-5 backdrop-blur-sm">
-      <section role="dialog" aria-modal="true" aria-labelledby="share-collection-title" onMouseDown={(event) => event.stopPropagation()} className="w-full max-w-md bg-white p-6 shadow-2xl sm:p-8">
+      <section role="dialog" aria-modal="true" aria-labelledby="share-collection-title" onMouseDown={(event) => event.stopPropagation()} className="w-full max-w-md bg-white p-6 shadow-2xl sm:p-8 dark:bg-[#1a1a1d]">
         <div className="flex items-start justify-between gap-5">
-          <div><p className="text-[10px] font-bold uppercase tracking-[0.22em] text-dark-red">Compartir colección</p><h2 id="share-collection-title" className="mt-2 text-3xl font-black uppercase leading-none text-neutral-950">{collection.label}</h2></div>
-          <button type="button" onClick={onClose} aria-label="Cerrar" className="grid size-9 place-items-center text-neutral-500 transition-colors hover:text-neutral-950"><X size={20} /></button>
+          <div><p className="text-[10px] font-bold uppercase tracking-[0.22em] text-dark-red">Compartir colección</p><h2 id="share-collection-title" className="mt-2 text-3xl font-black uppercase leading-none text-neutral-950 dark:text-white">{collection.label}</h2></div>
+          <button type="button" onClick={onClose} aria-label="Cerrar" className="grid size-9 place-items-center text-neutral-500 transition-colors hover:text-neutral-950 dark:text-gray-400"><X size={20} /></button>
         </div>
-        <p className="mt-5 text-sm leading-relaxed text-neutral-600">Comparte esta colección con quien quieras descubrirla.</p>
-        <div className="mt-6 flex min-w-0 items-center border border-neutral-200 bg-neutral-50 p-2">
-          <span className="min-w-0 flex-1 truncate px-2 text-xs text-neutral-600">{url}</span>
+        <p className="mt-5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">Comparte esta colección con quien quieras descubrirla.</p>
+        <div className="mt-6 flex min-w-0 items-center border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-[#222226] p-2 dark:border-[#2a2a2d]">
+          <span className="min-w-0 flex-1 truncate px-2 text-xs text-neutral-600 dark:text-neutral-300">{url}</span>
           <button type="button" onClick={copyLink} className="inline-flex shrink-0 items-center gap-2 bg-neutral-950 px-4 py-3 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:bg-dark-red">{copied ? <Check size={16} /> : <Copy size={16} />}{copied ? 'Copiado' : 'Copiar'}</button>
         </div>
-        <button type="button" onClick={nativeShare} className="mt-3 inline-flex w-full items-center justify-center gap-2 border border-neutral-950 px-5 py-3 text-xs font-bold uppercase tracking-wide text-neutral-950 transition-colors hover:bg-neutral-950 hover:text-white"><Share2 size={16} />Compartir</button>
+        <button type="button" onClick={nativeShare} className="mt-3 inline-flex w-full items-center justify-center gap-2 border border-neutral-950 px-5 py-3 text-xs font-bold uppercase tracking-wide text-neutral-950 transition-colors hover:bg-neutral-950 hover:text-white dark:text-white"><Share2 size={16} />Compartir</button>
       </section>
     </div>
   )

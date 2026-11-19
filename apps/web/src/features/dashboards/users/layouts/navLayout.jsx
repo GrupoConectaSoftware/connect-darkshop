@@ -55,7 +55,7 @@ export default function NavLayout({ open, onClose, activeSection, onNavigateSect
             />
           </div>
           <p className="mt-4 text-sm font-bold">Alejandro Aguilón Buitrago</p>
-          <p className="mt-1 text-[10px] uppercase tracking-[.18em] text-neutral-500">
+          <p className="mt-1 text-[10px] uppercase tracking-[.18em] text-neutral-500 dark:text-gray-400">
             Mi cuenta
           </p>
         </div>

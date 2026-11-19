@@ -52,17 +52,17 @@ const CATEGORIES = [
 
 export default function CategoriesSection() {
   return (
-    <section id="categorias" className="bg-dark-white text-dark-950">
+    <section id="categorias" className="bg-dark-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white">
       <div className="mx-auto grid max-w-[1600px] gap-8 px-6 py-14 sm:px-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12 lg:px-10 lg:py-20">
         <Reveal className="max-w-4xl">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-dark-red sm:text-sm">Categorías</p>
-          <h2 className="text-3xl font-black uppercase leading-none tracking-[-0.045em] text-dark-950 sm:text-4xl lg:text-5xl">Encuentra la silueta ideal para ti</h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-dark-600 sm:text-lg">No diseñamos para una temporada. Diseñamos para una identidad. Elige las prendas que te acompañarán durante años.</p>
+          <h2 className="text-3xl font-black uppercase leading-none tracking-[-0.045em] text-dark-950 sm:text-4xl lg:text-5xl dark:text-white">Encuentra la silueta ideal para ti</h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-dark-600 dark:text-neutral-300 sm:text-lg">No diseñamos para una temporada. Diseñamos para una identidad. Elige las prendas que te acompañarán durante años.</p>
         </Reveal>
 
         <Reveal as="nav" effect="fade" delay={120} aria-label="Navegación de categorías" className="flex flex-col gap-3 self-start text-left lg:items-end lg:text-right">
           {NAV_ITEMS.map((item) => (
-            <a key={item.label} href={item.href} className="text-xs font-medium uppercase tracking-widest text-dark-500 transition-colors hover:text-dark-950 sm:text-sm">{item.label}</a>
+            <a key={item.label} href={item.href} className="text-xs font-medium uppercase tracking-widest text-dark-500 transition-colors hover:text-dark-950 sm:text-sm dark:text-gray-400">{item.label}</a>
           ))}
         </Reveal>
       </div>

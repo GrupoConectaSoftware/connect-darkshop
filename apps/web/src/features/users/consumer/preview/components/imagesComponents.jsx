@@ -31,7 +31,7 @@ export default function ImagesComponents({ images, productName }) {
 
         <div className="relative order-1 aspect-[3/4] overflow-hidden border border-dark-300 bg-dark-100 lg:order-2">
           <img src={activeImage} alt={productName} className="size-full cursor-zoom-in object-cover object-top transition-transform duration-500 ease-out hover:scale-[1.05]" />
-          <button type="button" onClick={() => setIsZoomOpen(true)} aria-label="Ampliar imagen" className="absolute bottom-3 left-3 z-10 grid size-11 cursor-pointer place-items-center rounded-full bg-white text-dark-950 shadow-md transition hover:scale-105 hover:bg-dark-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red sm:bottom-4 sm:left-4 sm:size-12"><Search size={20} /></button>
+          <button type="button" onClick={() => setIsZoomOpen(true)} aria-label="Ampliar imagen" className="absolute bottom-3 left-3 z-10 grid size-11 cursor-pointer place-items-center rounded-full bg-white text-dark-950 shadow-md transition hover:scale-105 hover:bg-dark-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-red sm:bottom-4 sm:left-4 sm:size-12 dark:bg-[#1a1a1d] dark:text-white"><Search size={20} /></button>
           <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4"><GarmentSwitch value={viewMode} onChange={setViewMode} /></div>
         </div>
       </div>

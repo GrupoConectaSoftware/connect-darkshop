@@ -120,7 +120,7 @@ export default function IdentityComponents({
               />
             ))}
           </div>
-          <p aria-live="polite" className="mt-5 font-body text-xs font-light text-neutral-600">
+          <p aria-live="polite" className="mt-5 font-body text-xs font-light text-neutral-600 dark:text-neutral-300">
             {secondsLeft > 0 ? <>El código vence en <span className="font-semibold text-neutral-900">{formattedTime}</span></> : 'El código expiró. Puedes solicitar uno nuevo.'}
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function IdentityComponents({
             Reenviar código
           </button>
         </div>
-        {notice && <p role="status" aria-live="polite" className="mt-4 font-body text-xs text-neutral-600">{notice}</p>}
+        {notice && <p role="status" aria-live="polite" className="mt-4 font-body text-xs text-neutral-600 dark:text-neutral-300">{notice}</p>}
       </form>
     </div>
   )

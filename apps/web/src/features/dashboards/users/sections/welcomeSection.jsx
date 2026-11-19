@@ -2,8 +2,8 @@ import hero from "../../../../assets/Brand/category/categoryUno.webp";
 import {
   products,
   orders,
-  notifications,
 } from "../../../../data/dashboardData.js";
+import { notificationsData } from "../../../../data/notifications";
 import OrderComponent from "../components/welcome/orderComponent";
 import PurchaseComponent from "../components/welcome/purchaseComponent";
 import CartComponent from "../components/welcome/cartComponent";
@@ -45,14 +45,14 @@ export default function WelcomeSection() {
           alt=""
           className="absolute inset-0 h-full w-full object-cover object-center opacity-80"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-white via-white/75 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-white dark:from-[#0f0f11] via-white/75 dark:via-[#0f0f11]/90 to-transparent" />
         <div className="relative max-w-3xl">
           <h1 className="mt-6 font-display text-4xl font-black uppercase leading-[.95] sm:text-5xl">
-            <span className="text-neutral-500">Hola, Alejandro</span>
+            <span className="text-neutral-500 dark:text-gray-400">Hola, Alejandro</span>
             <br />
             Todo lo tuyo, <span className="text-[#8b0c1d]">un solo lugar</span>
           </h1>
-          <p className="mt-4 max-w-sm text-sm text-neutral-600">
+          <p className="mt-4 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
             Consulta tus compras, sigue tus pedidos y administra tu experiencia
             dentro de DarkShop.
           </p>
@@ -73,7 +73,7 @@ export default function WelcomeSection() {
         <div className="lg:col-span-2">
           <PreferencesComponent />
         </div>
-        <NotificationsComponent notifications={notifications} />
+        <NotificationsComponent notifications={notificationsData} />
       </div>
       <div className="mt-5">
         <WishlistComponent products={favorites} fallbackProducts={products} />
