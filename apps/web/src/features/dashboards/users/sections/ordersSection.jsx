@@ -4,7 +4,7 @@ import { userOrders as orders } from "../../../../data/users.js";
 import OrdersFilters from "../components/orders/OrdersFilters";
 import OrdersListComponent from "../components/orders/OrdersListComponent";
 import TrackingSidebarComponent from "../components/orders/TrackingSidebarComponent";
-import OrderDetailsModal from "../../../../components/ui/OrderDetailsModal";
+import OrderDetailsModal from "../../../../components/ui/orders/OrderDetailsModal";
 import SupportCard from "../components/orders/SupportCard";
 
 export default function OrdersSection() {

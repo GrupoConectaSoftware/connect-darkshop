@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import { faqData } from '../../data/info.js'
+import { faqData } from '../../../data/info.js'
 
 export default function FAQList() {
   const [activeQuestion, setActiveQuestion] = useState(null)

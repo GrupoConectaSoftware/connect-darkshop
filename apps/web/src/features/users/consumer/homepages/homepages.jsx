@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import VideoIntro from './sections/VideoIntro'
 import NavLayout from './layouts/navLayout'
 import NewsletterSection from './sections/NewsletterSection'
 import Footer from './layouts/Footer'
@@ -17,6 +18,10 @@ import { COLLECTIONS } from '../../../../data/collections.js'
 export default function Homepages() {
   const [selectedBrand, setSelectedBrand] = useState('')
   const { gender } = useGender()
+  const [showIntro, setShowIntro] = useState(() => {
+    try { return !sessionStorage.getItem('introPlayed') } catch { return true }
+  })
+  const finishIntro = useCallback(() => setShowIntro(false), [])
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand)
@@ -25,6 +30,7 @@ export default function Homepages() {
 
   return (
     <>
+      {showIntro && <VideoIntro onFinish={finishIntro} />}
       <div className="flex min-h-screen flex-col bg-dark-950 text-dark-50" aria-hidden={gender ? undefined : true} inert={gender ? undefined : ''}>
         <NavLayout />
         <main id="inicio" className="flex-1">

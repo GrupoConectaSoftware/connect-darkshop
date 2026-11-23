@@ -105,19 +105,23 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
     return () => window.removeEventListener(FAVORITES_UPDATED_EVENT, syncFavorite)
   }, [product])
 
-  const handleAction = (label) => (event) => {
+  const handleAction = (action) => (event) => {
     event.stopPropagation()
-    if (label === 'Vista rápida') navigate(`/preview/${productSlug}`)
-    if (label === 'Agregar a favoritos') {
+    // Route by action type so translated/accessibility text cannot break preview navigation.
+    if (action.icon === Eye) {
+      navigate(`/preview/${productSlug}`)
+      return
+    }
+    if (action.icon === Heart) {
       const result = toggleFavorite(product)
       setFavorite(result.isFavorite)
       showToast('success', result.isFavorite ? 'Producto agregado a tus favoritos.' : 'Producto eliminado de tus favoritos.')
     }
-    if (label === 'Agregar al carrito') {
+    if (action.icon === ShoppingCart) {
       addToCart({ ...product, price: currentPrice }, { size: selectedSize ?? product.sizes?.[0], color: selectedColor })
       showToast('success', 'Producto agregado al carrito.')
     }
-    if (label === 'Compartir producto') {
+    if (action.icon === Share2) {
       const url = window.location.origin + `/preview/${productSlug}`
       if (navigator.share) {
         navigator.share({ title: product.name, url }).then(() => showToast('success', 'Enlace del producto compartido.')).catch(() => {})
@@ -151,7 +155,7 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
         <span aria-hidden="true" className={`pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_50%_40%,#fff_0%,rgba(255,255,255,.9)_40%,rgba(255,255,255,.6)_100%)] transition-opacity ease-out ${flashPhase === 'peak' ? 'opacity-100 duration-75' : flashPhase === 'fade' ? 'opacity-0 duration-300' : 'opacity-0 duration-0'}`} />
         {flashPhase !== 'idle' && <span aria-hidden="true" className={`pointer-events-none absolute right-8 top-8 z-10 size-2 rounded-full bg-white shadow-[0_0_16px_8px_rgba(255,255,255,.8)] transition-opacity duration-300 ${flashPhase === 'peak' ? 'opacity-100' : 'opacity-0'}`} />}
         <div className={`absolute right-3 top-3 z-20 flex flex-col gap-2 transition-all duration-300 ${alwaysShowActions ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`}>
-          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action.label)} className={!iconHoverRedOnly && action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} hoverColorOnly={iconHoverRedOnly} />)}
+          {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Eye ? 'Ver producto' : action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action)} className={!iconHoverRedOnly && action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} hoverColorOnly={iconHoverRedOnly} />)}
         </div>
         <div className="absolute bottom-3 left-3 z-10">
           <GarmentSwitch value={viewMode} onChange={(mode) => { setCurrentImgIndex(0); setViewMode(mode) }} />

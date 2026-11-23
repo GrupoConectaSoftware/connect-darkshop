@@ -82,6 +82,7 @@ export default function App() {
         <Route path="/register/buyer" element={<RolePlaceholder role="comprador" />} />
         <Route path="/register/seller" element={<RolePlaceholder role="vendedor" />} />
         <Route path="/" element={<Homepages />} />
+        <Route path="/homepages" element={<Homepages />} />
         {['hombre', 'mujer', 'unisex', 'ninos', 'todo'].map((gender) => <Route key={gender} path={`/${gender}`} element={<Homepages />} />)}
         <Route path="*" element={<NotFound />} />
       </Routes>
