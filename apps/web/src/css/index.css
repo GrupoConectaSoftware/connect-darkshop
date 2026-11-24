@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lilita+One&family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@config "../../tailwind.config.js";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
