@@ -24,6 +24,8 @@ import Collection from './features/users/consumer/collection/collection'
 import Poster from './features/users/consumer/poster/poster'
 import Config from './features/users/consumer/config/config'
 import DashboardUsers from './features/dashboards/users/dashboardUsers'
+import DashboardBrand from './features/dashboards/brand/dashboardBrand'
+import RequestProduct from './features/dashboards/brand/request/sections/requestProduct'
 import CheckoutPage from './features/users/consumer/checkout/CheckoutPage'
 import NotFound from './components/ui/feedback/NotFound'
 import ToastViewport from './components/ui/feedback/ToastViewport'
@@ -76,6 +78,8 @@ export default function App() {
         <Route path="/poster" element={<Poster />} />
         <Route path="/config" element={<Config />} />
         <Route path="/dashboard" element={<DashboardUsers />} />
+        <Route path="/dashboard/brand" element={<DashboardBrand />} />
+        <Route path="/dashboard/brand/products/new" element={<RequestProduct />} />
         <Route path="/dashboard/notifications" element={<DashboardUsers />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/set/:slug" element={<Logged />} />
