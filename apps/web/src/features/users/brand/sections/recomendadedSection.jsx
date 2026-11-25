@@ -1,7 +1,5 @@
 import { OUTLET_PRODUCTS_ON_SALE } from '../../../../data/products.js'
-import videoOne from '../../../../movies/brand/recomendaded/videoUno.mp4'
 import videoTwo from '../../../../movies/brand/recomendaded/videoDos.mp4'
-import videoThree from '../../../../movies/brand/recomendaded/videoTres.mp4'
 import videoFour from '../../../../movies/brand/recomendaded/videoCuatro.mp4'
 import videoFive from '../../../../movies/brand/recomendaded/videoCinco.mp4'
 import RecommendedProductsCarousel from './components/RecommendedProductsCarousel'
@@ -16,7 +14,7 @@ const RECOMMENDED_PRODUCTS = OUTLET_PRODUCTS_ON_SALE.slice(0, 6).map((product, i
   badge: { label: 'Recomendado', variant: 'recommended' },
 }))
 
-const VIDEOS = [videoOne, videoTwo, videoThree, videoFour, videoFive]
+const VIDEOS = [videoTwo, videoFour, videoFive]
 
 export default function RecomendadedSection() {
   return (

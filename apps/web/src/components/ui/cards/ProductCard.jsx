@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { catalogImageSets } from '../../../data/products'
 import { Eye, Gift, Heart, Share2, ShoppingCart } from 'lucide-react'
 import { productActionsData } from '../../../data/ui.js'
 import ProductBadge from '../badges/ProductBadge'
@@ -23,6 +24,7 @@ const money = new Intl.NumberFormat('es-CO', {
 
 export default function ProductCard({ product, badgeLabel = null, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, iconHoverRedOnly = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
   const currentPrice = (product.colorPrices?.[selectedColor] ?? product.price) + (product.sizePriceAdjustments?.[selectedSize] ?? 0)
@@ -34,7 +36,14 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
   const intervalRef = useRef(null)
   const shotTimers = useRef([])
   const firing = useRef(false)
-  const viewImages = viewMode === 'model' ? product.imagesModel : product.imagesGarment
+  const preserveImages = /^\/(brand|collection|collections|sets|set)(\/|$)/i.test(pathname)
+  const imageKey = String(product.id ?? product.name ?? '')
+  const numericId = Number(imageKey.match(/\d+$/)?.[0])
+  const imageIndex = numericId ? numericId - 1 : [...imageKey].reduce((sum, char) => sum + char.charCodeAt(0), 0)
+  const catalogImages = product.catalogImages ?? catalogImageSets[imageIndex % catalogImageSets.length]
+  const viewImages = preserveImages
+    ? (viewMode === 'model' ? product.imagesModel : product.imagesGarment)
+    : (viewMode === 'model' ? catalogImages.imagesModel : catalogImages.imagesClothes)
   const images = viewImages?.length ? viewImages : product.images?.length ? product.images : [product.image]
   const clearShotTimers = () => {
     shotTimers.current.forEach(window.clearTimeout)
@@ -64,7 +73,7 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
     hoverDelay.current = window.setTimeout(() => {
       hoverDelay.current = null
       fireFlash()
-      intervalRef.current = window.setInterval(fireFlash, 1800)
+      intervalRef.current = window.setInterval(fireFlash, 800)
     }, 150)
   }
 

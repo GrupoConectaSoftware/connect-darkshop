@@ -1,3 +1,4 @@
+import FloatingWidgets from "../../../components/ui/widgets/FloatingWidgets";
 import NavLayout from "./layouts/navLayout";
 import IntroductionSection from "./sections/introductionSection";
 import BannerSection from "./sections/bannerSection";
@@ -40,6 +41,7 @@ export default function Brand() {
         <GallerySection />
       </main>
       <Footer storeLinks={BRAND_FOOTER_LINKS} />
+      <FloatingWidgets />
     </div>
   );
 }

@@ -35,7 +35,7 @@ const templates = [
   { name: 'Hoodie Arcangel Black Archive', description: 'Construcción pesada, textura suave y un fit relajado para capas de ciudad.', image: outletOne, brand: 'Under Armour', brandType: 'TIENDA OFICIAL', colors: ['#080808', '#333333'], colorFilters: ['negro'], unavailableSizes: ['M'], category: 'Chaquetas', gender: 'Unisex', references: ['Grunge', 'Streetwear'], city: 'Cali', badge: { label: 'Recomendado', variant: 'recommended' } },
 ]
 
-const products = templates.concat(templates.slice(1, 5)).map((template, index) => {
+export const catalogProducts = templates.concat(templates.slice(1, 5)).map((template, index) => {
   const price = 35000 + (index % 5) * 5000
   const originalPrice = template.badge?.variant === 'descuento' ? price + 40500 : null
 
@@ -90,7 +90,7 @@ export default function Clothes() {
     else params.delete('category')
     setSearchParams(params)
   }
-  const filteredProducts = useMemo(() => products.filter((product) => (
+  const filteredProducts = useMemo(() => catalogProducts.filter((product) => (
     includesAny([product.category, ...(product.isOutlet ? ['Outlet'] : [])], filters.categories)
     && includesAny([product.gender], filters.genders)
     && includesAny(product.references, filters.references)
@@ -102,7 +102,7 @@ export default function Clothes() {
     && product.price >= filters.price[0]
     && product.price <= filters.price[1]
   )), [filters])
-  const productCounts = useMemo(() => Object.fromEntries(categories.map(({ name }) => [name, products.filter((product) => (name === 'Outlet' ? product.isOutlet : product.category === name)).length])), [])
+  const productCounts = useMemo(() => Object.fromEntries(categories.map(({ name }) => [name, catalogProducts.filter((product) => (name === 'Outlet' ? product.isOutlet : product.category === name)).length])), [])
   const activeCrumbs = [
     ...filters.categories,
     ...filters.genders.map((value) => `Género: ${value}`),

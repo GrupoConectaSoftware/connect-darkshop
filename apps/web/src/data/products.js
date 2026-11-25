@@ -2,6 +2,44 @@ import outletOne from "../assets/Sections/homespages/outlet/products/outletUno.w
 import outletTwo from "../assets/Sections/homespages/outlet/products/ouletDos.webp";
 import outletThree from "../assets/Sections/homespages/outlet/products/outletTres.webp";
 import outletFour from "../assets/Sections/homespages/outlet/products/outletCuatro.webp";
+import marcoFront from "../assets/Catalog/Marco/model/marcoFrente.webp";
+import marcoSide from "../assets/Catalog/Marco/model/marcoLado.webp";
+import marcoBack from "../assets/Catalog/Marco/model/marcoEspalda.webp";
+import marcoClothesFront from "../assets/Catalog/Marco/clothes/marcoFrente.webp";
+import marcoClothesSide from "../assets/Catalog/Marco/clothes/marcoLado.webp";
+import marcoClothesBack from "../assets/Catalog/Marco/clothes/marcoEspalda.webp";
+import mateoFront from "../assets/Catalog/Mateo/model/mateoFrente.webp";
+import mateoSide from "../assets/Catalog/Mateo/model/mateoLado.webp";
+import mateoBack from "../assets/Catalog/Mateo/model/mateoEspalda.webp";
+import mateoClothesFront from "../assets/Catalog/Mateo/clothes/mateoFrente.webp";
+import mateoClothesSide from "../assets/Catalog/Mateo/clothes/mateoLado.webp";
+import mateoClothesBack from "../assets/Catalog/Mateo/clothes/mateoEspalda.webp";
+import nicolasFront from "../assets/Catalog/Nicolas/model/nicolasFrente.webp";
+import nicolasSide from "../assets/Catalog/Nicolas/model/nicolasLado.webp";
+import nicolasBack from "../assets/Catalog/Nicolas/model/nicolasEspalda.png";
+import nicolasClothesFront from "../assets/Catalog/Nicolas/clothes/nicolasFrente.webp";
+import nicolasClothesSide from "../assets/Catalog/Nicolas/clothes/nicolasLado.webp";
+import nicolasClothesBack from "../assets/Catalog/Nicolas/clothes/nicolasEspalda.webp";
+import sofiaFront from "../assets/Catalog/Sofia/model/sofiaFrente..webp";
+import sofiaSide from "../assets/Catalog/Sofia/model/sofiaLado.png";
+import sofiaBack from "../assets/Catalog/Sofia/model/sofiaEspalda.png";
+import sofiaClothesFront from "../assets/Catalog/Sofia/clothes/sofiaFrente.webp";
+import sofiaClothesSide from "../assets/Catalog/Sofia/clothes/sofiaLado.webp";
+import sofiaClothesBack from "../assets/Catalog/Sofia/clothes/sofiaEspalda.webp";
+import valentinaFront from "../assets/Catalog/Valentina/model/valentinaFrente.webp";
+import valentinaSide from "../assets/Catalog/Valentina/model/valentinaLado.webp";
+import valentinaBack from "../assets/Catalog/Valentina/model/valentinaEspalda.webp";
+import valentinaClothesFront from "../assets/Catalog/Valentina/clothes/valentinaFrente.webp";
+import valentinaClothesSide from "../assets/Catalog/Valentina/clothes/valentinaLado.webp";
+import valentinaClothesBack from "../assets/Catalog/Valentina/clothes/valentinaEspalda.webp";
+
+export const catalogImageSets = [
+  { imagesModel: [marcoFront, marcoSide, marcoBack], imagesClothes: [marcoClothesFront, marcoClothesSide, marcoClothesBack] },
+  { imagesModel: [mateoFront, mateoSide, mateoBack], imagesClothes: [mateoClothesFront, mateoClothesSide, mateoClothesBack] },
+  { imagesModel: [nicolasFront, nicolasSide, nicolasBack], imagesClothes: [nicolasClothesFront, nicolasClothesSide, nicolasClothesBack] },
+  { imagesModel: [sofiaFront, sofiaSide, sofiaBack], imagesClothes: [sofiaClothesFront, sofiaClothesSide, sofiaClothesBack] },
+  { imagesModel: [valentinaFront, valentinaSide, valentinaBack], imagesClothes: [valentinaClothesFront, valentinaClothesSide, valentinaClothesBack] },
+];
 
 export const badgesData = [
   { variant: "descuento", label: "Descuento" },
@@ -62,6 +100,7 @@ export const productsData = Array.from({ length: 12 }, (_, index) => {
   const originalPrice = index % 4 === 3 ? null : price + 22000;
   return {
     ...base,
+    catalogImages: catalogImageSets[index % catalogImageSets.length],
     id: `product-${index + 1}`,
     gender: ["unisex", "mujer", "hombre"][index % 3],
     name: `${base.name} ${String(index + 1).padStart(2, "0")}`,

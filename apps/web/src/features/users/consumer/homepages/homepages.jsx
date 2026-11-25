@@ -12,7 +12,7 @@ import SetSection from './sections/setSection'
 import CtaSection from './sections/ctaSection'
 import GenderComponents from './components/GenderComponents'
 import useGender from '../../../../hooks/useGender'
-import CollectionsButton from '../../../../components/ui/buttons/CollectionsButton'
+import FloatingWidgets from '../../../../components/ui/widgets/FloatingWidgets'
 import { COLLECTIONS } from '../../../../data/collections.js'
 
 export default function Homepages() {
@@ -49,7 +49,7 @@ export default function Homepages() {
         <Footer />
       </div>
       {!gender && <GenderComponents />}
-      {gender && <CollectionsButton count={COLLECTIONS.length} href="/poster" />}
+      {gender && !showIntro && <FloatingWidgets autoOpenAd />}
     </>
   )
 }
