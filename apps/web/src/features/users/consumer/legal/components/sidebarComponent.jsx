@@ -1,4 +1,4 @@
-import { LEGAL_SECTIONS } from '../data/legal'
+import { LEGAL_SECTIONS } from '../../../../../data/legal'
 
 export default function SidebarComponent() {
   return (

@@ -1,7 +1,7 @@
 import { AlertCircle, Heart, Minus, Plus, ShoppingBag } from 'lucide-react'
 import { useState } from 'react'
-import { addToCart } from '../../../../../commons/storage/cartStorage'
-import { isFavorite, toggleFavorite } from '../../../../../commons/storage/favoritesStorage'
+import { addToCart } from '../../../../../hooks/cartStorage'
+import { isFavorite, toggleFavorite } from '../../../../../hooks/favoritesStorage'
 import { showToast } from '../../../../../utils/toast'
 
 const money = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 })

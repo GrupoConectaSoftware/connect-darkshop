@@ -10,6 +10,6 @@ export function registerProduct(product) {
   if (products.some(item => item.sku.toLowerCase() === sku.toLowerCase())) {
     throw new Error('Ya registraste un producto con este SKU.')
   }
-  const record = { ...product, sku, name: product.name.trim(), variants: product.variants.map(v => ({ ...v, stock: Number(v.stock) })) }
+  const record = { ...product, sku, name: product.name.trim(), variants: product.variants }
   localStorage.setItem(key, JSON.stringify([record, ...products]))
 }

@@ -62,6 +62,7 @@ const INITIAL_FILTERS = {
   colors: [],
   cities: [],
   ratings: [],
+  discounts: [],
   price: [0, 250000],
 }
 
@@ -99,6 +100,7 @@ export default function Clothes() {
     && includesAny(product.colorFilters, filters.colors)
     && includesAny([product.city], filters.cities)
     && (filters.ratings.length === 0 || filters.ratings.some((rating) => product.rating >= rating))
+    && (filters.discounts.length === 0 || filters.discounts.some((discount) => product.discount >= discount))
     && product.price >= filters.price[0]
     && product.price <= filters.price[1]
   )), [filters])
@@ -110,6 +112,7 @@ export default function Clothes() {
     ...filters.brands.map((value) => `Marca: ${value}`),
     ...filters.sizes.map((value) => `Talla: ${value}`),
     ...filters.colors.map((value) => `Color: ${value}`),
+    ...filters.discounts.map((value) => `Descuento: ${value}% o más`),
     ...filters.cities.map((value) => `Ciudad: ${value}`),
     ...(filters.price[0] > 0 || filters.price[1] < 250000 ? [`Precio: ${formatPrice(filters.price[0])} – ${formatPrice(filters.price[1])}`] : []),
   ]

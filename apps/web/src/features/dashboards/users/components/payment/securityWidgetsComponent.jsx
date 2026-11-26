@@ -1,5 +1,5 @@
 import { CreditCard, EyeOff, LockKeyhole, RefreshCw, ShieldCheck, Trash2, UserRound } from "lucide-react";
-import { paymentLogos } from "./paymentLogos";
+import { paymentLogos } from "../../../../../data/paymentLogos";
 
 const tips = [[UserRound, "Usa tus propios métodos de pago."], [EyeOff, "No compartas los datos de tu tarjeta."], [RefreshCw, "Revisa regularmente tus métodos guardados."], [Trash2, "Elimina los métodos que ya no utilices."]];
 export default function SecurityWidgetsComponent() {

@@ -16,10 +16,10 @@ export default function LocationSection({ initialData, onNext, onLogout }) {
           <iframe title={`Mapa de ${address}`} src={`https://maps.google.com/maps?q=${query}&z=16&output=embed`} className="size-full border-0 grayscale-20" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
         </div>
 
-        <div className="mt-4 flex items-start gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 p-4 text-xs leading-relaxed text-neutral-400">
-          <MapPin size={17} className="mt-0.5 shrink-0 text-red-600" aria-hidden="true" />
+        <p className="mt-2 flex items-center gap-1.5 text-[10px] leading-snug text-neutral-500">
+          <MapPin size={12} className="shrink-0 text-red-600" aria-hidden="true" />
           Verifica que el punto del mapa corresponda a la ubicación donde quieres recibir tus pedidos.
-        </div>
+        </p>
         <div className={actionRowClass}>
           <button type="button" onClick={() => onNext({ address })} className={skipActionClass}>Omitir</button>
           <button type="submit" className={primaryActionClass}>Continuar</button>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import NavLayout from '../homepages/layouts/navLayout'
-import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../commons/storage/favoritesStorage'
+import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../hooks/favoritesStorage'
 import ProductsComponents from './components/productsComponents'
 import EmptyComponents from './components/emptyComponents'
 

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 
-const VALID_GENDERS = new Set(['mujer', 'hombre', 'todo'])
+const VALID_GENDERS = new Set(['mujer', 'hombre', 'unisex', 'ninos', 'todo'])
 
 export default function useGender() {
   // Las rutas de género son estáticas ("/hombre", "/mujer", "/todo"),

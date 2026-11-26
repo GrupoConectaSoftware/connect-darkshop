@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { catalogImageSets } from '../../../data/products'
-import { Eye, Gift, Heart, Share2, ShoppingCart } from 'lucide-react'
+import { Eye, Gift, Heart, Share2, ShoppingCart, Sparkles } from 'lucide-react'
+import Chat from '../../../features/users/consumer/chat/chat'
 import { productActionsData } from '../../../data/ui.js'
 import ProductBadge from '../badges/ProductBadge'
 import ColorDot from '../buttons/ColorDot'
@@ -9,8 +11,8 @@ import GarmentSwitch from '../buttons/GarmentSwitch'
 import IconActionButton from '../buttons/IconActionButton'
 import SizeButton from '../buttons/SizeButton'
 import StoreCardButton from '../buttons/StoreCardButton'
-import { FAVORITES_UPDATED_EVENT, isFavorite as isProductFavorite, toggleFavorite } from '../../../commons/storage/favoritesStorage'
-import { addToCart } from '../../../commons/storage/cartStorage'
+import { FAVORITES_UPDATED_EVENT, isFavorite as isProductFavorite, toggleFavorite } from '../../../hooks/favoritesStorage'
+import { addToCart } from '../../../hooks/cartStorage'
 import { showToast } from '../../../utils/toast'
 
 const actionIcons = { Eye, Heart, ShoppingCart, Share2 }
@@ -24,6 +26,7 @@ const money = new Intl.NumberFormat('es-CO', {
 
 export default function ProductCard({ product, badgeLabel = null, isOutlet = false, compact = false, alwaysShowActions = false, priceAccent = false, iconHoverRedOnly = false, onCardMouseEnter, onCardMouseLeave, onCardFocus, onCardBlur }) {
   const navigate = useNavigate()
+  const [chatOpen, setChatOpen] = useState(false)
   const { pathname } = useLocation()
   const [selectedSize, setSelectedSize] = useState(null)
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0])
@@ -40,7 +43,13 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
   const imageKey = String(product.id ?? product.name ?? '')
   const numericId = Number(imageKey.match(/\d+$/)?.[0])
   const imageIndex = numericId ? numericId - 1 : [...imageKey].reduce((sum, char) => sum + char.charCodeAt(0), 0)
-  const catalogImages = product.catalogImages ?? catalogImageSets[imageIndex % catalogImageSets.length]
+  const gender = product.gender?.toLowerCase()
+  const routeGender = pathname.split('/')[1]?.toLowerCase()
+  const imageGender = gender === 'unisex' ? routeGender : gender
+  const eligibleImages = imageGender === 'hombre' ? catalogImageSets.slice(0, 3) : imageGender === 'mujer' ? catalogImageSets.slice(3) : catalogImageSets
+  const catalogImages = gender === 'unisex' && (routeGender === 'hombre' || routeGender === 'mujer')
+    ? eligibleImages[imageIndex % eligibleImages.length]
+    : product.catalogImages ?? eligibleImages[imageIndex % eligibleImages.length]
   const viewImages = preserveImages
     ? (viewMode === 'model' ? product.imagesModel : product.imagesGarment)
     : (viewMode === 'model' ? catalogImages.imagesModel : catalogImages.imagesClothes)
@@ -165,12 +174,14 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
         {flashPhase !== 'idle' && <span aria-hidden="true" className={`pointer-events-none absolute right-8 top-8 z-10 size-2 rounded-full bg-white shadow-[0_0_16px_8px_rgba(255,255,255,.8)] transition-opacity duration-300 ${flashPhase === 'peak' ? 'opacity-100' : 'opacity-0'}`} />}
         <div className={`absolute right-3 top-3 z-20 flex flex-col gap-2 transition-all duration-300 ${alwaysShowActions ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`}>
           {ACTIONS.map((action) => <IconActionButton key={action.label} {...action} label={action.icon === Eye ? 'Ver producto' : action.icon === Heart ? (favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') : action.label} onClick={handleAction(action)} className={!iconHoverRedOnly && action.icon === Heart && favorite ? 'bg-dark-red hover:bg-dark-950' : ''} iconClassName={action.icon === Heart && favorite ? 'fill-current' : ''} hoverColorOnly={iconHoverRedOnly} />)}
+          <button type="button" aria-label="Abrir DarkMood" onClick={(event) => { event.stopPropagation(); setChatOpen(true) }} className="grid h-9 w-9 place-items-center rounded-full bg-white text-black shadow-md transition-colors hover:bg-red-600 hover:text-white"><Sparkles size={15} /></button>
         </div>
         <div className="absolute bottom-3 left-3 z-10">
           <GarmentSwitch value={viewMode} onChange={(mode) => { setCurrentImgIndex(0); setViewMode(mode) }} />
         </div>
       </div>
 
+      {chatOpen && createPortal(<Chat isOpen={chatOpen} onClose={() => setChatOpen(false)} />, document.body)}
       <div className={`flex min-w-0 flex-1 flex-col bg-dark-white dark:bg-[#1a1a1d] ${compact ? 'min-h-[226px] p-3' : 'min-h-[248px] p-4'}`}>
         <h3 className="line-clamp-2 min-h-10 text-base font-bold uppercase leading-tight text-dark-950 dark:text-white">{product.name}</h3>
         <p className="mt-1 line-clamp-2 min-h-9 text-xs leading-4 text-dark-500 sm:text-sm dark:text-gray-400">{product.description}</p>

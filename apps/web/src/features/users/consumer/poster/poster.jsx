@@ -29,6 +29,7 @@ export default function Poster() {
       </button>
       {viewMode === 'carousel' ? <CarouselSection collections={visibleCollections} cursor={cursor} onMove={move} /> : <div className="relative z-10 mx-auto mt-6 min-h-0 w-full max-w-[1600px] flex-1 overflow-y-auto px-6 pb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-10 lg:px-16"><div className="grid auto-rows-[250px] grid-cols-2 gap-4 lg:grid-cols-4">{visibleCollections.map((collection) => <Link key={collection.id} to={`/collection/${collection.slug}`} className={`group relative overflow-hidden rounded-xl bg-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-700 ${['estampadas', 'filosoficas'].includes(collection.slug) ? 'lg:row-span-2' : ''}`}><img src={collection.image} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"/><span className="absolute inset-0 bg-gradient-to-t from-black/85 to-transparent"/><span className="absolute bottom-4 left-4 text-lg font-black uppercase text-white sm:text-2xl">{collection.label}</span></Link>)}</div></div>}
 
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-16 bg-gradient-to-t from-black/50 to-transparent" />
     </main>
   )
 }

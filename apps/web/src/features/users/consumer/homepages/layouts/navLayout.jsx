@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, User } from 'lucide-react'
 import logoDarkShop from '../../../../../assets/Logometria/LogoOficial.webp'
 import profileImage from '../../../../../assets/Profile/imagesProfile.webp'
-import HeartIcon from '../../../../../commons/ui/icons/commerce/HeartIcon'
-import ShoppingBagIcon from '../../../../../commons/ui/icons/commerce/ShoppingBagIcon'
-import MenuIcon from '../../../../../commons/ui/icons/navigation/MenuIcon'
-import CloseIcon from '../../../../../commons/ui/icons/navigation/CloseIcon'
-import MailIcon from '../../../../../commons/ui/icons/contact/MailIcon'
-import PhoneIcon from '../../../../../commons/ui/icons/contact/PhoneIcon'
-import InstagramIcon from '../../../../../commons/ui/icons/social/InstagramIcon'
-import FacebookIcon from '../../../../../commons/ui/icons/social/FacebookIcon'
-import TiktokIcon from '../../../../../commons/ui/icons/social/TiktokIcon'
+import HeartIcon from '../../../../../components/ui/icons/commerce/HeartIcon'
+import ShoppingBagIcon from '../../../../../components/ui/icons/commerce/ShoppingBagIcon'
+import MenuIcon from '../../../../../components/ui/icons/navigation/MenuIcon'
+import CloseIcon from '../../../../../components/ui/icons/navigation/CloseIcon'
+import MailIcon from '../../../../../components/ui/icons/contact/MailIcon'
+import PhoneIcon from '../../../../../components/ui/icons/contact/PhoneIcon'
+import InstagramIcon from '../../../../../components/ui/icons/social/InstagramIcon'
+import FacebookIcon from '../../../../../components/ui/icons/social/FacebookIcon'
+import TiktokIcon from '../../../../../components/ui/icons/social/TiktokIcon'
 import UserButton from '../../../../../components/ui/buttons/UserButton'
 import SearchBar from '../../../../../components/ui/inputs/SearchBar'
 import useHideOnScroll from '../../../../../hooks/useHideOnScroll'
 import TextPromotionComponent from '../components/TextPromotionComponent'
 import AyudaComponent from '../components/AyudaComponent'
-import PqrComponent from '../../../../../commons/components/PqrComponent'
-import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../../commons/storage/favoritesStorage'
-import { CART_UPDATED_EVENT, getCart } from '../../../../../commons/storage/cartStorage'
+import PqrComponent from '../../../../../components/ui/faq/PqrComponent'
+import { FAVORITES_UPDATED_EVENT, getFavorites } from '../../../../../hooks/favoritesStorage'
+import { CART_UPDATED_EVENT, getCart } from '../../../../../hooks/cartStorage'
 import { OUTLET_PRODUCTS_ON_SALE } from '../../../../../data/products.js'
 
 const NAV_LINKS = [
@@ -155,7 +155,7 @@ export default function NavLayout({ cartVariant = false, loggedVariant = false, 
                 <div className="flex shrink-0 flex-row items-center gap-4 text-sm text-dark-200">
                   <SocialLinks />
                   <span className="h-3 w-px bg-dark-700" />
-                  <Link to="/select-account" className="transition-colors hover:text-dark-white">Trabaja con nosotros</Link>
+                  <Link to="/select-account" className="transition-colors hover:text-dark-white">Haz parte de nosotros</Link>
                   <button type="button" aria-haspopup="dialog" aria-expanded={isPqrOpen} onClick={() => setIsPqrOpen(true)} className="cursor-pointer transition-colors hover:text-dark-white focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-white">Preguntas frecuentes</button>
                   <span className="relative ml-2"><AyudaComponent /></span>
                 </div>

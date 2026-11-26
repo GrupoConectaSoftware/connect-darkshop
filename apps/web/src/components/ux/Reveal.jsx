@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import './Reveal.css'
+import '../../css/Reveal.css'
 
 export default function Reveal({ as: Element = 'div', children, className = '', effect = 'rise', delay = 0, style = {}, ...props }) {
   const elementRef = useRef(null)
@@ -36,4 +36,4 @@ export default function Reveal({ as: Element = 'div', children, className = '', 
     </Element>
   )
 }
-import './Reveal.css'
+import '../../css/Reveal.css'

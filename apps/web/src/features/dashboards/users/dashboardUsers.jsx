@@ -16,8 +16,8 @@ export default function DashboardUsers() {
   const [section, setSection] = useState("welcome");
   const location = useLocation();
   const navigate = useNavigate();
-  const activeSection = location.pathname === "/dashboard/notifications" ? "notifications" : section;
-  const setActiveSection = (next) => { setSection(next); if (location.pathname !== "/dashboard") navigate("/dashboard"); };
+  const activeSection = location.pathname === "/dashboard/notifications" ? "notifications" : new URLSearchParams(location.search).get("section") === "orders" ? "orders" : section;
+  const setActiveSection = (next) => { setSection(next); if (location.pathname !== "/dashboard" || location.search) navigate("/dashboard"); };
 
   return (
     <MainLayout activeSection={activeSection} onNavigateSection={setActiveSection}>

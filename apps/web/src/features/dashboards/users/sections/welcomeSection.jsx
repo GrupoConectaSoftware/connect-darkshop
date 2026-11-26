@@ -14,11 +14,11 @@ import { useEffect, useState } from "react";
 import {
   CART_UPDATED_EVENT,
   getCart,
-} from "../../../../commons/storage/cartStorage";
+} from "../../../../hooks/cartStorage";
 import {
   FAVORITES_UPDATED_EVENT,
   getFavorites,
-} from "../../../../commons/storage/favoritesStorage";
+} from "../../../../hooks/favoritesStorage";
 
 export default function WelcomeSection() {
   const [cart, setCart] = useState(getCart);

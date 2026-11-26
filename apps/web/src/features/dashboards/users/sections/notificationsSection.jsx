@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from 'react'
-import { isNotificationRead, NOTIFICATIONS_UPDATED_EVENT } from '../../../../commons/storage/notificationsStorage'
+import { isNotificationRead, NOTIFICATIONS_UPDATED_EVENT } from '../../../../hooks/notificationsStorage'
 import { Bell } from 'lucide-react'
 import NotificationCard from '../../../../components/ui/notifications/NotificationCard'
 import EmptyState from '../../../../components/ui/states/EmptyState'

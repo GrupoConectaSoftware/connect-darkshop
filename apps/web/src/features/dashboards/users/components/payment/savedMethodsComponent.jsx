@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CreditCard } from "lucide-react";
-import { paymentLogos } from "./paymentLogos";
+import { paymentLogos } from "../../../../../data/paymentLogos";
 
 const methods = [{ brand: "Nequi", detail: "•••• 3021", note: "Cuenta" }, { brand: "Bancolombia", detail: "•••• 7710", note: "Cuenta de ahorros" }];
 

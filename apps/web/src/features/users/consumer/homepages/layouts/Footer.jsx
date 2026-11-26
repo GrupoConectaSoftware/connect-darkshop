@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import InstagramIcon from '../../../../../commons/ui/icons/social/InstagramIcon'
-import TiktokIcon from '../../../../../commons/ui/icons/social/TiktokIcon'
+import InstagramIcon from '../../../../../components/ui/icons/social/InstagramIcon'
+import TiktokIcon from '../../../../../components/ui/icons/social/TiktokIcon'
 
 const FOOTER_GROUPS = [
   {

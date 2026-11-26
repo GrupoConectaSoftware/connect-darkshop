@@ -1,6 +1,6 @@
 import bannerVideo from '../../../../movies/brand/banner/videoBanner.mp4'
 import BrandMarquee from '../../../../components/ux/BrandMarquee'
-import { DARK_PRODUCT_BRANDS } from '../../../../components/ux/brandMarqueeData'
+import { DARK_PRODUCT_BRANDS } from '../../../../data/brandMarqueeData'
 import Reveal from '../../../../components/ux/Reveal'
 
 export default function ReferencesSection() {

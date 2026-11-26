@@ -7,7 +7,7 @@ import RequestInfo from '../products/layouts/requestInfo'
 import RequestDescription from '../products/layouts/requestDescription'
 import RequestVariants from '../products/layouts/requestVariants'
 import RequestCollections from '../products/layouts/requestCollections'
-import { registerProduct } from '../products/productRegistry'
+import { registerProduct } from '../../../../../hooks/productRegistry'
 
 const steps = [
   [RequestCategory, 'Selecciona una categoría', 'Define el tipo de producto que vas a registrar.'],
@@ -17,11 +17,8 @@ const steps = [
   [RequestCollections, 'Referencias y submarcas', 'Selecciona la submarca y la colección de este producto.'],
 ]
 const initialData = {
-  category: 'camisetas', sku: '', name: '', tags: [], description: '', composition: '', shipping: '',
-  variants: [
-    { id: 'initial-xl', size: 'XL', color: 'Negro', stock: 15, gallery: 0 },
-    { id: 'initial-m', size: 'M', color: 'Blanco', stock: 8, gallery: 1 },
-  ], brand: 'DARK', collection: 'angelicales',
+  category: 'camisetas', gender: 'unisex', sku: '', name: '', tags: [], description: '', composition: '', shipping: '',
+  variants: [{ id: 'initial', hex: '#FFFFFF', color: '', sizes: [], imagesModel: [null, null, null], imagesClothes: [null, null, null] }], brand: 'DARK', collection: 'angelicales',
 }
 const categoryDetails = {
   camisetas: 'Prendas superiores de uso diario, disponibles en diferentes cortes y estilos.',
@@ -54,7 +51,7 @@ export default function RequestProduct() {
       setCurrentStep(2)
       return setError('Escribe el SKU y el nombre de la prenda.')
     }
-    if ((currentStep === 4 || final) && (!formData.variants.length || formData.variants.some(v => v.stock === '' || !Number.isSafeInteger(Number(v.stock)) || Number(v.stock) < 0))) {
+    if ((currentStep === 4 || final) && (!formData.variants.length || formData.variants.some(v => !v.sizes?.length))) {
       setCurrentStep(4)
       return setError('Añade una variante y usa cantidades enteras de stock desde cero.')
     }
@@ -81,7 +78,7 @@ export default function RequestProduct() {
             className="shrink-0 border-b-2 border-transparent px-3 py-3 text-sm text-neutral-600 aria-[current=step]:border-red-600 aria-[current=step]:font-bold aria-[current=step]:text-black dark:text-neutral-300 dark:aria-[current=step]:text-white">{name}</button>)}
         </nav>}
       </header>
-      <div key={currentStep} className="min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-8"><Step data={formData} update={update} /></div>
+      <div key={currentStep} className={`min-h-0 flex-1 px-5 py-6 sm:px-8 ${first ? 'overflow-hidden' : 'overflow-y-auto'}`}><Step data={formData} update={update} /></div>
       <footer className="shrink-0 border-t border-neutral-200 px-5 py-4 sm:px-8 dark:border-neutral-700">
         {error && <p role="alert" className="mb-2 text-sm text-red-700 dark:text-red-400">{error}</p>}
         <div className="flex flex-wrap items-center justify-between gap-3">

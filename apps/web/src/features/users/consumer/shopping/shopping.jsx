@@ -9,7 +9,7 @@ import outletOne from '../../../../assets/Sections/homespages/outlet/products/ou
 import outletTwo from '../../../../assets/Sections/homespages/outlet/products/ouletDos.webp'
 import outletThree from '../../../../assets/Sections/homespages/outlet/products/outletTres.webp'
 import outletFour from '../../../../assets/Sections/homespages/outlet/products/outletCuatro.webp'
-import { getCart, saveCart } from '../../../../commons/storage/cartStorage'
+import { getCart, saveCart } from '../../../../hooks/cartStorage'
 import { showToast } from '../../../../utils/toast'
 
 // TODO: Reemplazar por sugerencias obtenidas desde el catálogo.

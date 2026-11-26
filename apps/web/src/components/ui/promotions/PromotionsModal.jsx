@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { promotionsData } from '../../data/promotions'
+import { promotionsData } from '../../../data/promotions'
 
 const VISIBLE_DOTS = 3
 

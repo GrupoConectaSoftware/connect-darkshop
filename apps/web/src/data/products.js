@@ -102,7 +102,7 @@ export const productsData = Array.from({ length: 12 }, (_, index) => {
     ...base,
     catalogImages: catalogImageSets[index % catalogImageSets.length],
     id: `product-${index + 1}`,
-    gender: ["unisex", "mujer", "hombre"][index % 3],
+    gender: index % catalogImageSets.length < 3 ? "hombre" : "mujer",
     name: `${base.name} ${String(index + 1).padStart(2, "0")}`,
     brandType: "TIENDA OFICIAL",
     category: index % 4 === 0 ? "chaquetas" : "camisetas",

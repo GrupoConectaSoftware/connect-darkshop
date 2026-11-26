@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
-import { ChevronDown, Moon, Shirt, Sparkles, X } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { ChevronDown, Moon, Shirt, Sparkles, Store, X } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../../assets/Logotype/imagesLogotype.webp'
 import advertising from '../../../movies/homespages/presentation/videoAdvertising.mp4'
 import recommendedVideo from '../../../movies/brand/recomendaded/videoDos.mp4'
 import { catalogProducts } from '../../../features/users/consumer/clothes/clothes'
 import { collectionsData } from '../../../data/collections'
+import { storesCatalogData } from '../../../data/storesCatalog'
 import { useTheme } from '../../../context/ThemeContext'
 import OnSaleButton from '../buttons/OnSaleButton'
+import Chat from '../../../features/users/consumer/chat/chat'
 
 function HangerIcon({ size = 20 }) {
   return (
@@ -17,6 +19,10 @@ function HangerIcon({ size = 20 }) {
       <path d="M3 15v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2" />
     </svg>
   )
+}
+
+function WidgetLabel({ children, hidden, side = 'right' }) {
+  return <span aria-hidden="true" className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border border-red-600 bg-[#111] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-red-600 transition-all duration-500 ease-out ${side === 'right' ? 'left-full ml-3' : 'right-full mr-3'} ${hidden ? 'translate-x-4 opacity-0' : 'translate-x-0 opacity-100'}`}>{children}</span>
 }
 
 export default function FloatingWidgets({ autoOpenAd = false } = {}) {
@@ -33,10 +39,13 @@ export default function FloatingWidgets({ autoOpenAd = false } = {}) {
   const { isDark, toggleTheme } = useTheme()
   const [isAdOpen, setIsAdOpen] = useState(autoOpenAd)
   const [isBouncing, setIsBouncing] = useState(false)
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const closeChat = useCallback(() => setIsChatOpen(false), [])
   const isBrandPage = pathname === '/brand'
   const isLoggedPage = pathname === '/logged' || pathname.startsWith('/logged/')
   const isAdButtonVisible = !isBrandPage && !isLoggedPage
   const isPublicHomepage = pathname === '/' || pathname === '/homepages' || /^\/(hombre|mujer|unisex|ninos|todo)$/.test(pathname)
+  const [isPromotionsOpen, setIsPromotionsOpen] = useState(autoOpenAd && isPublicHomepage)
 
   useEffect(() => {
     setIsAdOpen(isAdButtonVisible && isPublicHomepage && autoOpenAd)
@@ -57,9 +66,10 @@ export default function FloatingWidgets({ autoOpenAd = false } = {}) {
     <>
       <div className="fixed bottom-6 left-6 z-[100] flex flex-col items-center gap-4">
         <button type="button" onClick={toggleTheme} aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'} aria-pressed={isDark} className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-red-500 shadow-lg transition-all hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"><Moon size={20} /></button>
-        <OnSaleButton autoOpen={autoOpenAd && isPublicHomepage} />
-        <button type="button" onClick={() => navigate('/catalog')} aria-label="Ver catálogo" className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"><HangerIcon /><span className="absolute -right-1 -top-1 rounded-full border border-[#111] bg-red-600 px-1.5 py-0.5 text-[0.6rem] font-bold text-white">{catalogProducts.length}</span></button>
-        {!isBrandPage && <button type="button" onClick={() => navigate('/poster')} aria-label="Ver colecciones" className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"><Shirt size={20} /><span className="absolute -right-1 -top-1 rounded-full border border-[#111] bg-red-600 px-1.5 py-0.5 text-[0.6rem] font-bold text-white">{collectionsData.length}</span></button>}
+        <OnSaleButton autoOpen={autoOpenAd && isPublicHomepage} onOpenChange={setIsPromotionsOpen} />
+        <button type="button" onClick={() => navigate('/stores')} aria-label="Ver tiendas" className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all hover:scale-105"><Store size={20} /><span className="absolute -right-1 -top-1 rounded-full border border-[#111] bg-red-600 px-1.5 py-0.5 text-[0.6rem] font-bold text-white">{storesCatalogData.length}</span><WidgetLabel hidden={isPromotionsOpen}>Ver todas las tiendas</WidgetLabel></button>
+        <button type="button" onClick={() => navigate('/catalog')} aria-label="Ver catálogo" className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"><HangerIcon /><span className="absolute -right-1 -top-1 rounded-full border border-[#111] bg-red-600 px-1.5 py-0.5 text-[0.6rem] font-bold text-white">{catalogProducts.length}</span><WidgetLabel hidden={isPromotionsOpen}>Ver todo el catálogo</WidgetLabel></button>
+        {!isBrandPage && <button type="button" onClick={() => navigate('/poster')} aria-label="Ver colecciones" className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"><Shirt size={20} /><span className="absolute -right-1 -top-1 rounded-full border border-[#111] bg-red-600 px-1.5 py-0.5 text-[0.6rem] font-bold text-white">{collectionsData.length}</span><WidgetLabel hidden={isPromotionsOpen}>Ver todas las colecciones</WidgetLabel></button>}
       </div>
 
       <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-4">
@@ -77,8 +87,9 @@ export default function FloatingWidgets({ autoOpenAd = false } = {}) {
             <img src={logo} alt="" className="h-6 w-6 object-contain" />
           </button>
         </>}
-        <button type="button" disabled aria-label="Asistente de IA próximamente" title="Asistente de IA próximamente" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all disabled:cursor-not-allowed"><Sparkles size={20} /></button>
+        <button type="button" onClick={() => setIsChatOpen(true)} aria-label="Abrir DarkMood" aria-expanded={isChatOpen} className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111] text-white shadow-lg transition-all hover:scale-105"><Sparkles size={20} /><WidgetLabel side="left" hidden={false}>Habla con un asesor</WidgetLabel></button>
       </div>
+      <Chat isOpen={isChatOpen} onClose={closeChat} />
     </>
   )
 }

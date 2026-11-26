@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Plus } from 'lucide-react'
-import { readProducts } from './request/products/productRegistry'
+import { readProducts } from '../../../hooks/productRegistry'
 
 export default function DashboardBrand() {
   let products

@@ -2,7 +2,7 @@ import setsImage from '../../../../../assets/Sections/homespages/sets/ImagesSets
 import ImageZoom from '../../../../../components/ux/ImageZoom'
 import Reveal from '../../../../../components/ux/Reveal'
 import BrandMarquee from '../../../../../components/ux/BrandMarquee'
-import { MARKETPLACE_BRANDS } from '../../../../../components/ux/brandMarqueeData'
+import { MARKETPLACE_BRANDS } from '../../../../../data/brandMarqueeData'
 
 export default function SetSection({ selectedBrand = '', onBrandSelect = () => {} }) {
   return (

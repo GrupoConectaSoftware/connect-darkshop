@@ -1,5 +1,5 @@
-import { MARKETPLACE_BRANDS } from './brandMarqueeData'
-import './BrandMarquee.css'
+import { MARKETPLACE_BRANDS } from '../../data/brandMarqueeData'
+import '../../css/BrandMarquee.css'
 
 function MarqueeRow({ brands, reverse, interactive, selectedBrand, onBrandSelect }) {
   return (

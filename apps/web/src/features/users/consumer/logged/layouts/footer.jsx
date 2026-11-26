@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import InstagramIcon from '../../../../../commons/ui/icons/social/InstagramIcon'
-import TiktokIcon from '../../../../../commons/ui/icons/social/TiktokIcon'
-import FacebookIcon from '../../../../../commons/ui/icons/social/FacebookIcon'
+import InstagramIcon from '../../../../../components/ui/icons/social/InstagramIcon'
+import TiktokIcon from '../../../../../components/ui/icons/social/TiktokIcon'
+import FacebookIcon from '../../../../../components/ui/icons/social/FacebookIcon'
 
 const GROUPS = [
   { title: 'Explora', links: [['Inicio', '/logged'], ['Outlet', '/catalog?outlet=true'], ['Categorías', '/catalog'], ['Tiendas', '/stores'], ['Conjuntos', '/catalog?category=conjuntos']] },

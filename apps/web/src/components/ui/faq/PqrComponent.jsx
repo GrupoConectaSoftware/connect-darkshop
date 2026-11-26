@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
-import FAQList from '../../components/ui/faq/FAQList'
+import FAQList from './FAQList'
 
 export default function PqrComponent({ isOpen, onClose }) {
   const dialogRef = useRef(null)

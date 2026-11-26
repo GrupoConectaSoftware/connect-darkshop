@@ -1,4 +1,4 @@
-import './ImageZoom.css'
+import '../../css/ImageZoom.css'
 
 export default function ImageZoom({ children, className = '' }) {
   return (

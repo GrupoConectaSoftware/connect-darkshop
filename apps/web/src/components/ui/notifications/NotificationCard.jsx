@@ -1,6 +1,6 @@
 ﻿import { AlertTriangle, Bell, CreditCard, Info, Package, Shirt } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { isNotificationRead, markNotificationRead, NOTIFICATIONS_UPDATED_EVENT } from '../../../commons/storage/notificationsStorage'
+import { isNotificationRead, markNotificationRead, NOTIFICATIONS_UPDATED_EVENT } from '../../../hooks/notificationsStorage'
 
 const icons = { ropa: Shirt, pedido: Package, pago: CreditCard, reporte: AlertTriangle }
 
