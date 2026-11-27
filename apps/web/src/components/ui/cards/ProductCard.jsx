@@ -127,7 +127,7 @@ export default function ProductCard({ product, badgeLabel = null, isOutlet = fal
     event.stopPropagation()
     // Route by action type so translated/accessibility text cannot break preview navigation.
     if (action.icon === Eye) {
-      navigate(`/preview/${productSlug}`)
+      navigate(`/preview/${productSlug}`, { state: { product, imagesModel: preserveImages ? product.imagesModel : catalogImages.imagesModel, imagesClothes: preserveImages ? product.imagesGarment : catalogImages.imagesClothes } })
       return
     }
     if (action.icon === Heart) {

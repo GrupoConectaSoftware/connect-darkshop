@@ -20,8 +20,8 @@ export default function DescriptionComponents({ product }) {
 
       <div className="mt-7 flex items-center gap-4 border-b border-dark-200 pb-6 dark:border-[#2a2a2d]">
         <span className="text-3xl font-bold tracking-tight text-dark-950 dark:text-white">{money.format(product.price)}</span>
-        <span className="text-sm text-dark-400 line-through">{money.format(product.originalPrice)}</span>
-        <span className="ml-auto shrink-0 -rotate-2 bg-dark-burgundy px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">-{product.discount}% descuento</span>
+        {product.originalPrice && <span className="text-sm text-dark-400 line-through">{money.format(product.originalPrice)}</span>}
+        {product.discount > 0 && <span className="ml-auto shrink-0 -rotate-2 bg-dark-burgundy px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">-{product.discount}% descuento</span>}
       </div>
 
       <div className="border-b border-dark-200 py-6 dark:border-[#2a2a2d]">
