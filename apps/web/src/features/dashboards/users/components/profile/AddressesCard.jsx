@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { MapPin, MoreHorizontal, Plus, X } from "lucide-react";
+import { MapPin, MoreHorizontal, Plus } from "lucide-react";
+
+import AddLocation from '../../request/locations/addLocation';
 
 const initialAddresses = [
   { id: 1, label: "Dirección principal", lines: ["Cra. 12D # 58-09, La Base", "Cali, Colombia"], primary: true },
@@ -9,14 +11,8 @@ const initialAddresses = [
 export default function AddressesCard() {
   const [addresses, setAddresses] = useState(initialAddresses);
   const [adding, setAdding] = useState(false);
-  const [newAddress, setNewAddress] = useState("");
-
-  const addAddress = (event) => {
-    event.preventDefault();
-    const value = newAddress.trim();
-    if (!value) return;
-    setAddresses((current) => [...current, { id: Date.now(), label: "Nueva dirección", lines: [value, "Cali, Colombia"], primary: false }]);
-    setNewAddress("");
+  const addAddress = (data) => {
+    setAddresses(current => [...current.map(item => data.primary ? { ...item, primary: false } : item), { id: Date.now(), label: data.primary ? 'Dirección principal' : 'Nueva dirección', lines: [data.address + ', ' + data.neighborhood, data.city + ', ' + data.department], primary: data.primary }]);
     setAdding(false);
   };
 
@@ -24,9 +20,9 @@ export default function AddressesCard() {
     <section className="rounded-2xl border border-gray-200 dark:border-neutral-700 bg-white p-5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md sm:p-6 dark:border-[#2a2a2d] dark:bg-[#1a1a1d]" aria-labelledby="addresses-title">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-lg bg-red-50 text-red-800"><MapPin size={19} strokeWidth={1.7} /></span><div><h2 id="addresses-title" className="text-sm font-bold sm:text-base">Direcciones</h2><p className="text-xs text-neutral-500 dark:text-gray-400">Administra dónde recibes tus pedidos.</p></div></div>
-        <button type="button" onClick={() => setAdding((value) => !value)} className="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-3.5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-red-800">{adding ? <X size={15} /> : <Plus size={15} />}{adding ? "Cancelar" : "Agregar dirección"}</button>
+        <button type="button" onClick={() => setAdding(true)} className="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-3.5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-red-800"><Plus size={15} />Agregar dirección</button>
       </div>
-      {adding && <form onSubmit={addAddress} className="mt-5 flex flex-col gap-2 sm:flex-row"><input autoFocus value={newAddress} onChange={(event) => setNewAddress(event.target.value)} placeholder="Escribe la dirección" className="min-w-0 flex-1 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-[#222226] px-3.5 py-3 text-sm outline-none focus:border-red-700 dark:border-[#2a2a2d]" /><button className="rounded-lg bg-red-800 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-700">Guardar</button></form>}
+      {adding && <AddLocation onClose={() => setAdding(false)} onSave={addAddress} />}
       <div className="mt-4 grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2 lg:gap-5">
         <div className="space-y-2.5">
           {addresses.map((address) => (

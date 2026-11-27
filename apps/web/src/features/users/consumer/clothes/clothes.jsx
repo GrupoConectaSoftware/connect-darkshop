@@ -76,12 +76,14 @@ export default function Clothes() {
   const [filters, setFilters] = useState(() => {
     const categoryParam = searchParams.get('category')?.toLowerCase()
     const category = categories.find((item) => item.name.toLowerCase() === categoryParam)
-    return category || categoryParam === 'outlet' ? { ...INITIAL_FILTERS, categories: [category?.name || 'Outlet'] } : INITIAL_FILTERS
+    const brand = searchParams.get('brand')
+    return { ...INITIAL_FILTERS, ...(category || categoryParam === 'outlet' ? { categories: [category?.name || 'Outlet'] } : {}), ...(brand ? { brands: [brand] } : {}) }
   })
   useEffect(() => {
     const categoryParam = searchParams.get('category')?.toLowerCase()
     const category = categories.find((item) => item.name.toLowerCase() === categoryParam)
-    setFilters((current) => ({ ...current, categories: category || categoryParam === 'outlet' ? [category?.name || 'Outlet'] : [] }))
+    const brand = searchParams.get('brand')
+    setFilters((current) => ({ ...current, categories: category || categoryParam === 'outlet' ? [category?.name || 'Outlet'] : [], brands: brand ? [brand] : [] }))
   }, [searchParams])
   const updateFilters = (updater) => {
     const next = typeof updater === 'function' ? updater(filters) : updater
@@ -89,6 +91,8 @@ export default function Clothes() {
     const params = new URLSearchParams(searchParams)
     if (next.categories.length === 1) params.set('category', next.categories[0].toLowerCase())
     else params.delete('category')
+    if (next.brands.length === 1) params.set('brand', next.brands[0])
+    else params.delete('brand')
     setSearchParams(params)
   }
   const filteredProducts = useMemo(() => catalogProducts.filter((product) => (
@@ -122,7 +126,9 @@ export default function Clothes() {
   }
   const selectCategory = (category) => {
     setFilters((current) => ({ ...current, categories: [category] }))
-    setSearchParams({ category: category.toLowerCase() })
+    const params = new URLSearchParams(searchParams)
+    params.set('category', category.toLowerCase())
+    setSearchParams(params)
     requestAnimationFrame(() => document.getElementById('catalog-products')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 

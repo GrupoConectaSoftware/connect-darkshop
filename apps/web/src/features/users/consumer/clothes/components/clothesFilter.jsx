@@ -1,8 +1,8 @@
-import { Check, ChevronDown, Star } from 'lucide-react'
+﻿import { Check, ChevronDown, Star } from 'lucide-react'
 import { useState } from 'react'
 
 const categories = ['Camisetas', 'Chaquetas', 'Zapatos', 'Pantalones', 'Accesorios', 'Exclusivo', 'Outlet']
-const brands = ['DARK', 'Adidas', 'Nike', 'Puma', 'New Balance', 'Under Armour']
+const brands = ['DARK', 'Adidas', 'Nike', 'Puma', 'New Balance', 'Under Armour', 'Moncler Friend', 'Dynamo Brand', 'American Eagle']
 const genders = ['Hombre', 'Mujer', 'Unisex']
 const references = ['Oversize', 'Underground', 'Streetwear', 'Urbano', 'Casual', 'Vintage', 'Techwear', 'Y2K', 'Básico', 'Minimalista', 'Estampado', 'Gótico', 'Deportivo', 'Grunge', 'Elegante', 'Athleisure', 'SmartCasual', 'Old Money', 'Workwear', 'DTF']
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
@@ -36,3 +36,4 @@ export default function ClothesFilter({ filters, onChange, onClear }) {
     <FilterAccordion id="cities" title="Ciudad" count={filters.cities.length} openId={openId} onToggle={setOpenId}><div className="space-y-4">{['Cali', 'Bogotá', 'Medellín'].map((city) => <CheckboxOption key={city} id={`clothes-city-${city}`} label={city} checked={filters.cities.includes(city)} onChange={() => toggle('cities', city)} />)}</div></FilterAccordion>
   </div></aside>
 }
+
