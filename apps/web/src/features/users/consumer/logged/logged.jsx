@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useState } from 'react';
+import Event from '../../../dashboards/users/consumer/events/event';
+import BrandMarquee from "../../../../components/ux/BrandMarquee";
 import NavLayout from "./layouts/navLayout";
 import IntroductionSection from "./sections/introductionSection";
 import StoresSection from "./sections/storesSection";
@@ -11,6 +14,9 @@ import FloatingWidgets from "../../../../components/ui/widgets/FloatingWidgets";
 import { COLLECTIONS } from "../../../../data/collections.js";
 
 export default function Logged() {
+  const [eventsOpen, setEventsOpen] = useState(false);
+  const closeEvents = useCallback(() => setEventsOpen(false), []);
+  useEffect(() => { const timer = window.setTimeout(() => setEventsOpen(true), 2000); return () => window.clearTimeout(timer); }, []);
   return (
     <div className="min-h-screen bg-white text-dark-950 dark:bg-[#1a1a1d] dark:text-white">
       <NavLayout />
@@ -21,10 +27,12 @@ export default function Logged() {
         <CategoriesSection />
         <StoresSection />
         <CtaSection />
+        <div className="overflow-hidden bg-white py-8"><BrandMarquee /></div>
         <SetSection />
       </main>
       <Footer />
       <FloatingWidgets />
+      {eventsOpen && <Event onClose={closeEvents} />}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { MARKETPLACE_BRANDS } from '../../data/brandMarqueeData'
 import '../../css/BrandMarquee.css'
 
@@ -16,7 +17,7 @@ function MarqueeRow({ brands, reverse, interactive, selectedBrand, onBrandSelect
                   aria-pressed={selectedBrand === brand}
                   tabIndex={group === 0 ? 0 : -1}
                   className={`cursor-pointer ${selectedBrand === brand ? 'is-selected' : ''}`}
-                  onClick={() => onBrandSelect(selectedBrand === brand ? '' : brand)}
+                  onClick={() => onBrandSelect(brand)}
                 >
                   {brand}
                 </button>
@@ -31,7 +32,11 @@ function MarqueeRow({ brands, reverse, interactive, selectedBrand, onBrandSelect
   )
 }
 
-export default function BrandMarquee({ brands = MARKETPLACE_BRANDS, interactive = false, selectedBrand = '', onBrandSelect = () => {} }) {
+export default function BrandMarquee({ brands = MARKETPLACE_BRANDS, store = '' }) {
+  const navigate = useNavigate()
+  const selectedBrand = ''
+  const interactive = true
+  const onBrandSelect = brand => { const params = new URLSearchParams({ brand }); if (store) params.set('store', store); navigate(`/catalog?${params}`) }
   const reverseBrands = [...brands].reverse()
 
   return (

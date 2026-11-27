@@ -1,0 +1,3 @@
+﻿import { CalendarDays } from 'lucide-react'
+import { tickerEvents } from '../../../../../../data/events.data'
+export default function BadgeLayout() { return <div className="mt-3 flex shrink-0 items-center gap-5 overflow-x-auto rounded-full border border-white/20 bg-black/60 px-5 py-3 text-xs text-white [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"><span className="flex shrink-0 items-center gap-2 font-bold"><CalendarDays size={18}/>PRÓXIMOS EVENTOS EN TIENDAS</span>{tickerEvents.map(event => <span key={event} className="flex shrink-0 items-center gap-5"><span className="font-black text-red-600">//</span>{event}</span>)}</div> }

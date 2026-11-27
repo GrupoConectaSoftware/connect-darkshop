@@ -16,6 +16,7 @@ import ClothesContent from './components/clothesContent'
 import ClothesFilter from './components/clothesFilter'
 import ClothesHero from './components/clothesHero'
 import NavClothes from './layouts/navClothes'
+import { productsData } from '../../../../data/products'
 
 const categories = [
   { name: 'Camisetas', image: camisetasSection },
@@ -41,6 +42,7 @@ export const catalogProducts = templates.concat(templates.slice(1, 5)).map((temp
 
   return {
     ...template,
+    store: 'DARK',
     isOutlet: template.badge?.variant === 'descuento',
     rating: [5, 4, 3, 5, 4][index % 5],
     id: `catalog-${index + 1}`,
@@ -66,6 +68,7 @@ const INITIAL_FILTERS = {
   price: [0, 250000],
 }
 
+const marketplaceProducts = productsData.map(p => ({ ...p, store: p.brand, category: p.category[0].toUpperCase() + p.category.slice(1), gender: p.gender === 'hombre' ? 'Hombre' : 'Mujer', references: [], colorFilters: [], city: '', rating: 0, isOutlet: p.badge?.variant === 'descuento' }))
 const includesAny = (values, options) => options.length === 0 || options.some((option) => values.includes(option))
 const formatPrice = (value) => `$${value.toLocaleString('es-CO')}`
 
@@ -76,14 +79,14 @@ export default function Clothes() {
   const [filters, setFilters] = useState(() => {
     const categoryParam = searchParams.get('category')?.toLowerCase()
     const category = categories.find((item) => item.name.toLowerCase() === categoryParam)
-    const brand = searchParams.get('brand')
-    return { ...INITIAL_FILTERS, ...(category || categoryParam === 'outlet' ? { categories: [category?.name || 'Outlet'] } : {}), ...(brand ? { brands: [brand] } : {}) }
+    const brand = searchParams.getAll('brand').map(value => [...catalogProducts, ...marketplaceProducts].find(product => product.brand.toLowerCase() === value.toLowerCase())?.brand || value)
+    return { ...INITIAL_FILTERS, ...(category || categoryParam === 'outlet' ? { categories: [category?.name || 'Outlet'] } : {}), ...(brand.length ? { brands: brand } : {}) }
   })
   useEffect(() => {
     const categoryParam = searchParams.get('category')?.toLowerCase()
     const category = categories.find((item) => item.name.toLowerCase() === categoryParam)
-    const brand = searchParams.get('brand')
-    setFilters((current) => ({ ...current, categories: category || categoryParam === 'outlet' ? [category?.name || 'Outlet'] : [], brands: brand ? [brand] : [] }))
+    const brand = searchParams.getAll('brand').map(value => [...catalogProducts, ...marketplaceProducts].find(product => product.brand.toLowerCase() === value.toLowerCase())?.brand || value)
+    setFilters((current) => ({ ...current, categories: category || categoryParam === 'outlet' ? [category?.name || 'Outlet'] : [], brands: brand }))
   }, [searchParams])
   const updateFilters = (updater) => {
     const next = typeof updater === 'function' ? updater(filters) : updater
@@ -91,15 +94,16 @@ export default function Clothes() {
     const params = new URLSearchParams(searchParams)
     if (next.categories.length === 1) params.set('category', next.categories[0].toLowerCase())
     else params.delete('category')
-    if (next.brands.length === 1) params.set('brand', next.brands[0])
-    else params.delete('brand')
+    params.delete('brand')
+    next.brands.forEach(brand => params.append('brand', brand))
     setSearchParams(params)
   }
-  const filteredProducts = useMemo(() => catalogProducts.filter((product) => (
+  const filteredProducts = useMemo(() => [...catalogProducts, ...marketplaceProducts].filter((product) => (
     includesAny([product.category, ...(product.isOutlet ? ['Outlet'] : [])], filters.categories)
     && includesAny([product.gender], filters.genders)
     && includesAny(product.references, filters.references)
-    && includesAny([product.brand], filters.brands)
+    && (filters.brands.length === 0 || filters.brands.some(brand => brand.toLowerCase() === product.brand?.toLowerCase()))
+    && (!searchParams.get('store') || product.store?.toLowerCase() === searchParams.get('store').toLowerCase())
     && includesAny(product.sizes, filters.sizes)
     && includesAny(product.colorFilters, filters.colors)
     && includesAny([product.city], filters.cities)
@@ -107,9 +111,10 @@ export default function Clothes() {
     && (filters.discounts.length === 0 || filters.discounts.some((discount) => product.discount >= discount))
     && product.price >= filters.price[0]
     && product.price <= filters.price[1]
-  )), [filters])
+  )), [filters, searchParams])
   const productCounts = useMemo(() => Object.fromEntries(categories.map(({ name }) => [name, catalogProducts.filter((product) => (name === 'Outlet' ? product.isOutlet : product.category === name)).length])), [])
   const activeCrumbs = [
+    ...(searchParams.get('store') ? [`Tienda: ${searchParams.get('store')}`] : []),
     ...filters.categories,
     ...filters.genders.map((value) => `Género: ${value}`),
     ...filters.references.map((value) => `Estilo: ${value}`),

@@ -18,8 +18,8 @@ export default function ReferencesSection() {
           className="block h-[80vh] w-full object-cover"
         />
       </Reveal>
-      <Reveal effect="fade" delay={100} aria-hidden="true" className="w-full overflow-hidden bg-white py-6 sm:py-8 lg:py-10">
-        <BrandMarquee brands={DARK_PRODUCT_BRANDS} />
+      <Reveal effect="fade" delay={100} className="w-full overflow-hidden bg-white py-6 sm:py-8 lg:py-10">
+        <BrandMarquee brands={DARK_PRODUCT_BRANDS} store="DARK" />
       </Reveal>
     </section>
     
